@@ -22,6 +22,8 @@ private:
 	void processEvents();
 
 	sf::RenderWindow m_window; // main SFML window
+	sf::View miniMap;
+	sf::View m_follow;
 	Player* m_player;
 	Worker* m_worker;
 	

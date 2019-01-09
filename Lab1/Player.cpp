@@ -65,11 +65,11 @@ void Player::update(double dt)
 	//change rotation 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		m_sprite.rotate(-0.3);
+		m_sprite.rotate(-0.5);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		m_sprite.rotate(0.3);
+		m_sprite.rotate(0.5);
 	}
 
 	//Apply direction to sprite
