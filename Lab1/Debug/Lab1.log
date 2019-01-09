@@ -1,0 +1,13 @@
+﻿  Game.cpp
+c:\users\gameuser\desktop\ai games\project2\lab1\game.cpp(51): warning C4244: '-=': conversion from 'const double' to 'sf::Int32', possible loss of data
+c:\users\gameuser\desktop\ai games\project2\lab1\game.cpp(90): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\ai games\project2\lab1\game.cpp(107): warning C4018: '<': signed/unsigned mismatch
+  Main.cpp
+  Sweeper_Bot.cpp
+c:\users\gameuser\desktop\ai games\project2\lab1\sweeper_bot.cpp(37): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\ai games\project2\lab1\sweeper_bot.cpp(68): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\gameuser\desktop\ai games\project2\lab1\sweeper_bot.cpp(69): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\ai games\project2\lab1\sweeper_bot.cpp(119): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\ai games\project2\lab1\sweeper_bot.cpp(130): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  Lab1.vcxproj -> C:\Users\gameuser\Desktop\AI Games\Project2\Debug\Lab1.exe
