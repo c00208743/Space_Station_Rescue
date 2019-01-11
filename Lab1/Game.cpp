@@ -17,7 +17,9 @@ Game::Game()
 	
 	m_player = new Player();
 	m_worker = new Worker();
-	
+	m_level = new Level("Main Level");
+	m_level->load(path, &m_window);
+
 	Enemy* m_alienNest = new Alien_Nest();
 	Enemy* m_predatorShip = new Predator_Ship();
 	Enemy* m_sweeperBot = new Sweeper_Bot();
@@ -29,8 +31,6 @@ Game::Game()
 	//minimap + player camera
 	m_follow.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
 	m_follow.setSize(sf::Vector2f(2000.f, 2000.f));
-
-	
 
 	// player 2 (right side of the screen)
 	miniMap.setViewport(sf::FloatRect(0.75f, 0.f, 0.25f, 0.25f));
@@ -116,6 +116,7 @@ void Game::update(double dt)
 void Game::render()
 {
 	m_window.clear(sf::Color(0, 0, 0));
+	m_level->draw(&m_window);
 	m_window.setView(miniMap);
 	m_player->render(m_window);
 	m_worker->render(m_window);

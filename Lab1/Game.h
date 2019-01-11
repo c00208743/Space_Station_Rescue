@@ -5,6 +5,7 @@
 #include "Alien_Nest.h"
 #include "Predator_Ship.h"
 #include "Sweeper_Bot.h"
+#include "Level.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -26,6 +27,8 @@ private:
 	sf::View m_follow;
 	Player* m_player;
 	Worker* m_worker;
+	Level* m_level;
+	std::string const path = "assets/maps/Practice.tmx";
 	
 	std::vector<Enemy*> enemies;
 

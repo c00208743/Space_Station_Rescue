@@ -1,2 +1,4 @@
-﻿  Bullet.cpp
-  Lab1.vcxproj -> C:\Users\gameuser\Desktop\Space_Station_Rescue\Debug\Lab1.exe
+﻿  Level.cpp
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\level.cpp(13): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\level.cpp(97): warning C4018: '<=': signed/unsigned mismatch
+  Lab1.vcxproj -> C:\Users\gameuser\Desktop\Test\Space_Station_Rescue\Debug\Lab1.exe
