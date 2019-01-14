@@ -4,6 +4,8 @@ c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(76): warning
 c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(79): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(116): warning C4552: '*': result of expression not used
 c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(117): warning C4552: '*': result of expression not used
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(130): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(131): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(132): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(133): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(135): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(136): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Lab1.vcxproj -> C:\Users\gameuser\Desktop\Test\Space_Station_Rescue\Debug\Lab1.exe
