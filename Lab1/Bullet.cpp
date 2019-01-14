@@ -1,14 +1,20 @@
 #include "Bullet.h"
 
-Bullet::Bullet()
+Bullet::Bullet() 
 {
 	m_speed = 50.0f;
-	m_size = sf::Vector2f(5.0f, 5.0f);
-	m_pos = sf::Vector2f(100.0f, 100.0f);
+	//m_position = sf::Vector2f(100.0f, 100.0f);
 	m_alive = false;
-	m_rect = sf::RectangleShape(m_size);
-	m_rect.setPosition(m_pos);
-	m_rect.setFillColor(sf::Color::Red);
+
+	if (!m_texture.loadFromFile("assets/laser/laser1.png"))
+	{
+		// error...
+	}
+
+	m_sprite.setTexture(m_texture);
+	m_sprite.setOrigin(16, 2);
+	m_sprite.setPosition(m_position);
+
 }
 
 Bullet::~Bullet()
@@ -20,67 +26,56 @@ void Bullet::render(sf::RenderWindow & window)
 {
 	if (m_alive)
 	{
-		window.draw(m_rect);
+		window.draw(m_sprite);
 	}
+	
+	
 }
 
 void Bullet::update()
 {
 	if (m_alive)
 	{
-		m_pos.x += m_speed;
-
-		m_rect.setPosition(m_pos);
+		m_position.x += velocity.x;
+		m_position.y += velocity.y;
+		m_sprite.setPosition(m_position);
 	}
-}
-
-void Bullet::checkCollision(sf::Vector2f size, sf::Vector2f pos)
-{
-
-	float w = 0.5f * (m_size.x + size.x);
-	float h = 0.5f * (m_size.y + size.y);
-	float dx = (m_pos.x + (m_size.x / 2)) - (pos.x + (size.x / 2));
-	float dy = (m_pos.y + (m_size.y / 2)) - (pos.y + (size.y / 2));
-
-	if (abs(dx) <= w && abs(dy) <= h)
-	{
-		/* collision! */
+	if (collison) {
 		m_alive = false;
-
-		float wy = w * dy;
-		float hx = h * dx;
-
-		if (wy > hx)
-		{
-			if (wy > -hx)
-			{
-				// Top 
-			}
-			else if (wy < -hx)
-			{
-				// Left
-			}
-		}
-		else if (wy < hx)
-		{
-			if (wy > -hx)
-			{
-				// Right
-			}
-			else if (wy < -hx)
-			{
-				// Bottom
-			}
-		}
+		collison = false;
 	}
-
 }
 
-void Bullet::fire(float direction, sf::Vector2f pos)
+
+
+void Bullet::fire(sf::Vector2f direction, sf::Vector2f pos, float rotation)
 {
 	m_speed = 50.0f;
+	//calculate trigetory
+	velocity.x = m_speed * direction.x;
+	velocity.y = m_speed * direction.y;
+	//start on players position
+	m_position.x = pos.x;
+	m_position.y = pos.y;
 
-	m_speed *= direction;
-	m_pos = pos;
+	m_sprite.setRotation(rotation);
 	m_alive = true;
+}
+
+bool Bullet::checkCollision(sf::Vector2f pos, int width, int height)
+{
+
+	//box collsion formula 
+	if (m_alive) {
+		if (m_position.x < pos.x + width
+			&& m_position.x + 32> pos.x
+			&& m_position.y + 4 > pos.y
+			&& m_position.y < pos.y + height)
+		{
+			// explosion
+			collison = true;
+		}
+	}
+	return collison;
+
 }

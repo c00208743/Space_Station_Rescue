@@ -20,7 +20,15 @@ Sweeper_Bot::Sweeper_Bot() :
 	m_velocity.x = getRandom(20, -10);
 	m_velocity.y = getRandom(20, -10);
 
-	m_sprite.setOrigin(64, 128);
+	m_sprite.setOrigin(16, 32);
+
+	if (!m_textureExplosion.loadFromFile("assets/explosion/explosion1.png"))
+	{
+		// error...
+	}
+
+	m_spriteExplosion.setTexture(m_textureExplosion);
+	m_spriteExplosion.setOrigin(160, 160);
 
 }
 
@@ -44,19 +52,19 @@ float Sweeper_Bot::getNewOrientation(float currentOrientation, float velocity)
 
 void Sweeper_Bot::boundary(float x, float y)
 {
-	if (x > 2100)
+	if (x > 6100)
 	{
 		m_position.x = -100;
 	}
 	if (x < -100)
 	{
-		m_position.x = 2100;
+		m_position.x = 6100;
 	}
 	if (y < -100)
 	{
-		m_position.y = 2100;
+		m_position.y = 6100;
 	}
-	if (y > 2100)
+	if (y > 6100)
 	{
 		m_position.y = -100;
 	}
@@ -166,16 +174,62 @@ void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vecto
 		kinematicArrive(playerPosition);
 	}
 
-	m_position = m_position + m_velocity;
+	if (health > 0) {
+		m_position = m_position + m_velocity;
+	}
 
 	m_sprite.setPosition(m_position);
 	m_sprite.setRotation(m_orientation);
 
 	boundary(m_sprite.getPosition().x, m_sprite.getPosition().y);
+
+	if (health <= 0) {
+		timer++;
+		if (timer % 10 == 0)
+		{
+			animate++;
+		}
+		//animate++;
+		m_spriteExplosion.setTextureRect(sf::IntRect(310 * animate, 0, 320, 320));
+		if (animate>15) {
+			animate = 0;
+			finishAnimate = true;
+		}
+	}
 }
 
 
 void Sweeper_Bot::render(sf::RenderWindow & window)
 {
-	window.draw(m_sprite);
+	if (health <= 0) {
+		if (finishAnimate == false) {
+			window.draw(m_spriteExplosion);
+		}
+
+	}
+	else {
+		window.draw(m_sprite);
+	}
+}
+
+int Sweeper_Bot::getWidth()
+{
+	return  32; 
+}
+int Sweeper_Bot::getHeight()
+{
+	return  64;
+}
+
+void Sweeper_Bot::hit(int damage)
+{
+	//std::cout << "Sweeper bot hit" << std::endl;
+	health = health - damage;
+	m_explosion.x = m_position.x;
+	m_explosion.y = m_position.y;
+	m_spriteExplosion.setPosition(m_explosion);
+}
+int Sweeper_Bot::getHealth()
+{
+	return health;
 }
