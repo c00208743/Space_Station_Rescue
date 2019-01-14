@@ -61,7 +61,7 @@ Player::~Player()
 {
 }
 
-void Player::update(double dt)
+void Player::update(double dt, Level * cLevel)
 {
 
 	//increase velocity
@@ -179,6 +179,7 @@ void Player::update(double dt)
 	
 	
 	
+	currentTile(cLevel);
 
 }
 
@@ -235,4 +236,34 @@ bool Player::checkWorkerCollision(sf::Vector2f pos, int width, int height, bool 
 		
 	
 	return collison;
+}
+
+void Player::currentTile(Level * cLevel)
+{
+	// Get the square in front
+	float posX = m_sprite.getPosition().x + 64;
+	float posXB = m_sprite.getPosition().x - 64;
+	float posY = m_sprite.getPosition().y;
+
+	sf::Vector2f tileAhead = rotate(sf::Vector2f(posX, posY), m_sprite.getPosition(), m_sprite.getRotation());
+	sf::Vector2f tileBehind = rotate(sf::Vector2f(posXB, posY), m_sprite.getPosition(), m_sprite.getRotation());
+
+
+	int x = floor(tileAhead.x / 32);
+	int y = floor(tileAhead.y / 32);
+
+	int xb = floor(tileBehind.x / 32);
+	int yb = floor(tileBehind.y / 32);
+
+	if (cLevel->collide(sf::Vector2i(x, y)) || cLevel->collide(sf::Vector2i(xb, yb)))
+	{
+		speed = 0;
+	}
+}
+
+sf::Vector2f Player::rotate(sf::Vector2f P, sf::Vector2f O, float theta)
+{
+	sf::Transform rotTran;
+	rotTran.rotate(theta, O.x, O.y);
+	return rotTran.transformPoint(P);
 }
