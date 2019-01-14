@@ -1,2 +1,9 @@
-﻿  Bullet.cpp
+﻿  Game.cpp
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(67): warning C4244: '-=': conversion from 'const double' to 'sf::Int32', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(104): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(149): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(153): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(161): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(165): warning C4018: '<': signed/unsigned mismatch
   Lab1.vcxproj -> C:\Users\gameuser\Desktop\Space_Station_Rescue\Debug\Lab1.exe

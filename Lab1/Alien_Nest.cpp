@@ -22,6 +22,15 @@ Alien_Nest::Alien_Nest() :
 
 	m_sprite.setOrigin(64, 128);
 
+	if (!m_textureExplosion.loadFromFile("assets/explosion/explosion1.png"))
+	{
+		// error...
+	}
+
+	m_spriteExplosion.setTexture(m_textureExplosion);
+	m_spriteExplosion.setOrigin(160, 160);
+
+	m_missile = new Missile();
 }
 
 
@@ -44,19 +53,19 @@ float Alien_Nest::getNewOrientation(float currentOrientation, float velocity)
 
 void Alien_Nest::boundary(float x, float y)
 {
-	if (x > 2100)
+	if (x > 6100)
 	{
 		m_position.x = -100;
 	}
 	if (x < -100)
 	{
-		m_position.x = 2100;
+		m_position.x = 6100;
 	}
 	if (y < -100)
 	{
-		m_position.y = 2100;
+		m_position.y = 6100;
 	}
-	if (y > 2100)
+	if (y > 6100)
 	{
 		m_position.y = -100;
 	}
@@ -70,82 +79,6 @@ float Alien_Nest::getRandom(int a, int b)
 	return randVal;
 }
 
-void Alien_Nest::kinematicSeek(sf::Vector2f playerPosition)
-{
-	m_velocity = playerPosition - m_position;
-	//Get magnitude of vector
-	m_velocityF = std::sqrt(m_velocity.x*m_velocity.x + m_velocity.y* m_velocity.y);
-
-	//Normalize vector
-	m_velocity.x = m_velocity.x / m_velocityF;
-	m_velocity.y = m_velocity.y / m_velocityF;
-
-	m_velocity.x = m_velocity.x * m_maxSpeed;
-	m_velocity.y = m_velocity.y * m_maxSpeed;
-
-	m_orientation = getNewOrientation(m_orientation, m_velocityF);
-	m_orientation = m_orientation + 180;
-
-}
-void Alien_Nest::kinematicArrive(sf::Vector2f playerPosition)
-{
-	//Get magnitude of vector
-	m_velocityF = std::sqrt(m_velocity.x*m_velocity.x + m_velocity.y* m_velocity.y);
-
-	m_velocity = playerPosition - m_position;
-
-	if (m_velocityF >= 0)
-	{
-		m_velocity = m_velocity / m_timeToTarget;
-
-		if (m_velocityF > m_maxSpeed) {
-
-			//Normalize vector
-			m_velocity.x = m_velocity.x / m_velocityF;
-			m_velocity.y = m_velocity.y / m_velocityF;
-			m_velocity = m_velocity * m_maxSpeed;
-
-		}
-
-		m_orientation = getNewOrientation(m_orientation, m_velocityF);
-		m_orientation = m_orientation + 180;
-	}
-
-}
-
-
-void Alien_Nest::collison(std::vector<Enemy*> enemies)
-{
-	for (int i = 0; i < enemies.size(); i++)
-	{
-		n_direction = enemies[i]->getPosition() - m_position;
-		n_distance = std::sqrt(n_direction.x*n_direction.x + n_direction.y* n_direction.y);
-
-		if (n_distance <= radius)
-		{
-			float dot = (m_velocity.x * n_direction.x) + (m_velocity.y * n_direction.y);
-			float det = (m_velocity.x * n_direction.y) - (m_velocity.y * n_direction.x);
-
-			float angle = atan2(det, dot);
-			angle = (180 / 3.14) * angle;
-
-
-			if (angle >= -m_threshold && angle <= m_threshold)
-			{
-				crash = true;
-				m_velocity = -m_velocity;
-				m_orientation = -m_orientation;
-				//std::cout << "Collided Arrive" << std::endl;
-
-			}
-
-		}
-		if (crash == true && n_distance > radius)
-		{
-			crash = false;
-		}
-	}
-}
 
 
 sf::Vector2f Alien_Nest::getPosition()
@@ -160,22 +93,95 @@ sf::Vector2f Alien_Nest::getVelocity()
 
 void Alien_Nest::update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies)
 {
-	//collison(enemies);
-	if (crash == false)
-	{
-		kinematicArrive(playerPosition);
-	}
 
-	m_position = m_position + m_velocity;
 
 	m_sprite.setPosition(m_position);
-	m_sprite.setRotation(m_orientation);
+	m_sprite.setRotation(m_orientation); 
 
 	boundary(m_sprite.getPosition().x, m_sprite.getPosition().y);
+
+	if (health<=0) {
+		timer++;
+		if (timer % 10 == 0)
+		{
+			animate++;
+		}
+		//animate++;
+		m_spriteExplosion.setTextureRect(sf::IntRect(310 * animate, 0, 320, 320));
+		if (animate>15) {
+			animate = 0;
+			finishAnimate = true;
+		}
+	}
+	if (health >0) {
+		m_missile->update();
+		if (m_missile->getStatus() == true) {
+			m_missile->kinematicSeek(playerPosition);
+		}
+	}
+	
+	
 }
 
 
 void Alien_Nest::render(sf::RenderWindow & window)
 {
-	window.draw(m_sprite);
+	
+	if (health <= 0 ) {
+		if (finishAnimate == false) {
+			window.draw(m_spriteExplosion);
+			
+		}
+	
+	}
+	else {
+		window.draw(m_sprite);
+		m_missile->render(window);
+	}
+	
 }
+int Alien_Nest::getWidth()
+{
+	return  128;
+}
+int Alien_Nest::getHeight()
+{
+	return  256;
+}
+
+void Alien_Nest::hit(int damage)
+{
+	//std::cout << health << std::endl;
+	health = health - damage;
+	m_explosion.x = m_position.x;
+	m_explosion.y = m_position.y;
+	m_spriteExplosion.setPosition(m_explosion);
+}
+
+int Alien_Nest::getHealth()
+{
+	return health;
+}
+int Alien_Nest::getId()
+{
+	return 1;
+}
+
+bool Alien_Nest::radar(sf::Vector2f pos) {
+	radarDistance = sqrt((pos.x - m_sprite.getPosition().x)*(pos.x - m_sprite.getPosition().x)
+		+ (pos.y - m_sprite.getPosition().y)*(pos.y - m_sprite.getPosition().y));
+
+	if (radarDistance < 750) {
+		inRange = true;
+		//std::cout << "in range " << std::endl;
+		m_missile->fire(m_sprite.getPosition());
+	}
+	else {
+		//std::cout << "not in range " << std::endl;
+		inRange = false;
+	}
+
+	return inRange;
+
+}
+

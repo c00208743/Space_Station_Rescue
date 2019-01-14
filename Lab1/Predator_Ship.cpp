@@ -3,7 +3,7 @@
 Predator_Ship::Predator_Ship() :
 	m_position(1000, 1500),
 	m_velocity(0, 0),
-	m_maxSpeed(1.5f),
+	m_maxSpeed(0.1f),
 	m_maxRotation(20.0f),
 	m_timeToTarget(100.0f),
 	radius(200.0f),
@@ -20,8 +20,15 @@ Predator_Ship::Predator_Ship() :
 	m_velocity.x = getRandom(20, -10);
 	m_velocity.y = getRandom(20, -10);
 
-	m_sprite.setOrigin(64, 128);
+	m_sprite.setOrigin(32, 64);
 
+	if (!m_textureExplosion.loadFromFile("assets/explosion/explosion1.png"))
+	{
+		// error...
+	}
+
+	m_spriteExplosion.setTexture(m_textureExplosion);
+	m_spriteExplosion.setOrigin(160, 160);
 }
 
 
@@ -44,19 +51,19 @@ float Predator_Ship::getNewOrientation(float currentOrientation, float velocity)
 
 void Predator_Ship::boundary(float x, float y)
 {
-	if (x > 2100)
+	if (x > 6100)
 	{
 		m_position.x = -100;
 	}
 	if (x < -100)
 	{
-		m_position.x = 2100;
+		m_position.x = 6100;
 	}
 	if (y < -100)
 	{
-		m_position.y = 2100;
+		m_position.y = 6100;
 	}
-	if (y > 2100)
+	if (y > 6100)
 	{
 		m_position.y = -100;
 	}
@@ -166,16 +173,64 @@ void Predator_Ship::update(sf::Vector2f playerPosition, Player* player, std::vec
 		kinematicArrive(playerPosition);
 	}
 
-	m_position = m_position + m_velocity;
+	if (health > 0) {
+		m_position = m_position + m_velocity;
+	}
+
+	//m_position = m_position + m_velocity;
 
 	m_sprite.setPosition(m_position);
 	m_sprite.setRotation(m_orientation);
 
 	boundary(m_sprite.getPosition().x, m_sprite.getPosition().y);
+
+	if (health <= 0) {
+		timer++;
+		if (timer % 10 == 0)
+		{
+			animate++;
+		}
+		//animate++;
+		m_spriteExplosion.setTextureRect(sf::IntRect(310 * animate, 0, 320, 320));
+		if (animate>15) {
+			animate = 0;
+			finishAnimate = true;
+		}
+	}
 }
 
 
 void Predator_Ship::render(sf::RenderWindow & window)
 {
-	window.draw(m_sprite);
+	if (health <= 0) {
+		if (finishAnimate == false) {
+			window.draw(m_spriteExplosion);
+		}
+
+	}
+	else {
+		window.draw(m_sprite);
+	}
+}
+
+int Predator_Ship::getWidth()
+{
+	return  128; 
+}
+int Predator_Ship::getHeight()
+{
+	return  256;
+}
+
+void Predator_Ship::hit(int damage)
+{
+	//std::cout << health << std::endl;
+	health = health - damage;
+	m_explosion.x = m_position.x;
+	m_explosion.y = m_position.y;
+	m_spriteExplosion.setPosition(m_explosion);
+}
+int Predator_Ship::getHealth()
+{
+	return health;
 }
