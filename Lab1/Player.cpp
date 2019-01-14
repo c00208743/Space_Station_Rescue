@@ -18,8 +18,39 @@ Player::Player() :
 	}
 	
 	m_sprite.setTexture(m_texture);
-	m_sprite.setOrigin(32, 64);
+	m_sprite.setOrigin(64, 32);
 	m_sprite.setPosition(m_position);
+
+	if (!m_font.loadFromFile("ALBA.TTF")) {
+		//error
+	}
+	m_text.setFont(m_font);
+	m_text.setFillColor(sf::Color::White);
+	m_text.setCharacterSize(30);
+	m_text.setString("Shield: Not Ready");
+	
+	m_textScore.setFont(m_font);
+	m_textScore.setFillColor(sf::Color::White);
+	m_textScore.setCharacterSize(30);
+	m_textScore.setString("Score: ");
+
+	scoreNu.setFont(m_font);
+	scoreNu.setFillColor(sf::Color::White);
+	scoreNu.setCharacterSize(30);
+	scoreNu.setString("");
+
+	if (!m_textureShield.loadFromFile("assets/rotating_shield/shieldAnim.png"))
+	{
+		// error...
+	}
+;
+	m_spriteShield.setTexture(m_textureShield);
+	m_spriteShield.setOrigin(160, 160);
+	m_spriteShield.setPosition(m_position);
+	m_spriteShield.setTextureRect(sf::IntRect(0, 0, 320, 320));
+
+
+	m_bullet = new Bullet();
 }
 
 /// <summary>
@@ -80,28 +111,89 @@ void Player::update(double dt)
 
 
 	//looping screen 
-	if (m_sprite.getPosition().x > 2100)
+	if (m_sprite.getPosition().x > 6100)
 	{
 		m_sprite.setPosition(-100, m_sprite.getPosition().y);
 	}
 	if (m_sprite.getPosition().x < -100)
 	{
-		m_sprite.setPosition(2100, m_sprite.getPosition().y);
+		m_sprite.setPosition(6100, m_sprite.getPosition().y);
 	}
 	if (m_sprite.getPosition().y < -100)
 	{
-		m_sprite.setPosition(m_sprite.getPosition().x, 2100);
+		m_sprite.setPosition(m_sprite.getPosition().x, 6100);
 	}
-	if (m_sprite.getPosition().y > 2100)
+	if (m_sprite.getPosition().y > 6100)
 	{
 		m_sprite.setPosition(m_sprite.getPosition().x, -100);
 	}
+
+	//fire bullet
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		m_bullet->fire(direction, m_sprite.getPosition(), m_sprite.getRotation());
+	}
+	m_bullet->update();
+
+
+	//shield
+	m_spriteShield.setPosition(m_sprite.getPosition());
+	m_spriteShield.setRotation(m_sprite.getRotation());
+	m_text.setPosition(m_sprite.getPosition().x-900, m_sprite.getPosition().y+ 900);
+	m_textScore.setPosition(m_sprite.getPosition().x - 900, m_sprite.getPosition().y - 900);
+	scoreNu.setPosition(m_sprite.getPosition().x - 800, m_sprite.getPosition().y - 900);
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && shieldReady ==true)
+	{
+		shield = true;
+		shieldTimer++;
+	}
+	else {
+		shield = false; 
+	}
+	
+	if (shield) {
+		timer++;
+		if (timer % 10 == 0)
+		{
+			animate++;
+		}
+		//animate++;
+		m_spriteShield.setTextureRect(sf::IntRect(320 * animate, 0, 320, 320));
+		if (animate>11) {
+			animate = 0;
+		}
+	 }
+
+	shieldCoolDown++;
+	if (shieldCoolDown > 1000) {
+		shieldReady = true;
+		m_text.setString("Shield : READY!!!");
+		
+	}
+	if (shieldTimer > 1000) {
+		shieldReady = false;
+		m_text.setString("Shield : Not Ready");
+		shieldCoolDown = 0;
+		shieldTimer = 0;
+	}
+	
+	
+	
 
 }
 
 void Player::render(sf::RenderWindow & window)
 {
+	m_bullet->render(window);
+	window.draw(m_text);
+	window.draw(m_textScore);
+	window.draw(scoreNu);
 	window.draw(m_sprite);
+	if (shield) {
+		window.draw(m_spriteShield);
+	}
+
+	
 }
 
 
@@ -114,4 +206,33 @@ sf::Vector2f Player::getVelocity()
 	direction.x * speed;
 	direction.y * speed;
 	return direction;
+}
+
+bool Player::checkBulletCollision(sf::Vector2f pos, int width, int height)
+{
+	return m_bullet->checkCollision(pos, width, height);
+}
+
+bool Player::checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive)
+{
+	//box collsion formula 
+	if (alive == false) {
+		if (m_sprite.getPosition().x < pos.x + width
+			&& m_sprite.getPosition().x + 128> pos.x
+			&&  m_sprite.getPosition().y + 64 > pos.y
+			&&  m_sprite.getPosition().y < pos.y + height)
+		{
+			collison = true;
+			score = score + 10;
+			//std::cout << score << std::endl;
+			std::string s = std::to_string(score);
+			scoreNu.setString(s);
+		}
+		else {
+			collison = false;
+		}
+	}
+		
+	
+	return collison;
 }

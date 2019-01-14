@@ -19,6 +19,10 @@ public:
 
 	sf::Vector2f getPosition();
 	sf::Vector2f getVelocity();
+	int getWidth();
+	int getHeight();
+	int getHealth();
+	void hit(int damage);
 
 	void collison(std::vector<Enemy*> enemies);
 
@@ -58,5 +62,15 @@ private:
 	double n_distance = 0;
 	float m_threshold;
 	bool crash = false;
+
+	int health = 50;
+	int timer = 0;
+	int animate = 0;
+	sf::Vector2f m_explosion;
+	bool finishAnimate = false;
+	sf::Texture m_textureExplosion;
+	sf::Sprite m_spriteExplosion;
+
+	int radarDistance = 100000;
 
 };

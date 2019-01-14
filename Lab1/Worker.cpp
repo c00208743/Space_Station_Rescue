@@ -22,7 +22,11 @@ Worker::Worker() :
 
 	m_velocity.x = getRandom(20, -10);
 	m_velocity.y = getRandom(20, -10);
-	m_sprite.setOrigin(128, 128);
+	m_sprite.setOrigin(16, 32);
+	/* initialize random seed: */
+	srand(time(NULL));
+	//m_position.x = rand() % 400 + 1;
+	//m_position.y = rand() % 400 + 1;
 }
 
 
@@ -34,11 +38,13 @@ Worker::~Worker()
 
 void Worker::update(sf::Vector2f playerPosition, Player* player)
 {
-	kinematicWander(playerPosition);
-	//repulseSteering(enemies);
-	m_position = m_position + m_velocity;
-	m_sprite.setPosition(m_position);
-	m_sprite.setRotation(m_orientation);
+	if (collected == false) {
+		kinematicWander(playerPosition);
+
+		m_position = m_position + m_velocity;
+		m_sprite.setPosition(m_position);
+		m_sprite.setRotation(m_orientation);
+	}
 	
 }
 
@@ -66,6 +72,12 @@ sf::Vector2f Worker::getPosition()
 {
 	return m_sprite.getPosition();
 }
+void Worker::setPosition(float x, float y)
+{
+	
+	m_position.x = x;
+	m_position.y = y;
+}
 
 sf::Vector2f Worker::getVelocity()
 {
@@ -74,9 +86,24 @@ sf::Vector2f Worker::getVelocity()
 
 void Worker::kinematicWander(sf::Vector2f playerPosition)
 {
-	m_velocity = playerPosition - m_position;
+	//steering = new SteeringOutput()
+	//steering = velocity
+	
+	wanderOrientation += getRandom(-1, +1) * wanderRate;
 
-	//Get magnitude of vector
+
+	targetOrientation = wanderOrientation + m_orientation;
+	//sf::Vector2f wanderOffset(25.f, 25.f);
+	float wanderOffset(25.f);
+	float wanderRadius(250.f);
+	orientationAsVector = asVector(m_orientation);
+	target = m_position + wanderOffset * orientationAsVector;
+	targetOrientationAsVector = asVector(targetOrientation);
+	target += wanderRadius * targetOrientationAsVector;
+	//face(target)
+	m_velocity = target - m_position;
+
+	//Get magnitude of vector#
 	m_velocityF = std::sqrt(m_velocity.x*m_velocity.x + m_velocity.y*m_velocity.y);
 
 	//Normalize vector
@@ -85,18 +112,36 @@ void Worker::kinematicWander(sf::Vector2f playerPosition)
 
 	//get new orientation
 	m_orientation = getNewOrientation(m_orientation, m_velocityF);
+	//steering.linear = maxAcc * my.orientation.asVector()
+	orientationAsVector = asVector(m_orientation);
+	m_velocity = m_maxSpeed * orientationAsVector;
 
-	//orientation = orientation + MaxRotation * random(-1, +1)
-	m_orientation = m_orientation + maxRotation * getRandom(-1, 1);
-
-	//Velocity = (-sin(orientation), cos(orientation))*maxSpeed
-	m_velocity.x = (-sin(m_orientation))*m_maxSpeed;
-	m_velocity.y = cos(m_orientation) *m_maxSpeed;
+	//return steering
 
 }
 
+sf::Vector2f Worker::asVector(float orientation)
+{
+	return sf::Vector2f(sinf(orientation), cosf(orientation));
+
+}
 
 void Worker::render(sf::RenderWindow & window)
 {
-	window.draw(m_sprite);
+	if (collected == false) {
+		window.draw(m_sprite);
+	}
+	
 }
+
+void Worker::setCollected()
+{
+	collected = true;
+
+}
+bool Worker::getCollected()
+{
+	return collected;
+
+}
+

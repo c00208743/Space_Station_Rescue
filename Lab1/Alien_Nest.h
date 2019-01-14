@@ -3,6 +3,7 @@
 #include <iostream>
 #include <random>
 #include "Enemy.h"
+#include "Missile.h"
 
 class Alien_Nest : public Enemy
 {
@@ -10,17 +11,25 @@ public:
 	Alien_Nest();
 	~Alien_Nest();
 	float getNewOrientation(float currentOrientation, float velocity);
-	void kinematicSeek(sf::Vector2f playerPosition);
-	void kinematicArrive(sf::Vector2f playerPosition);
+
 	void boundary(float x, float y);
 	float getRandom(int x, int y);
 	void update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies);
 	void render(sf::RenderWindow & window);
 
+
 	sf::Vector2f getPosition();
 	sf::Vector2f getVelocity();
+	int getWidth();
+	int getHeight();
+	int getHealth();
+	int getId();
 
-	void collison(std::vector<Enemy*> enemies);
+	void hit(int damage);
+
+	bool radar(sf::Vector2f pos);
+	
+
 
 private:
 	float m_timeToTarget;
@@ -33,7 +42,8 @@ private:
 	float m_maxRotation;
 	sf::Sprite m_sprite;
 	sf::Texture m_texture;
-
+	sf::Texture m_textureExplosion;
+	sf::Sprite m_spriteExplosion;
 
 	//double shortestTime = std::numeric_limits<double>::infinity();
 	double shortestTime = 2000;
@@ -58,5 +68,15 @@ private:
 	double n_distance = 0;
 	float m_threshold;
 	bool crash = false;
+
+
+	int health = 100;
+	int timer = 0;
+	int animate = 0;
+	sf::Vector2f m_explosion;
+	bool finishAnimate =false;
+	bool inRange = false;
+	int radarDistance = 100000;
+	Missile* m_missile;
 
 };

@@ -6,6 +6,7 @@
 #include "Predator_Ship.h"
 #include "Sweeper_Bot.h"
 
+
 #include <SFML/Graphics.hpp>
 
 class Game
@@ -25,8 +26,9 @@ private:
 	sf::View miniMap;
 	sf::View m_follow;
 	Player* m_player;
-	Worker* m_worker;
-	
+	//Worker* m_worker;
+
+	std::vector<Worker*> workers;
 	std::vector<Enemy*> enemies;
 
 };

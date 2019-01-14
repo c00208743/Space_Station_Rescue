@@ -18,7 +18,11 @@ public:
 	float getNewOrientation(float currentOrientation, float velocity);
 	float getRandom(int x, int y);
 	sf::Vector2f getPosition();
+	void setPosition(float x, float y);
+	void setCollected();
+	bool getCollected();
 	sf::Vector2f getVelocity();
+	sf::Vector2f asVector(float orientation);
 
 
 private:
@@ -30,10 +34,18 @@ private:
 	int m_size;
 	double speed = 0.3;
 	double maxRotation = 180;
-
-	//Lab2
+	int timer =0;
 	sf::Texture m_texture;
 	sf::Sprite m_sprite;
+	bool collected = false;
+
+	//wander
+	float wanderOrientation =0;
+	float targetOrientation =0;
+	float wanderRate = 0.3f;
+	sf::Vector2f target;
+	sf::Vector2f orientationAsVector;
+	sf::Vector2f targetOrientationAsVector;
 	
 
 };
