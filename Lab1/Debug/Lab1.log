@@ -1,37 +1,41 @@
 ﻿  Alien_Nest.cpp
-c:\users\gameuser\desktop\space_station_rescue\lab1\alien_nest.cpp(37): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\alien_nest.cpp(68): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\alien_nest.cpp(69): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\alien_nest.cpp(119): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\space_station_rescue\lab1\alien_nest.cpp(130): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\alien_nest.cpp(46): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\alien_nest.cpp(77): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\alien_nest.cpp(78): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\alien_nest.cpp(171): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Bullet.cpp
   Game.cpp
-c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(62): warning C4244: '-=': conversion from 'const double' to 'sf::Int32', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(67): warning C4244: '-=': conversion from 'const double' to 'sf::Int32', possible loss of data
 c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(104): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(122): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(131): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(117): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(149): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(153): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(161): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\space_station_rescue\lab1\game.cpp(165): warning C4018: '<': signed/unsigned mismatch
   Main.cpp
+  Missile.cpp
+c:\users\gameuser\desktop\space_station_rescue\lab1\missile.cpp(107): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
   Player.cpp
-c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(76): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(79): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(114): warning C4552: '*': result of expression not used
-c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(115): warning C4552: '*': result of expression not used
+c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(102): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(105): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(199): warning C4552: '*': result of expression not used
+c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(200): warning C4552: '*': result of expression not used
   Predator_Ship.cpp
-c:\users\gameuser\desktop\space_station_rescue\lab1\predator_ship.cpp(37): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\predator_ship.cpp(68): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\predator_ship.cpp(69): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\predator_ship.cpp(119): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\space_station_rescue\lab1\predator_ship.cpp(130): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\predator_ship.cpp(44): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\predator_ship.cpp(75): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\predator_ship.cpp(76): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\predator_ship.cpp(126): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\space_station_rescue\lab1\predator_ship.cpp(137): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Sweeper_Bot.cpp
-c:\users\gameuser\desktop\space_station_rescue\lab1\sweeper_bot.cpp(37): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\sweeper_bot.cpp(68): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\sweeper_bot.cpp(69): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\sweeper_bot.cpp(119): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\space_station_rescue\lab1\sweeper_bot.cpp(130): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\sweeper_bot.cpp(45): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\sweeper_bot.cpp(76): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\sweeper_bot.cpp(77): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\sweeper_bot.cpp(127): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\space_station_rescue\lab1\sweeper_bot.cpp(138): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Worker.cpp
-c:\users\gameuser\desktop\space_station_rescue\lab1\worker.cpp(49): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\worker.cpp(60): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\worker.cpp(61): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\worker.cpp(90): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\worker.cpp(52): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\worker.cpp(63): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\worker.cpp(64): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
   Generating Code...
   LINK : C:\Users\gameuser\Desktop\Space_Station_Rescue\Debug\Lab1.exe not found or not built by the last incremental link; performing full link
   Lab1.vcxproj -> C:\Users\gameuser\Desktop\Space_Station_Rescue\Debug\Lab1.exe
