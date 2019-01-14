@@ -23,8 +23,10 @@ Worker::Worker() :
 	m_velocity.x = getRandom(20, -10);
 	m_velocity.y = getRandom(20, -10);
 	m_sprite.setOrigin(16, 32);
-	m_position.x = getRandom(1, 400);
-	m_position.y = getRandom(1, 400);
+	/* initialize random seed: */
+	srand(time(NULL));
+	//m_position.x = rand() % 400 + 1;
+	//m_position.y = rand() % 400 + 1;
 }
 
 
@@ -36,12 +38,13 @@ Worker::~Worker()
 
 void Worker::update(sf::Vector2f playerPosition, Player* player)
 {
-	kinematicWander(playerPosition);
+	if (collected == false) {
+		kinematicWander(playerPosition);
 
-	m_position = m_position + m_velocity;
-	m_sprite.setPosition(m_position);
-	m_sprite.setRotation(m_orientation);
-	
+		m_position = m_position + m_velocity;
+		m_sprite.setPosition(m_position);
+		m_sprite.setRotation(m_orientation);
+	}
 	
 }
 
@@ -71,7 +74,9 @@ sf::Vector2f Worker::getPosition()
 }
 void Worker::setPosition(float x, float y)
 {
-	 m_sprite.setPosition(x, y);
+	
+	m_position.x = x;
+	m_position.y = y;
 }
 
 sf::Vector2f Worker::getVelocity()
@@ -123,6 +128,20 @@ sf::Vector2f Worker::asVector(float orientation)
 
 void Worker::render(sf::RenderWindow & window)
 {
-	window.draw(m_sprite);
+	if (collected == false) {
+		window.draw(m_sprite);
+	}
+	
+}
+
+void Worker::setCollected()
+{
+	collected = true;
+
+}
+bool Worker::getCollected()
+{
+	return collected;
+
 }
 

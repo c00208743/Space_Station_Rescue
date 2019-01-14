@@ -34,6 +34,11 @@ Player::Player() :
 	m_textScore.setCharacterSize(30);
 	m_textScore.setString("Score: ");
 
+	scoreNu.setFont(m_font);
+	scoreNu.setFillColor(sf::Color::White);
+	scoreNu.setCharacterSize(30);
+	scoreNu.setString("");
+
 	if (!m_textureShield.loadFromFile("assets/rotating_shield/shieldAnim.png"))
 	{
 		// error...
@@ -136,6 +141,7 @@ void Player::update(double dt)
 	m_spriteShield.setRotation(m_sprite.getRotation());
 	m_text.setPosition(m_sprite.getPosition().x-900, m_sprite.getPosition().y+ 900);
 	m_textScore.setPosition(m_sprite.getPosition().x - 900, m_sprite.getPosition().y - 900);
+	scoreNu.setPosition(m_sprite.getPosition().x - 800, m_sprite.getPosition().y - 900);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && shieldReady ==true)
 	{
 		shield = true;
@@ -181,6 +187,7 @@ void Player::render(sf::RenderWindow & window)
 	m_bullet->render(window);
 	window.draw(m_text);
 	window.draw(m_textScore);
+	window.draw(scoreNu);
 	window.draw(m_sprite);
 	if (shield) {
 		window.draw(m_spriteShield);
@@ -206,19 +213,26 @@ bool Player::checkBulletCollision(sf::Vector2f pos, int width, int height)
 	return m_bullet->checkCollision(pos, width, height);
 }
 
-bool Player::checkWorkerCollision(sf::Vector2f pos, int width, int height)
+bool Player::checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive)
 {
 	//box collsion formula 
-	
+	if (alive == false) {
 		if (m_sprite.getPosition().x < pos.x + width
 			&& m_sprite.getPosition().x + 128> pos.x
 			&&  m_sprite.getPosition().y + 64 > pos.y
 			&&  m_sprite.getPosition().y < pos.y + height)
 		{
-			// explosion
 			collison = true;
-			score++;
+			score = score + 10;
+			//std::cout << score << std::endl;
+			std::string s = std::to_string(score);
+			scoreNu.setString(s);
 		}
+		else {
+			collison = false;
+		}
+	}
+		
 	
 	return collison;
 }

@@ -17,11 +17,18 @@ Game::Game()
 	
 	m_player = new Player();
 	//m_worker = new Worker();
-	Worker* m_worker = new Worker();
+
 
 	for (int i = 0; i < 5; i++){
+		Worker* m_worker = new Worker();
 		workers.push_back(m_worker);
 	}
+	//hardcore start positions of worker bots
+	workers[0]->setPosition(100, 200);
+	workers[1]->setPosition(300, 200);
+	workers[2]->setPosition(500, 200);
+	workers[3]->setPosition(700, 200);
+	workers[4]->setPosition(900, 200);
 
 	Enemy* m_alienNest = new Alien_Nest();
 	//Enemy* m_predatorShip = new Predator_Ship();
@@ -105,7 +112,9 @@ void Game::update(double dt)
 	{
 		workers[i]->update(m_player->getPosition(), m_player);
 		//worker collision
-		m_player->checkWorkerCollision(workers[i]->getPosition(), 32, 64);
+		if (m_player->checkWorkerCollision(workers[i]->getPosition(), 32, 64, workers[i]->getCollected())) {
+			workers[i]->setCollected();
+		}
 		
 	}
 	
@@ -128,9 +137,7 @@ void Game::update(double dt)
 		if (enemies[i]->getId() == 1)
 		{
 			enemies[i]->radar(m_player->getPosition());
-			
 		}
-		//check missile collision
 		
 	}
 }

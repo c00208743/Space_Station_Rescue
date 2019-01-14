@@ -12,7 +12,7 @@ public:
 	void update(double dt);
 	void render(sf::RenderWindow & window);
 	bool checkBulletCollision(sf::Vector2f pos, int width, int height);
-	bool checkWorkerCollision(sf::Vector2f pos, int width, int height);
+	bool checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive);
 	sf::Vector2f getPosition();
 	sf::Vector2f getVelocity();
 	
@@ -44,6 +44,7 @@ private:
 	sf::Font m_font;
 	sf::Text m_text;
 	sf::Text m_textScore;
+	sf::Text scoreNu;
 	int score = 0;
 
 
