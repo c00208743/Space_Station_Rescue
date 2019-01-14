@@ -139,3 +139,4 @@ void Game::render()
 
 }
 
+// Write a method to check surrounding tiles and check if you should collide with them.

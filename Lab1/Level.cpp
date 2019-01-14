@@ -70,6 +70,10 @@ void Level::load(const std::string& path, sf::RenderWindow* ren) {
 			continue;
 		}
 
+		if (layer->getName() == "WallsTL") {
+			// Put a variable to say "This is the layer to collide with"
+		}
+
 		auto* tile_layer = dynamic_cast<const tmx::TileLayer*>(layer.get());
 
 		// Grab all of this layer's tiles. 
@@ -123,7 +127,7 @@ void Level::load(const std::string& path, sf::RenderWindow* ren) {
 				auto x_pos = x * tile_width;
 				auto y_pos = y * tile_height;
 				tile t(x_pos, y_pos,
-					region_x, region_y, tile_width, tile_height, &texture);
+					region_x, region_y, tile_width, tile_height, &texture); // Add variable to say whether this should collide or not
 				tiles.push_back(t);
 			}
 		}
