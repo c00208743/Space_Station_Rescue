@@ -18,7 +18,7 @@ Player::Player() :
 	}
 	
 	m_sprite.setTexture(m_texture);
-	m_sprite.setOrigin(32, 64);
+	m_sprite.setOrigin(64, 32);
 	m_sprite.setPosition(m_position);
 }
 
@@ -30,7 +30,7 @@ Player::~Player()
 {
 }
 
-void Player::update(double dt)
+void Player::update(double dt, Level * cLevel)
 {
 
 	//increase velocity
@@ -97,6 +97,8 @@ void Player::update(double dt)
 		m_sprite.setPosition(m_sprite.getPosition().x, -100);
 	}
 
+	currentTile(cLevel);
+
 }
 
 void Player::render(sf::RenderWindow & window)
@@ -114,4 +116,29 @@ sf::Vector2f Player::getVelocity()
 	direction.x * speed;
 	direction.y * speed;
 	return direction;
+}
+
+void Player::currentTile(Level * cLevel)
+{
+	// Get the square in front
+	float posX = m_sprite.getPosition().x + 64;
+	float posY = m_sprite.getPosition().y;
+	float angle = (m_sprite.getRotation() * PI) / 180;
+	sf::Vector2f tileAhead = rotate(sf::Vector2f(posX, posY), m_sprite.getPosition(), m_sprite.getRotation());
+	
+
+	int x = floor(tileAhead.x / 32);
+	int y = floor(tileAhead.y / 32);
+	
+	if (cLevel->collide(sf::Vector2i(x, y)))
+	{
+		speed = 0;
+	}
+}
+
+sf::Vector2f Player::rotate(sf::Vector2f P, sf::Vector2f O, float theta)
+{
+	sf::Transform rotTran;
+	rotTran.rotate(theta, O.x, O.y);
+	return rotTran.transformPoint(P);
 }

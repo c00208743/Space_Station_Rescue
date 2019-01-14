@@ -1,4 +1,9 @@
-﻿  Level.cpp
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\level.cpp(13): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\level.cpp(101): warning C4018: '<=': signed/unsigned mismatch
+﻿  Player.cpp
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.h(27): warning C4305: 'initializing': truncation from 'double' to 'const float'
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(76): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(79): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(116): warning C4552: '*': result of expression not used
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(117): warning C4552: '*': result of expression not used
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(130): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(131): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Lab1.vcxproj -> C:\Users\gameuser\Desktop\Test\Space_Station_Rescue\Debug\Lab1.exe

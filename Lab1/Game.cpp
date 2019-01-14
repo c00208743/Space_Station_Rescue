@@ -16,17 +16,17 @@ Game::Game()
 	m_window.setVerticalSyncEnabled(true);
 	
 	m_player = new Player();
-	m_worker = new Worker();
+	//m_worker = new Worker();
 	m_level = new Level("Main Level");
 	m_level->load(path, &m_window);
 
-	Enemy* m_alienNest = new Alien_Nest();
-	Enemy* m_predatorShip = new Predator_Ship();
-	Enemy* m_sweeperBot = new Sweeper_Bot();
-
-	enemies.push_back(m_alienNest);
-	enemies.push_back(m_predatorShip);
-	enemies.push_back(m_sweeperBot);
+	//Enemy* m_alienNest = new Alien_Nest();
+	//Enemy* m_predatorShip = new Predator_Ship();
+	//Enemy* m_sweeperBot = new Sweeper_Bot();
+	//
+	//enemies.push_back(m_alienNest);
+	//enemies.push_back(m_predatorShip);
+	//enemies.push_back(m_sweeperBot);
 	
 	//minimap + player camera
 	m_follow.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
@@ -94,17 +94,17 @@ void Game::processEvents()
 void Game::update(double dt)
 {
 	sf::Time deltaTime;
-	m_player->update(dt);
-	m_worker->update(m_player->getPosition(), m_player);
+	m_player->update(dt, m_level);
+	//m_worker->update(m_player->getPosition(), m_player);
 
 	//camera 
 	m_follow.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
 	miniMap.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
 	
-	for (int i = 0; i < enemies.size(); i++)
-	{
-		enemies[i]->update(m_player->getPosition(), m_player, enemies);
-	}
+	//for (int i = 0; i < enemies.size(); i++)
+	//{
+	//	enemies[i]->update(m_player->getPosition(), m_player, enemies);
+	//}
 }
 
 
@@ -119,20 +119,20 @@ void Game::render()
 	m_level->draw(&m_window);
 	m_window.setView(miniMap);
 	m_player->render(m_window);
-	m_worker->render(m_window);
-	for (int i = 0; i < enemies.size(); i++)
-	{
-		enemies[i]->render(m_window);
-	}
+	//m_worker->render(m_window);
+	//for (int i = 0; i < enemies.size(); i++)
+	//{
+	//	enemies[i]->render(m_window);
+	//}
 	
 
 	m_window.setView(m_follow);
 	m_player->render(m_window);
-	m_worker->render(m_window);
-	for (int i = 0; i < enemies.size(); i++)
-	{
-		enemies[i]->render(m_window);
-	}
+	//m_worker->render(m_window);
+	//for (int i = 0; i < enemies.size(); i++)
+	//{
+	//	enemies[i]->render(m_window);
+	//}
 	m_window.display();
 	
 

@@ -25,8 +25,12 @@ struct tile {
 	int width;
 	int height;
 
-	tile(int x, int y, int tx, int ty, int w, int h, sf::Texture* t);
+	bool collide;
+
+	tile();
+	tile(int x, int y, int tx, int ty, int w, int h, sf::Texture* t, bool c);
 	void draw(sf::RenderWindow* ren);
+	bool getCollision();
 };
 
 class Level
@@ -35,6 +39,7 @@ public:
 	Level(const std::string& name);
 	void load(const std::string& path, sf::RenderWindow* ren);
 	void draw(sf::RenderWindow* ren);
+	bool collide(sf::Vector2i pos);
 
 private:
 	std::string name;

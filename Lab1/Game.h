@@ -26,11 +26,11 @@ private:
 	sf::View miniMap;
 	sf::View m_follow;
 	Player* m_player;
-	Worker* m_worker;
+	//Worker* m_worker;
 	Level* m_level;
 	std::string const path = "assets/maps/Practice.tmx";
 	
-	std::vector<Enemy*> enemies;
+	//std::vector<Enemy*> enemies;
 
 };
 

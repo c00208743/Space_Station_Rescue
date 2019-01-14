@@ -1,7 +1,10 @@
 #include "Level.h"
 
-tile::tile(int x, int y, int tx, int ty, int w, int h, sf::Texture* t)
-	: x(x), y(y), tx(tx), ty(ty), width(w), height(h) {
+tile::tile()
+{}
+
+tile::tile(int x, int y, int tx, int ty, int w, int h, sf::Texture* t, bool c)
+	: x(x), y(y), tx(tx), ty(ty), width(w), height(h), collide(c){
 
 	sf::IntRect src = sf::IntRect(tx - 32, ty - 32, width, height);
 
@@ -19,12 +22,17 @@ void tile::draw(sf::RenderWindow* ren) {
 		return;
 
 	ren->draw(m_sprite);
+}
 
-	//SDL_RenderCopy(ren, sheet, &src, &dest);
+bool tile::getCollision()
+{
+	return collide;
 }
 
 Level::Level(const std::string& name)
 	: name(name), rows(0), cols(0) {
+
+	tiles.resize(230400);
 
 }
 
@@ -60,6 +68,8 @@ void Level::load(const std::string& path, sf::RenderWindow* ren) {
 
 	tilesets[1]->setTexture(tempAssets->getTexture(1));
 	texture = tempAssets->getTexture(1);
+	bool collisionLayer = false;
+	bool includeLayer = false;
 	// iterate through each layer in the map,
 	// poke each tile for the information you need, and store it in
 	// our tiles data structure. 
@@ -72,6 +82,20 @@ void Level::load(const std::string& path, sf::RenderWindow* ren) {
 
 		if (layer->getName() == "WallsTL") {
 			// Put a variable to say "This is the layer to collide with"
+			std::cout << "Hello" << std::endl;
+			collisionLayer = true;
+			includeLayer = true;
+		}
+		else if (layer->getName() == "Background") {
+			// Put a variable to say "This is the layer to collide with"
+			std::cout << "Hello" << std::endl;
+			collisionLayer = false;
+			includeLayer = true;
+		}
+		else
+		{
+			collisionLayer = false;
+			includeLayer = false;
 		}
 
 		auto* tile_layer = dynamic_cast<const tmx::TileLayer*>(layer.get());
@@ -87,7 +111,7 @@ void Level::load(const std::string& path, sf::RenderWindow* ren) {
 				auto cur_gid = layer_tiles[tile_index].ID;
 
 				// If the GID is 0, that means it's an empty tile
-				if (cur_gid == 0) {
+				if (cur_gid == 0 || !includeLayer) {
 					continue;
 				}
 
@@ -126,9 +150,13 @@ void Level::load(const std::string& path, sf::RenderWindow* ren) {
 				// Calculate the world position of our tile
 				auto x_pos = x * tile_width;
 				auto y_pos = y * tile_height;
+				
+				
+				
 				tile t(x_pos, y_pos,
-					region_x, region_y, tile_width, tile_height, &texture); // Add variable to say whether this should collide or not
-				tiles.push_back(t);
+					region_x, region_y, tile_width, tile_height, &texture, collisionLayer); // Add variable to say whether this should collide or not
+				//tiles.push_back(t);
+				tiles[x + (480 * y)] = t;
 			}
 		}
 	}
@@ -138,4 +166,9 @@ void Level::draw(sf::RenderWindow* ren) {
 	for (auto& tile : tiles) {
 		tile.draw(ren);
 	}
+}
+
+bool Level::collide(sf::Vector2i pos)
+{
+	return tiles[pos.x + (480 * pos.y)].getCollision();
 }
