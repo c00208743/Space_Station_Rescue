@@ -25,29 +25,26 @@ Game::Game()
 	}
 	//hardcore start positions of worker bots
 	workers[0]->setPosition(100, 200);
-	workers[1]->setPosition(300, 200);
+	workers[1]->setPosition(800, 200);
 	workers[2]->setPosition(500, 200);
 	workers[3]->setPosition(700, 200);
 	workers[4]->setPosition(900, 200);
 
 	Enemy* m_alienNest = new Alien_Nest();
-	//Enemy* m_predatorShip = new Predator_Ship();
-	//Enemy* m_sweeperBot = new Sweeper_Bot();
+	Enemy* m_predatorShip = new Predator_Ship();
+	Enemy* m_sweeperBot = new Sweeper_Bot();
 	
 	enemies.push_back(m_alienNest);
-	//enemies.push_back(m_predatorShip);
-	//enemies.push_back(m_sweeperBot);
+	enemies.push_back(m_predatorShip);
+	enemies.push_back(m_sweeperBot);
 	
 	//minimap + player camera
 	m_follow.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
 	m_follow.setSize(sf::Vector2f(2000.f, 2000.f));
 
-	
-
 	// player 2 (right side of the screen)
 	miniMap.setViewport(sf::FloatRect(0.75f, 0.f, 0.25f, 0.25f));
 	miniMap.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
-
 
 }
 
@@ -116,27 +113,50 @@ void Game::update(double dt)
 			workers[i]->setCollected();
 		}
 		
+		
 	}
 	
-
 	//camera 
 	m_follow.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
 	miniMap.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
 	
 	for (int i = 0; i < enemies.size(); i++)
 	{
+		
 		enemies[i]->update(m_player->getPosition(), m_player, enemies);
-		//check collision
 		//wrapper this in gethealth 
 		if (enemies[i]->getHealth() > 0) {
-			if (m_player->checkBulletCollision(enemies[i]->getPosition(), enemies[i]->getWidth(), enemies[i]->getHeight()))
+			if (m_player->checkBulletCollision(enemies[i]->getPosition(), enemies[i]->getWidth(), enemies[i]->getHeight()) == true)
 			{
-				enemies[i]->hit(25);
+ 				enemies[i]->hit(25);
 			}
 		}
 		if (enemies[i]->getId() == 1)
 		{
 			enemies[i]->radar(m_player->getPosition());
+			//set player health
+			m_player->setHealth(enemies[i]->getDamageToPlayer());
+		}
+		if (enemies[i]->getId() == 3)
+		{
+			enemies[i]->radar(m_player->getPosition());
+			if (enemies[i]->getHealth() <= 0) {
+				//give score to player
+				m_player->setScore(enemies[i]->getScore());
+				enemies[i]->setScore();
+			}
+			for (int j = 0; j < workers.size(); j++)
+			{
+				//if dead dont seek worker
+				if (workers[j]->getCollected() == false) {
+					enemies[i]->workerRadar(workers[j]->getPosition());
+				}
+				
+				if (enemies[i]->checkWorkerCollision(workers[j]->getPosition(), 32, 64, workers[j]->getCollected())) {
+					workers[j]->setCollected();
+				}
+			}
+			
 		}
 		
 	}

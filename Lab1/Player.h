@@ -15,7 +15,9 @@ public:
 	bool checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive);
 	sf::Vector2f getPosition();
 	sf::Vector2f getVelocity();
-	
+	void setScore(int enemyS);
+	void setHealth(int dam);
+
 private:
 
 	sf::Vector2f m_position;
@@ -45,7 +47,10 @@ private:
 	sf::Text m_text;
 	sf::Text m_textScore;
 	sf::Text scoreNu;
+	sf::Text m_gameOver;
+	sf::Text m_health;
 	int score = 0;
+	int health = 100;
 
 
 };

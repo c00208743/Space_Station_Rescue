@@ -20,6 +20,7 @@ public:
 
 	float getNewOrientation(float currentOrientation, float velocity);
 	void kinematicSeek(sf::Vector2f playerPosition);
+	int damagedPlayer();
 
 private:
 	float m_speed;
@@ -36,7 +37,8 @@ private:
 	float m_velocityF;
 	float m_orientation;
 	float m_maxSpeed = 0.5f;
-
+	int playerDamage = 0;
 	sf::Vector2f m_playerPos;
+	sf::Vector2f m_nestPos;
 	
 };

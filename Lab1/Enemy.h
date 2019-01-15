@@ -15,10 +15,14 @@ public:
 	virtual int getWidth() = 0;
 	virtual int getHeight() = 0;
 	virtual int getHealth() = 0;
+	virtual int getScore() = 0;
+	virtual int getDamageToPlayer() = 0;
+	virtual void setScore() = 0;
 	virtual int getId() = 0;
 	virtual bool radar(sf::Vector2f pos) = 0;
+	virtual bool workerRadar(sf::Vector2f pos) = 0;
 	virtual void hit(int damage) = 0;
-
+	virtual bool checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive) = 0;
 protected:
 	Enemy() {}
 };

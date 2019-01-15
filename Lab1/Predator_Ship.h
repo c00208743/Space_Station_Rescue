@@ -23,8 +23,14 @@ public:
 	int getHeight();
 	int getHealth();
 	void hit(int damage);
-
+	int getId();
+	bool radar(sf::Vector2f pos);
+	bool workerRadar(sf::Vector2f pos);
 	void collison(std::vector<Enemy*> enemies);
+	int getScore();
+	void setScore();
+	bool checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive);
+	int getDamageToPlayer();
 
 private:
 	float m_timeToTarget;

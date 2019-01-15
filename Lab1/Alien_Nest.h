@@ -23,11 +23,14 @@ public:
 	int getWidth();
 	int getHeight();
 	int getHealth();
+	int getScore();
+	void setScore();
 	int getId();
-
+	int getDamageToPlayer();
 	void hit(int damage);
-
 	bool radar(sf::Vector2f pos);
+	bool workerRadar(sf::Vector2f pos);
+	bool checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive);
 	
 
 

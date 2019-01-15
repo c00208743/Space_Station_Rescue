@@ -46,7 +46,7 @@ void Missile::update()
 
 void Missile::fire(sf::Vector2f pos)
 {
-
+	m_nestPos = pos;
 	//start on Alien Nest position
 	
 	if (timer % 1000 == 0) {
@@ -58,7 +58,6 @@ void Missile::fire(sf::Vector2f pos)
 	checkCollision();
 	
 	m_alive = true;
-	
 	
 }
 
@@ -75,7 +74,12 @@ bool Missile::checkCollision()
 			// explosion
 			collison = true;
 			std::cout << "Player was hit" << std::endl;
-			
+			//call fire to reset the bullet
+			m_alive = false;
+			m_position = m_nestPos;
+		}
+		else {
+			collison = false;
 		}
 	}
 	return collison;
@@ -113,4 +117,16 @@ float Missile::getNewOrientation(float currentOrientation, float velocity)
 }
 bool Missile::getStatus() {
 	return m_alive;
+}
+int Missile::damagedPlayer() {
+	//decrease player health
+	if (collison ==true) {
+		playerDamage = 20;
+	}
+	else {
+		playerDamage = 0;
+	}
+	//std::cout << playerDamage << std::endl;
+	return playerDamage;
+	
 }

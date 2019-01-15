@@ -1,6 +1,6 @@
 ﻿  Player.cpp
-c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(107): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(110): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(206): warning C4552: '*': result of expression not used
-c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(207): warning C4552: '*': result of expression not used
+c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(119): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(122): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(227): warning C4552: '*': result of expression not used
+c:\users\gameuser\desktop\space_station_rescue\lab1\player.cpp(228): warning C4552: '*': result of expression not used
   Lab1.vcxproj -> C:\Users\gameuser\Desktop\Space_Station_Rescue\Debug\Lab1.exe
