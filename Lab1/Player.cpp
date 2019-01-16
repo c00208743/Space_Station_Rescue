@@ -39,6 +39,16 @@ Player::Player() :
 	scoreNu.setCharacterSize(30);
 	scoreNu.setString("");
 
+	m_gameOver.setFont(m_font);
+	m_gameOver.setFillColor(sf::Color::Red);
+	m_gameOver.setCharacterSize(30);
+	m_gameOver.setString("Game Over!");
+
+	m_health.setFont(m_font);
+	m_health.setFillColor(sf::Color::White);
+	m_health.setCharacterSize(30);
+	m_health.setString("Health : ");
+
 	if (!m_textureShield.loadFromFile("assets/rotating_shield/shieldAnim.png"))
 	{
 		// error...
@@ -64,44 +74,46 @@ Player::~Player()
 
 void Player::update(double dt, Level * cLevel)
 {
+	if (health > 0) {
 
-	//increase velocity
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	{
-		if (speed < 3)
+		//increase velocity
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
-			speed = speed + 0.02;
+			if (speed < 3)
+			{
+				speed = speed + 0.02;
+			}
 		}
-	}
-	else
-	{
-		if (speed > 0)
+		else
 		{
-			speed = speed - 0.02;
+			if (speed > 0)
+			{
+				speed = speed - 0.02;
+			}
 		}
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
-	{
-		if (speed > -3)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
-			speed = speed - 0.02;
+			if (speed > -3)
+			{
+				speed = speed - 0.02;
+			}
 		}
-	}
-	else
-	{
-		if (speed < 0)
+		else
 		{
-			speed = speed + 0.02;
+			if (speed < 0)
+			{
+				speed = speed + 0.02;
+			}
 		}
-	}
-	//change rotation 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-	{
-		m_sprite.rotate(-0.5);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-	{
-		m_sprite.rotate(0.5);
+		//change rotation 
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+		{
+			m_sprite.rotate(-0.5);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+		{
+			m_sprite.rotate(0.5);
+		}
 	}
 
 	//Apply direction to sprite
@@ -143,6 +155,8 @@ void Player::update(double dt, Level * cLevel)
 	m_text.setPosition(m_sprite.getPosition().x-900, m_sprite.getPosition().y+ 900);
 	m_textScore.setPosition(m_sprite.getPosition().x - 900, m_sprite.getPosition().y - 900);
 	scoreNu.setPosition(m_sprite.getPosition().x - 800, m_sprite.getPosition().y - 900);
+	m_gameOver.setPosition(m_sprite.getPosition().x, m_sprite.getPosition().y);
+	m_health.setPosition(m_sprite.getPosition().x - 900, m_sprite.getPosition().y- 860);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && shieldReady ==true)
 	{
 		shield = true;
@@ -190,7 +204,14 @@ void Player::render(sf::RenderWindow & window)
 	window.draw(m_text);
 	window.draw(m_textScore);
 	window.draw(scoreNu);
-	window.draw(m_sprite);
+	window.draw(m_health);
+	if (health > 0) {
+		window.draw(m_sprite);
+	}
+	else {
+		window.draw(m_gameOver);
+	}
+	
 	if (shield) {
 		window.draw(m_spriteShield);
 	}
@@ -239,6 +260,22 @@ bool Player::checkWorkerCollision(sf::Vector2f pos, int width, int height, bool 
 	return collison;
 }
 
+void Player::setScore(int enemyS) {
+	score += enemyS;
+	std::string s = std::to_string(score);
+	scoreNu.setString(s);
+}
+
+void Player::setHealth(int dam) {
+	if (shield == false) {
+		health = health - dam;
+		std::string s = std::to_string(health);
+		m_health.setString("Health : "+ s);
+	}
+	
+	//std::cout << health << std::endl;
+}
+
 void Player::currentTile(Level * cLevel)
 {
 	// Get the square in front
@@ -268,6 +305,7 @@ void Player::currentTile(Level * cLevel)
 	{
 		previousTile = sf::Vector2i(m_sprite.getPosition().x / 32, m_sprite.getPosition().y / 32);
 		cLevel->updateWeights(previousTile);
+		std::cout << "X: " << previousTile.x << std::endl;
 	}
 
 	m_bullet->checkWall(cLevel);
@@ -278,4 +316,4 @@ sf::Vector2f Player::rotate(sf::Vector2f P, sf::Vector2f O, float theta)
 	sf::Transform rotTran;
 	rotTran.rotate(theta, O.x, O.y);
 	return rotTran.transformPoint(P);
-} 
+}

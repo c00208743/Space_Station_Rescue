@@ -351,20 +351,22 @@ void Level::path(std::shared_ptr<tile>(grid)[V][V], sf::Vector2i start, sf::Vect
 
 void Level::reset(std::shared_ptr<tile>(grid)[V][V])
 {
-	for (int i = 0; i < V; i++)
+	/*for (int i = 0; i < V; i++)
 	{
 		for (int j = 0; j < V; j++)
 		{
-			//if (SquareType::wall != grid[i][j]->getType())
-			//{
+			
 			grid[i][j]->reset();
-			//}
+			
 		}
-	}
+	}*/
+
+	grid = emptyGrid;
 }
 
 void Level::updateWeights(sf::Vector2i p)
 {
+	reset(grid);
 	giveWeights(grid, p);
 }
 
@@ -393,5 +395,4 @@ void Level::giveWeights(std::shared_ptr<tile>(grid)[V][V], sf::Vector2i goal)
 		}
 		queue.erase(queue.begin());
 	}
-	std::cout << "hhelo" << std::endl;
 }

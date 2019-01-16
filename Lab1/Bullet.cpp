@@ -59,11 +59,12 @@ void Bullet::fire(sf::Vector2f direction, sf::Vector2f pos, float rotation)
 
 	m_sprite.setRotation(rotation);
 	m_alive = true;
+	collison = false;
 }
 
 bool Bullet::checkCollision(sf::Vector2f pos, int width, int height)
 {
-
+	collison = false;
 	//box collsion formula 
 	if (m_alive) {
 		if (m_position.x < pos.x + width
@@ -73,6 +74,10 @@ bool Bullet::checkCollision(sf::Vector2f pos, int width, int height)
 		{
 			// explosion
 			collison = true;
+			m_alive = false;
+		}
+		else {
+			collison = false;
 		}
 	}
 	return collison;

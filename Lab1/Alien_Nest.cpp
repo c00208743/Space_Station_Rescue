@@ -120,7 +120,6 @@ void Alien_Nest::update(sf::Vector2f playerPosition, Player* player, std::vector
 		}
 	}
 	
-	
 }
 
 
@@ -185,3 +184,26 @@ bool Alien_Nest::radar(sf::Vector2f pos) {
 
 }
 
+bool Alien_Nest::workerRadar(sf::Vector2f pos) {
+
+	return 0;
+}
+bool Alien_Nest::checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive)
+{
+	//sweeper bot has no use for this method
+	return 0;
+}
+int Alien_Nest::getScore()
+{
+	return 0;
+}
+void Alien_Nest::setScore()
+{
+	//do nothing
+}
+
+int Alien_Nest::getDamageToPlayer()
+{
+	//how much damage has been inflicted to the player
+	return m_missile->damagedPlayer();
+}

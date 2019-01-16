@@ -49,17 +49,6 @@ float Predator_Ship::getNewOrientation(float currentOrientation, float velocity)
 
 }
 
-int Predator_Ship::getId()
-{
-	return 0;
-}
-
-bool Predator_Ship::radar(sf::Vector2f pos)
-{
-	return false;
-}
-
-
 void Predator_Ship::boundary(float x, float y)
 {
 	if (x > 6100)
@@ -240,7 +229,7 @@ sf::Vector2f Predator_Ship::nextTile(Level * cLevel)
 		}
 	}
 
-	std::cout << "Weight: " << cLevel->getWeight(sf::Vector2i(gridPosX, gridPosY)) << std::endl;
+	//std::cout << "Weight: " << cLevel->getWeight(sf::Vector2i(gridPosX, gridPosY)) << std::endl;
 	
 	return neighbourPos[smallestIndexPos];
 
@@ -279,4 +268,35 @@ void Predator_Ship::hit(int damage)
 int Predator_Ship::getHealth()
 {
 	return health;
+}
+
+bool Predator_Ship::radar(sf::Vector2f pos) {
+	//might have to be used for other preds 
+	return 0;
+
+}
+bool Predator_Ship::workerRadar(sf::Vector2f pos) {
+	return 0;
+}
+int Predator_Ship::getId()
+{
+	return 2;
+}
+int Predator_Ship::getScore()
+{
+	return 0;
+}
+void Predator_Ship::setScore()
+{
+	//do nothing 
+}
+bool Predator_Ship::checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive)
+{
+	//do nothing
+	return 0;
+}
+int Predator_Ship::getDamageToPlayer()
+{
+	//how much damage has been inflicted to the player
+	return 0;
 }

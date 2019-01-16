@@ -84,6 +84,7 @@ private:
 
 	std::vector<std::vector<tile>> tiles;
 	std::shared_ptr<tile> grid[V][V];
+	std::shared_ptr<tile> emptyGrid[V][V];
 
 	std::map<gid, sf::Sprite*> tilesets;
 	
