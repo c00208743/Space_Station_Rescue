@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <random>
+#include "Level.h"
 
 
 
@@ -16,7 +17,7 @@ public:
 
 	void fire(sf::Vector2f direction, sf::Vector2f pos, float rotation);
 	bool checkCollision(sf::Vector2f pos, int width, int height);
-	//void checkCollision(sf::Vector2f size, sf::Vector2f pos);
+	void checkWall(Level * cLevel);
 
 private:
 	float m_speed;
@@ -29,4 +30,5 @@ private:
 	bool collison = false;
 	int timer = 0;
 	int animate = 0;
+	
 };

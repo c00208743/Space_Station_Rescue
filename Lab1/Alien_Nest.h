@@ -14,7 +14,7 @@ public:
 
 	void boundary(float x, float y);
 	float getRandom(int x, int y);
-	void update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies);
+	void update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies, Level * cLevel);
 	void render(sf::RenderWindow & window);
 
 

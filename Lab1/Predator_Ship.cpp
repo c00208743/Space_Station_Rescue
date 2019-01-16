@@ -3,7 +3,7 @@
 Predator_Ship::Predator_Ship() :
 	m_position(1000, 1500),
 	m_velocity(0, 0),
-	m_maxSpeed(0.1f),
+	m_maxSpeed(1.0f),
 	m_maxRotation(20.0f),
 	m_timeToTarget(100.0f),
 	radius(200.0f),
@@ -48,6 +48,17 @@ float Predator_Ship::getNewOrientation(float currentOrientation, float velocity)
 	}
 
 }
+
+int Predator_Ship::getId()
+{
+	return 0;
+}
+
+bool Predator_Ship::radar(sf::Vector2f pos)
+{
+	return false;
+}
+
 
 void Predator_Ship::boundary(float x, float y)
 {
@@ -165,12 +176,13 @@ sf::Vector2f Predator_Ship::getVelocity()
 }
 
 
-void Predator_Ship::update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies)
+void Predator_Ship::update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies, Level * cLevel)
 {
 	//collison(enemies);
 	if (crash == false)
 	{
-		kinematicArrive(playerPosition);
+		kinematicSeek(nextTile(cLevel));
+		
 	}
 
 	if (health > 0) {
@@ -199,6 +211,40 @@ void Predator_Ship::update(sf::Vector2f playerPosition, Player* player, std::vec
 	}
 }
 
+sf::Vector2f Predator_Ship::nextTile(Level * cLevel)
+{
+	int gridPosX = std::floor(m_position.x / 32);
+	int gridPosY = std::floor(m_position.y / 32);
+
+	
+ 	std::vector<int> neighbourWeights;
+	std::vector<sf::Vector2f> neighbourPos;
+
+	neighbourWeights.push_back(cLevel->getWeight(sf::Vector2i(gridPosX, gridPosY - 1))); // Above
+	neighbourPos.push_back(sf::Vector2f(gridPosX * 32 + 16, ((gridPosY - 1) * 32) + 16)); // Above
+	neighbourWeights.push_back(cLevel->getWeight(sf::Vector2i(gridPosX, gridPosY + 1))); // Below
+	neighbourPos.push_back(sf::Vector2f(gridPosX * 32 + 16, ((gridPosY + 1) * 32) + 16)); // Below
+	neighbourWeights.push_back(cLevel->getWeight(sf::Vector2i(gridPosX - 1, gridPosY))); // Left
+	neighbourPos.push_back(sf::Vector2f(((gridPosX - 1) * 32) + 16, gridPosY * 32 + 16)); // Left
+	neighbourWeights.push_back(cLevel->getWeight(sf::Vector2i(gridPosX + 1, gridPosY))); // Right
+	neighbourPos.push_back(sf::Vector2f(((gridPosX + 1) * 32) + 16 , gridPosY * 32 + 16)); // Right
+
+	int smallest = INT_MAX;
+	int smallestIndexPos = 0;
+	for (int i = 0; i < neighbourWeights.size(); i++)
+	{
+		if (neighbourWeights[i] < smallest)
+		{
+			smallest = neighbourWeights[i];
+			smallestIndexPos = i;
+		}
+	}
+
+	std::cout << "Weight: " << cLevel->getWeight(sf::Vector2i(gridPosX, gridPosY)) << std::endl;
+	
+	return neighbourPos[smallestIndexPos];
+
+}
 
 void Predator_Ship::render(sf::RenderWindow & window)
 {

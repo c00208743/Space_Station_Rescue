@@ -166,7 +166,7 @@ sf::Vector2f Sweeper_Bot::getVelocity()
 }
 
 
-void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies)
+void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies, Level * cLevel)
 {
 	//collison(enemies);
 	if (crash == false)

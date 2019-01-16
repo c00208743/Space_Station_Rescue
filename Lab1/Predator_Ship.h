@@ -14,8 +14,11 @@ public:
 	void kinematicArrive(sf::Vector2f playerPosition);
 	void boundary(float x, float y);
 	float getRandom(int x, int y);
-	void update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies);
+	void update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies, Level * cLevel);
 	void render(sf::RenderWindow & window);
+
+	int getId();
+	bool radar(sf::Vector2f pos);
 
 	sf::Vector2f getPosition();
 	sf::Vector2f getVelocity();
@@ -27,6 +30,7 @@ public:
 	void collison(std::vector<Enemy*> enemies);
 
 private:
+	sf::Vector2f nextTile(Level * cLevel);
 	float m_timeToTarget;
 	sf::Vector2f m_position;
 	float m_orientation;
@@ -37,7 +41,6 @@ private:
 	float m_maxRotation;
 	sf::Sprite m_sprite;
 	sf::Texture m_texture;
-
 
 	//double shortestTime = std::numeric_limits<double>::infinity();
 	double shortestTime = 2000;

@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <random>
+#include "Level.h"
 
 
 
@@ -11,7 +12,7 @@ class Missile
 public:
 	Missile();
 	~Missile();
-	void update();
+	void update(Level * cLevel);
 	void render(sf::RenderWindow & window);
 
 	void fire(sf::Vector2f pos);
@@ -20,6 +21,7 @@ public:
 
 	float getNewOrientation(float currentOrientation, float velocity);
 	void kinematicSeek(sf::Vector2f playerPosition);
+	void checkWall(Level * cLevel);
 
 private:
 	float m_speed;

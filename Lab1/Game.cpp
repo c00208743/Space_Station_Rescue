@@ -31,7 +31,7 @@ Game::Game()
 	workers[4]->setPosition(900, 200);
 
 	Enemy* m_alienNest = new Alien_Nest();
-	//Enemy* m_predatorShip = new Predator_Ship();
+	Enemy* m_predatorShip = new Predator_Ship();
 	//Enemy* m_sweeperBot = new Sweeper_Bot();
 	
 	enemies.push_back(m_alienNest);
@@ -39,7 +39,7 @@ Game::Game()
 	m_level = new Level("Main Level");
 	m_level->load(path, &m_window);
 
-	//enemies.push_back(m_predatorShip);
+	enemies.push_back(m_predatorShip);
 	//enemies.push_back(m_sweeperBot);
 	
 	//minimap + player camera
@@ -112,7 +112,7 @@ void Game::update(double dt)
 	
 	for (int i = 0; i < workers.size(); i++)
 	{
-		workers[i]->update(m_player->getPosition(), m_player);
+		workers[i]->update(m_level);
 		//worker collision
 		if (m_player->checkWorkerCollision(workers[i]->getPosition(), 32, 64, workers[i]->getCollected())) {
 			workers[i]->setCollected();
@@ -128,7 +128,7 @@ void Game::update(double dt)
 	
 	for (int i = 0; i < enemies.size(); i++)
 	{
-		enemies[i]->update(m_player->getPosition(), m_player, enemies);
+		enemies[i]->update(m_player->getPosition(), m_player, enemies, m_level);
 		//check collision
 		//wrapper this in gethealth 
 		if (enemies[i]->getHealth() > 0) {

@@ -1,5 +1,4 @@
 #include "Worker.h"
-#include "Player.h"
 #include "math.h"
 
 
@@ -25,8 +24,12 @@ Worker::Worker() :
 	m_sprite.setOrigin(16, 32);
 	/* initialize random seed: */
 	srand(time(NULL));
+
+	newTarget();
 	//m_position.x = rand() % 400 + 1;
 	//m_position.y = rand() % 400 + 1;
+
+	m_timerCount = 0;
 }
 
 
@@ -34,18 +37,55 @@ Worker::~Worker()
 {
 }
 
+void Worker::newTarget()
+{
+	target = sf::Vector2f(rand() % 6000, rand() % 6000);
+}
 
+sf::Vector2f Worker::rotate(sf::Vector2f P, sf::Vector2f O, float theta)
+{
+	sf::Transform rotTran;
+	rotTran.rotate(theta, O.x, O.y);
+	return rotTran.transformPoint(P);
+}
 
-void Worker::update(sf::Vector2f playerPosition, Player* player)
+void Worker::update(Level * cLevel)
 {
 	if (collected == false) {
-		kinematicWander(playerPosition);
+		if (m_timerCount >= m_timerCountLimit)
+		{
+			m_timerCount = 0;
+			newTarget();
+		}
+		else
+		{
+			m_timerCount++;
+		}
 
+		kinematicWander(target);
 		m_position = m_position + m_velocity;
 		m_sprite.setPosition(m_position);
-		m_sprite.setRotation(m_orientation);
+		checkWall(cLevel);
 	}
 	
+}
+
+
+void Worker::checkWall(Level * cLevel)
+{
+	// Get the square in front
+	float posX = m_position.x + 32;
+	float posY = m_position.y;
+	
+	sf::Vector2f tileAhead = rotate(sf::Vector2f(posX, posY), m_sprite.getPosition(), m_sprite.getRotation());
+
+	int x = floor(tileAhead.x / 32);
+	int y = floor(tileAhead.y / 32);
+
+	if (cLevel->collide(sf::Vector2i(x, y)))
+	{
+		newTarget();
+	}
 }
 
 float Worker::getNewOrientation(float currentOrientation, float velocity)
@@ -84,39 +124,14 @@ sf::Vector2f Worker::getVelocity()
 	return m_velocity;
 }
 
-void Worker::kinematicWander(sf::Vector2f playerPosition)
+void Worker::kinematicWander(sf::Vector2f targetPosition)
 {
-	//steering = new SteeringOutput()
-	//steering = velocity
-	
-	wanderOrientation += getRandom(-1, +1) * wanderRate;
-
-
-	targetOrientation = wanderOrientation + m_orientation;
-	//sf::Vector2f wanderOffset(25.f, 25.f);
-	float wanderOffset(25.f);
-	float wanderRadius(250.f);
-	orientationAsVector = asVector(m_orientation);
-	target = m_position + wanderOffset * orientationAsVector;
-	targetOrientationAsVector = asVector(targetOrientation);
-	target += wanderRadius * targetOrientationAsVector;
-	//face(target)
-	m_velocity = target - m_position;
-
-	//Get magnitude of vector#
-	m_velocityF = std::sqrt(m_velocity.x*m_velocity.x + m_velocity.y*m_velocity.y);
-
-	//Normalize vector
-	m_velocity.x = m_velocity.x / m_velocityF;
-	m_velocity.y = m_velocity.y / m_velocityF;
-
-	//get new orientation
-	m_orientation = getNewOrientation(m_orientation, m_velocityF);
-	//steering.linear = maxAcc * my.orientation.asVector()
-	orientationAsVector = asVector(m_orientation);
-	m_velocity = m_maxSpeed * orientationAsVector;
-
-	//return steering
+	m_velocity = targetPosition - m_position;
+	m_velocity = normalize(m_velocity);
+	float orientation = getNewOrientation(m_sprite.getRotation(), length(m_velocity));
+	orientation = orientation + m_maxRotation * ((rand() % 2) - 1);
+	m_sprite.setRotation(orientation);
+	m_velocity = sf::Vector2f(-sin(orientation), cos(orientation)) * m_maxSpeed;
 
 }
 
@@ -145,3 +160,16 @@ bool Worker::getCollected()
 
 }
 
+
+float Worker::length(sf::Vector2f vel)
+{
+	return (sqrt((vel.x * vel.x) + (vel.y * vel.y)));
+}
+
+sf::Vector2f Worker::normalize(sf::Vector2f vel)
+{
+	if (length(vel) != 0)
+		return sf::Vector2f(vel.x / length(vel), vel.y / length(vel));
+	else
+		return vel;
+}

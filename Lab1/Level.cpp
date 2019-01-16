@@ -10,18 +10,24 @@ tile::tile(int x, int y, int tx, int ty, int w, int h, sf::Texture* t, bool c)
 
 	sf::IntRect dest = sf::IntRect(x, y, width, height);
 	
+	gridX = x / width;
+	gridY = y / height;
 
 	m_sprite.setTexture(*t);
 	m_sprite.setTextureRect(src);
 	m_sprite.setPosition(sf::Vector2f(x, y));
+	m_checked = false;
+	m_weight = INT_MAX;
 
 }
 
 void tile::draw(sf::RenderWindow* ren) {
 	if (!ren)
 		return;
-
-	ren->draw(m_sprite);
+	if (this != nullptr)
+	{
+		ren->draw(m_sprite);
+	}
 }
 
 bool tile::getCollision()
@@ -29,11 +35,139 @@ bool tile::getCollision()
 	return collide;
 }
 
+void tile::setNeighbourWeights(std::shared_ptr<tile>(grid)[V][V])
+{
+
+	// Get x and y variable to make it handier
+	m_neighbours = grid[gridX][gridY]->getNeighbours(grid, true);
+
+	int lowestWeight = INT_MAX;
+	//for each neighbour of this node (only straight line neighbours, not diagonals)
+	for (int j = 0; j < m_neighbours.size(); j++) {
+		std::shared_ptr<tile> n = m_neighbours[j];
+
+		if (n->getWeight() < lowestWeight)
+		{
+			lowestWeight = n->getWeight();
+		}
+	}
+
+	if (lowestWeight == INT_MAX)
+	{
+		m_checked = true;
+		setWeight(0);
+	}
+	else
+	{
+		m_checked = true;
+		setWeight(lowestWeight + 1);		
+	}
+}
+
+std::vector<std::shared_ptr<tile>> tile::getNeighbours(std::shared_ptr<tile>(grid)[V][V], bool needWeights)
+{
+	std::vector<std::shared_ptr<tile>> ans;	// Put all neighbours in here
+	
+	int numRows = V;
+	int numCols = V;
+
+	bool checked;
+
+	if (gridY > 0)
+	{
+		checked = grid[gridX][gridY - 1]->getChecked();
+		if (!grid[gridX][gridY - 1]->getCollision() && (!checked || needWeights))
+		{
+			if (!needWeights)
+			{
+				grid[gridX][gridY - 1]->setChecked(true);
+			}
+			m_neighbourVisited[UP] = true;
+			ans.push_back(grid[gridX][gridY - 1]);
+		}
+	}
+	if (gridY < numCols - 1)
+	{
+		checked = grid[gridX][gridY + 1]->getChecked();
+		if (!grid[gridX][gridY + 1]->getCollision() && (!grid[gridX][gridY + 1]->getChecked() || needWeights))
+		{
+			if (!needWeights)
+			{
+				grid[gridX][gridY + 1]->setChecked(true);
+			}
+			m_neighbourVisited[DOWN] = true;
+			ans.push_back(grid[gridX][gridY + 1]);
+		}
+	}
+
+	if (gridX > 0)
+	{
+		checked = grid[gridX - 1][gridY]->getChecked();
+		if (!grid[gridX - 1][gridY]->getCollision() && (!grid[gridX - 1][gridY]->getChecked() || needWeights))
+		{
+			if (!needWeights)
+			{
+				grid[gridX - 1][gridY]->setChecked(true);
+			}
+			m_neighbourVisited[LEFT] = true;
+			ans.push_back(grid[gridX - 1][gridY]);
+		}
+	}
+	
+	if (gridX < numRows - 1)
+	{
+		checked = grid[gridX + 1][gridY]->getChecked();
+		if (!grid[gridX + 1][gridY]->getCollision() && (!grid[gridX + 1][gridY]->getChecked() || needWeights))
+		{
+			if (!needWeights)
+			{
+				grid[gridX + 1][gridY]->setChecked(true);
+			}
+			m_neighbourVisited[RIGHT] = true;
+			ans.push_back(grid[gridX + 1][gridY]);
+		}
+	}
+
+	return ans;
+}
+
+int tile::getWeight()
+{
+	return m_weight;
+}
+
+void tile::setWeight(int w)
+{
+	m_weight = w;
+}
+
+bool tile::getChecked()
+{
+	return m_checked;
+}
+
+void tile::setChecked(bool c)
+{
+	m_checked = c;
+}
+
+void tile::reset()
+{
+	m_checked = false;
+	m_weight = INT_MAX;
+}
+
+sf::Vector2i tile::getGridPos()
+{
+	return sf::Vector2i(gridX, gridY);
+}
+
 Level::Level(const std::string& name)
 	: name(name), rows(0), cols(0) {
-
-	tiles.resize(230400);
-
+	
+	tiles.resize(200);
+	for (int i = 0; i < 200; ++i)
+		tiles[i].resize(200);
 }
 
 void Level::load(const std::string& path, sf::RenderWindow* ren) {
@@ -81,14 +215,10 @@ void Level::load(const std::string& path, sf::RenderWindow* ren) {
 		}
 
 		if (layer->getName() == "WallsTL") {
-			// Put a variable to say "This is the layer to collide with"
-			std::cout << "Hello" << std::endl;
 			collisionLayer = true;
 			includeLayer = true;
 		}
 		else if (layer->getName() == "Background") {
-			// Put a variable to say "This is the layer to collide with"
-			std::cout << "Hello" << std::endl;
 			collisionLayer = false;
 			includeLayer = true;
 		}
@@ -153,22 +283,115 @@ void Level::load(const std::string& path, sf::RenderWindow* ren) {
 				
 				
 				
-				tile t(x_pos, y_pos,
-					region_x, region_y, tile_width, tile_height, &texture, collisionLayer); // Add variable to say whether this should collide or not
+				//tile t(x_pos, y_pos,
+				//	region_x, region_y, tile_width, tile_height, &texture, collisionLayer); // Add variable to say whether this should collide or not
 				//tiles.push_back(t);
-				tiles[x + (480 * y)] = t;
+				
+				grid[x][y] = std::make_unique<tile>(tile(x_pos, y_pos, region_x, region_y, tile_width, tile_height, &texture, collisionLayer));
 			}
 		}
 	}
+	giveWeights(grid, sf::Vector2i(9, 9));
 }
 
 void Level::draw(sf::RenderWindow* ren) {
-	for (auto& tile : tiles) {
-		tile.draw(ren);
+	for (auto& layer : grid) {
+		for (auto& tile : layer)
+		{
+			tile->draw(ren);
+		}
 	}
 }
 
 bool Level::collide(sf::Vector2i pos)
 {
-	return tiles[pos.x + (480 * pos.y)].getCollision();
+	return grid[pos.x][pos.y]->getCollision();
+}
+
+int Level::getWeight(sf::Vector2i gp)
+{
+	return grid[gp.x][gp.y]->getWeight();
+}
+
+void Level::path(std::shared_ptr<tile>(grid)[V][V], sf::Vector2i start, sf::Vector2i goal)
+{
+	std::vector<std::shared_ptr<tile>> path;
+	std::shared_ptr<tile> lowestNeighbour;
+	std::vector<std::shared_ptr<tile>> neighbours;
+	path.push_back(grid[start.x][start.y]);
+
+
+	neighbours = path[path.size() - 1]->getNeighbours(grid, true);
+
+	lowestNeighbour = neighbours[0];
+
+	while (lowestNeighbour->getWeight() != 0)
+	{
+		int lowestWeight = INT_MAX;
+
+		neighbours = path[path.size() - 1]->getNeighbours(grid, true);
+		lowestNeighbour = neighbours[0];
+
+		for (int i = 0; i < neighbours.size(); i++)
+		{
+			if (neighbours[i]->getWeight() < path[path.size() - 1]->getWeight())
+			{
+				lowestNeighbour = neighbours[i];
+			}
+		}
+		int currentWeight = path[path.size() - 1]->getWeight();
+		int nextWeight = lowestNeighbour->getWeight();
+		if (currentWeight == nextWeight)
+		{
+			break;
+		}
+		path.push_back(lowestNeighbour);
+	}
+}
+
+void Level::reset(std::shared_ptr<tile>(grid)[V][V])
+{
+	for (int i = 0; i < V; i++)
+	{
+		for (int j = 0; j < V; j++)
+		{
+			//if (SquareType::wall != grid[i][j]->getType())
+			//{
+			grid[i][j]->reset();
+			//}
+		}
+	}
+}
+
+void Level::updateWeights(sf::Vector2i p)
+{
+	giveWeights(grid, p);
+}
+
+void Level::giveWeights(std::shared_ptr<tile>(grid)[V][V], sf::Vector2i goal)
+{
+	std::vector<std::shared_ptr<tile>> queue;
+	std::vector<std::shared_ptr<tile>> neighbours;
+	queue.push_back(grid[goal.x][goal.y]);
+
+	int LargestX = goal.x;
+	int LargestY = goal.y;
+
+	while (queue.size() > 0)
+	{
+		LargestX = queue[0]->getGridPos().x;
+		LargestY = queue[0]->getGridPos().y;
+		
+		queue[0]->setNeighbourWeights(grid);
+		neighbours = grid[queue[0]->getGridPos().x][queue[0]->getGridPos().y]->getNeighbours(grid, false);
+		for (int i = 0; i < neighbours.size(); i++)
+		{
+			if (neighbours[i]->getWeight() == INT_MAX)
+			{
+				queue.push_back(neighbours[i]);
+			}
+		}
+		queue.erase(queue.begin());
+	}
+	std::cout << "hhelo" << std::endl;
 }

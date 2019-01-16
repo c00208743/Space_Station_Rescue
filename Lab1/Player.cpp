@@ -49,6 +49,7 @@ Player::Player() :
 	m_spriteShield.setPosition(m_position);
 	m_spriteShield.setTextureRect(sf::IntRect(0, 0, 320, 320));
 
+	previousTile = sf::Vector2i(m_sprite.getPosition().x / 32, m_sprite.getPosition().y / 32);
 
 	m_bullet = new Bullet();
 }
@@ -259,6 +260,17 @@ void Player::currentTile(Level * cLevel)
 	{
 		speed = 0;
 	}
+
+	int gridPosX = m_sprite.getPosition().x / 32;
+	int gridPosY = m_sprite.getPosition().y / 32;
+
+	if (previousTile.x != gridPosX || previousTile.y != gridPosY)
+	{
+		previousTile = sf::Vector2i(m_sprite.getPosition().x / 32, m_sprite.getPosition().y / 32);
+		cLevel->updateWeights(previousTile);
+	}
+
+	m_bullet->checkWall(cLevel);
 }
 
 sf::Vector2f Player::rotate(sf::Vector2f P, sf::Vector2f O, float theta)
@@ -266,4 +278,4 @@ sf::Vector2f Player::rotate(sf::Vector2f P, sf::Vector2f O, float theta)
 	sf::Transform rotTran;
 	rotTran.rotate(theta, O.x, O.y);
 	return rotTran.transformPoint(P);
-}
+} 

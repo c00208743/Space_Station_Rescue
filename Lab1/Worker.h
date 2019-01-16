@@ -2,14 +2,14 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <random>
-#include "Player.h"
+#include "Level.h"
 
 class Worker 
 {
 public:
 	Worker();
 	~Worker();
-	void update(sf::Vector2f playerPosition, Player* player);
+	void update(Level * cLevel);
 	void render(sf::RenderWindow & window);
 
 	//wall collison +player collison
@@ -40,13 +40,23 @@ private:
 	bool collected = false;
 
 	//wander
+	int m_timerCount;
+	const int m_timerCountLimit = 500;
 	float wanderOrientation =0;
 	float targetOrientation =0;
 	float wanderRate = 0.3f;
+	const float m_maxRotation = 360.0f;
 	sf::Vector2f target;
 	sf::Vector2f orientationAsVector;
 	sf::Vector2f targetOrientationAsVector;
+	void newTarget();
+	void checkWall(Level * cLevel);
+	sf::Vector2f rotate(sf::Vector2f P, sf::Vector2f Q, float theta);
+
 	
+	// Math methods
+	float length(sf::Vector2f vel);
+	sf::Vector2f normalize(sf::Vector2f vel);
 
 };
 

@@ -55,4 +55,6 @@ private:
 
 	void currentTile(Level * cLevel);
 
+	sf::Vector2i previousTile;
+
 };

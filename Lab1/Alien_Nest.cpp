@@ -91,7 +91,7 @@ sf::Vector2f Alien_Nest::getVelocity()
 }
 
 
-void Alien_Nest::update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies)
+void Alien_Nest::update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies, Level * cLevel)
 {
 
 
@@ -114,7 +114,7 @@ void Alien_Nest::update(sf::Vector2f playerPosition, Player* player, std::vector
 		}
 	}
 	if (health >0) {
-		m_missile->update();
+		m_missile->update(cLevel);
 		if (m_missile->getStatus() == true) {
 			m_missile->kinematicSeek(playerPosition);
 		}
@@ -171,7 +171,7 @@ bool Alien_Nest::radar(sf::Vector2f pos) {
 	radarDistance = sqrt((pos.x - m_sprite.getPosition().x)*(pos.x - m_sprite.getPosition().x)
 		+ (pos.y - m_sprite.getPosition().y)*(pos.y - m_sprite.getPosition().y));
 
-	if (radarDistance < 750) {
+	if (radarDistance < 750 && !m_missile->getStatus()) {
 		inRange = true;
 		//std::cout << "in range " << std::endl;
 		m_missile->fire(m_sprite.getPosition());

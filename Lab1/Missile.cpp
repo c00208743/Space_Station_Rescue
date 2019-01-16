@@ -28,13 +28,17 @@ void Missile::render(sf::RenderWindow & window)
 	}
 }
 
-void Missile::update()
+void Missile::update(Level * cLevel)
 {
 	if (m_alive)
 	{
+
+		checkCollision();
+		checkWall(cLevel);
 		m_position = m_position + m_velocity;
 		m_sprite.setPosition(m_position);
 		m_sprite.setRotation(m_orientation);
+
 	}
 	/*if (collison) {
 		m_alive = false;
@@ -49,13 +53,12 @@ void Missile::fire(sf::Vector2f pos)
 
 	//start on Alien Nest position
 	
-	if (timer % 1000 == 0) {
+	//if (timer % 1000 == 0) {
 		m_position.x = pos.x;
 		m_position.y = pos.y;
-	}
-	timer++;
+	//}
+	//timer++;
 
-	checkCollision();
 	
 	m_alive = true;
 	
@@ -74,12 +77,29 @@ bool Missile::checkCollision()
 		{
 			// explosion
 			collison = true;
+			m_alive = false;
 			std::cout << "Player was hit" << std::endl;
 			
 		}
 	}
 	return collison;
 
+}
+
+void Missile::checkWall(Level * cLevel)
+{
+	// Get the square in front
+	float posX = m_position.x;
+	float posY = m_position.y;
+
+	int x = floor(posX / 32);
+	int y = floor(posY / 32);
+
+	if (cLevel->collide(sf::Vector2i(x, y)))
+	{
+		m_alive = false;
+		std::cout << "Wall was hit" << std::endl;
+	}
 }
 
 void Missile::kinematicSeek(sf::Vector2f playerPosition)

@@ -1,13 +1,15 @@
-﻿  Player.cpp
+﻿  Predator_Ship.cpp
 c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.h(32): warning C4305: 'initializing': truncation from 'double' to 'const float'
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(107): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(110): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(207): warning C4552: '*': result of expression not used
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(208): warning C4552: '*': result of expression not used
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(252): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(253): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(255): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.cpp(256): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  LINK : C:\Users\gameuser\Desktop\Test\Space_Station_Rescue\Debug\Lab1.exe not found or not built by the last incremental link; performing full link
-     Creating library C:\Users\gameuser\Desktop\Test\Space_Station_Rescue\Debug\Lab1.lib and object C:\Users\gameuser\Desktop\Test\Space_Station_Rescue\Debug\Lab1.exp
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\predator_ship.cpp(44): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\predator_ship.cpp(86): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\predator_ship.cpp(87): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\predator_ship.cpp(137): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\predator_ship.cpp(148): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\predator_ship.cpp(216): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\predator_ship.cpp(217): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\predator_ship.cpp(224): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\predator_ship.cpp(226): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\predator_ship.cpp(228): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\predator_ship.cpp(230): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\predator_ship.cpp(234): warning C4018: '<': signed/unsigned mismatch
   Lab1.vcxproj -> C:\Users\gameuser\Desktop\Test\Space_Station_Rescue\Debug\Lab1.exe

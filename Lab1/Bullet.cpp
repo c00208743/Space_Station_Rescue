@@ -2,7 +2,7 @@
 
 Bullet::Bullet() 
 {
-	m_speed = 50.0f;
+	m_speed = 25.0f;
 	//m_position = sf::Vector2f(100.0f, 100.0f);
 	m_alive = false;
 
@@ -50,7 +50,6 @@ void Bullet::update()
 
 void Bullet::fire(sf::Vector2f direction, sf::Vector2f pos, float rotation)
 {
-	m_speed = 50.0f;
 	//calculate trigetory
 	velocity.x = m_speed * direction.x;
 	velocity.y = m_speed * direction.y;
@@ -78,4 +77,19 @@ bool Bullet::checkCollision(sf::Vector2f pos, int width, int height)
 	}
 	return collison;
 
+}
+
+void Bullet::checkWall(Level * cLevel)
+{
+	// Get the square in front
+	float posX = m_position.x;
+	float posY = m_position.y;
+	
+	int x = floor(posX / 32);
+	int y = floor(posY / 32);
+	
+	if (cLevel->collide(sf::Vector2i(x, y)))
+	{
+		m_alive = false;
+	}
 }
