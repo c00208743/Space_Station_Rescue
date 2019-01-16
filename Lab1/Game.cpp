@@ -37,6 +37,12 @@ Game::Game()
 	enemies.push_back(m_alienNest);
 	enemies.push_back(m_predatorShip);
 	enemies.push_back(m_sweeperBot);
+
+
+	m_level = new Level("Main Level");
+	m_level->load(path, &m_window);
+
+
 	
 	//minimap + player camera
 	m_follow.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
@@ -103,7 +109,7 @@ void Game::processEvents()
 void Game::update(double dt)
 {
 	sf::Time deltaTime;
-	m_player->update(dt);
+
 	
 	for (int i = 0; i < workers.size(); i++)
 	{
@@ -116,6 +122,8 @@ void Game::update(double dt)
 		
 	}
 	
+	m_player->update(dt, m_level);
+
 	//camera 
 	m_follow.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
 	miniMap.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
@@ -171,8 +179,10 @@ void Game::update(double dt)
 void Game::render()
 {
 	m_window.clear(sf::Color(0, 0, 0));
+	m_level->draw(&m_window);
 	m_window.setView(miniMap);
 	m_player->render(m_window);
+
 	for (int i = 0; i < workers.size(); i++)
 	{
 		workers[i]->render(m_window);
@@ -185,6 +195,7 @@ void Game::render()
 
 	m_window.setView(m_follow);
 	m_player->render(m_window);
+
 	for (int i = 0; i < workers.size(); i++)
 	{
 		workers[i]->render(m_window);
@@ -198,4 +209,3 @@ void Game::render()
 
 
 }
-
