@@ -26,8 +26,6 @@ Worker::Worker() :
 	srand(time(NULL));
 
 	newTarget();
-	//m_position.x = rand() % 400 + 1;
-	//m_position.y = rand() % 400 + 1;
 
 	m_timerCount = 0;
 }

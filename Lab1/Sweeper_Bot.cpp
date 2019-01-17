@@ -5,9 +5,7 @@ Sweeper_Bot::Sweeper_Bot() :
 	m_velocity(0, 0),
 	m_maxSpeed(1.5f),
 	m_maxRotation(20.0f),
-	m_timeToTarget(100.0f),
-	radius(200.0f),
-	m_threshold(30.0f)
+	m_timeToTarget(100.0f)
 {
 
 
@@ -124,6 +122,28 @@ void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vecto
 	else {
 		kinematicFlee(playerPosition);
 		//std::cout << "FLEE" << std::endl;
+	}
+
+	//boundray
+	if (m_sprite.getPosition().x > 5850)
+	{
+		//m_sprite.setPosition(5850, m_sprite.getPosition().y);
+		m_position.x = 5850;
+	}
+	if (m_sprite.getPosition().x < 150)
+	{
+		//m_sprite.setPosition(5850, m_sprite.getPosition().y);
+		m_position.x = 150;
+	}
+	if (m_sprite.getPosition().y < 150)
+	{
+		//m_sprite.setPosition(m_sprite.getPosition().x, 5850);
+		m_position.y = 150;
+	}
+	if (m_sprite.getPosition().y > 5850)
+	{
+		//m_sprite.setPosition(m_sprite.getPosition().x, 150);
+		m_position.y = 150;
 	}
 
 	

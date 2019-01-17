@@ -5,9 +5,7 @@ Alien_Nest::Alien_Nest() :
 	m_velocity(0, 0),
 	m_maxSpeed(1.5f),
 	m_maxRotation(20.0f),
-	m_timeToTarget(100.0f),
-	radius(200.0f),
-	m_threshold(30.0f)
+	m_timeToTarget(100.0f)
 {
 
 
