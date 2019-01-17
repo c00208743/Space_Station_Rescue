@@ -33,6 +33,9 @@ public:
 	bool workerRadar(sf::Vector2f pos);
 	int getDamageToPlayer();
 
+	void setPos(sf::Vector2f newPos);
+	void spawn(sf::Vector2f pos);
+
 private:
 	float m_timeToTarget;
 	sf::Vector2f m_position;

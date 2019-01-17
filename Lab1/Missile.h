@@ -23,6 +23,7 @@ public:
 	void kinematicSeek(sf::Vector2f playerPosition);
 	void checkWall(Level * cLevel);
 	int damagedPlayer();
+	void setSpeed(float s);
 
 private:
 	float m_speed;

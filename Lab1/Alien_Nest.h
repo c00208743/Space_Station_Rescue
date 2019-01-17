@@ -4,6 +4,7 @@
 #include <random>
 #include "Enemy.h"
 #include "Missile.h"
+#include "Bullet.h"
 
 class Alien_Nest : public Enemy
 {
@@ -31,7 +32,8 @@ public:
 	bool radar(sf::Vector2f pos);
 	bool workerRadar(sf::Vector2f pos);
 	bool checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive);
-	
+	void setPos(sf::Vector2f newPos);
+	void spawn(sf::Vector2f pos);
 
 
 private:
@@ -47,6 +49,11 @@ private:
 	sf::Texture m_texture;
 	sf::Texture m_textureExplosion;
 	sf::Sprite m_spriteExplosion;
+
+	// Predator ship spawning
+	int m_spawnCounter;
+	const int m_spawnTimerLimit = 600;
+
 
 	//double shortestTime = std::numeric_limits<double>::infinity();
 	double shortestTime = 2000;

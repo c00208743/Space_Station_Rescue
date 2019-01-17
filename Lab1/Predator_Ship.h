@@ -3,6 +3,8 @@
 #include <iostream>
 #include <random>
 #include "Enemy.h"
+#include "Missile.h"
+#include "Bullet.h"
 
 class Predator_Ship : public Enemy
 {
@@ -33,9 +35,20 @@ public:
 	bool checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive);
 	int getDamageToPlayer();
 
+	bool checkBulletCollision(sf::Vector2f pos, int width, int height);
+	void spawn(sf::Vector2f pos);
+
+	void setPos(sf::Vector2f newPos);
+
 private:
+
+	void newTarget();
+	void checkWall(Level * cLevel);
+	sf::Vector2f rotate(sf::Vector2f P, sf::Vector2f Q, float theta);
+	void kinematicWander(sf::Vector2f targetPosition);
 	sf::Vector2f nextTile(Level * cLevel);
 	float m_timeToTarget;
+	sf::Vector2f target;
 	sf::Vector2f m_position;
 	float m_orientation;
 	sf::Vector2f m_velocity;
@@ -62,6 +75,12 @@ private:
 	float maxAcceleration = 3;
 	double timeToCollision = 0;
 	double minSeparation = 0;
+	int m_timerCount;
+	const int m_timerCountLimit = 500;
+
+	int m_wallCount;
+	const int m_wallCountLimit = 50;
+
 
 	//cone of vision
 	sf::Vector2f n_direction;
@@ -79,5 +98,19 @@ private:
 	sf::Sprite m_spriteExplosion;
 
 	int radarDistance = 100000;
+
+	// Math methods
+	float length(sf::Vector2f vel);
+	sf::Vector2f normalize(sf::Vector2f vel);
+
+	// Missile
+	Missile* m_missile;
+
+	// Bullet
+	Bullet* m_bullet;
+	int m_fireCooldownCounter;
+	const int m_fireCooldownLimit = 100;
+
+	bool m_fireBullet;
 
 };

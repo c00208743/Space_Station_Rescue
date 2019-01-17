@@ -77,9 +77,6 @@ bool Missile::checkCollision()
 			// explosion
 			collison = true;
 			m_alive = false;
-			std::cout << "Player was hit" << std::endl;
-			//call fire to reset the bullet
-			m_alive = false;
 			m_position = m_nestPos;
 		}
 		else {
@@ -149,4 +146,10 @@ int Missile::damagedPlayer() {
 	//std::cout << playerDamage << std::endl;
 	return playerDamage;
 	
+}
+
+
+void Missile::setSpeed(float s)
+{
+	m_maxSpeed = s;
 }

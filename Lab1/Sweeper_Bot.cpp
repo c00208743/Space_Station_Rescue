@@ -50,6 +50,25 @@ float Sweeper_Bot::getNewOrientation(float currentOrientation, float velocity)
 
 }
 
+void Sweeper_Bot::setPos(sf::Vector2f newPos)
+{
+	m_position = newPos;
+}
+
+void Sweeper_Bot::spawn(sf::Vector2f pos)
+{
+	m_position = pos;
+	health = 50;
+	timer = 0;
+	animate = 0;
+	finishAnimate = false;
+
+	m_sprite.setPosition(m_position);
+	m_velocity.x = getRandom(20, -10);
+	m_velocity.y = getRandom(20, -10);
+
+}
+
 void Sweeper_Bot::boundary(float x, float y)
 {
 	if (x > 6100)

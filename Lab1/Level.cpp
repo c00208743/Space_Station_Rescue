@@ -68,12 +68,9 @@ std::vector<std::shared_ptr<tile>> tile::getNeighbours(std::shared_ptr<tile>(gri
 {
 	std::vector<std::shared_ptr<tile>> ans;	// Put all neighbours in here
 	
-	int numRows = V;
-	int numCols = V;
-
 	bool checked;
 
-	if (gridY > 0)
+	if (gridY > 2)
 	{
 		checked = grid[gridX][gridY - 1]->getChecked();
 		if (!grid[gridX][gridY - 1]->getCollision() && (!checked || needWeights))
@@ -82,11 +79,10 @@ std::vector<std::shared_ptr<tile>> tile::getNeighbours(std::shared_ptr<tile>(gri
 			{
 				grid[gridX][gridY - 1]->setChecked(true);
 			}
-			m_neighbourVisited[UP] = true;
 			ans.push_back(grid[gridX][gridY - 1]);
 		}
 	}
-	if (gridY < numCols - 1)
+	if (gridY < V - 3)
 	{
 		checked = grid[gridX][gridY + 1]->getChecked();
 		if (!grid[gridX][gridY + 1]->getCollision() && (!grid[gridX][gridY + 1]->getChecked() || needWeights))
@@ -95,12 +91,11 @@ std::vector<std::shared_ptr<tile>> tile::getNeighbours(std::shared_ptr<tile>(gri
 			{
 				grid[gridX][gridY + 1]->setChecked(true);
 			}
-			m_neighbourVisited[DOWN] = true;
 			ans.push_back(grid[gridX][gridY + 1]);
 		}
 	}
 
-	if (gridX > 0)
+	if (gridX > 2)
 	{
 		checked = grid[gridX - 1][gridY]->getChecked();
 		if (!grid[gridX - 1][gridY]->getCollision() && (!grid[gridX - 1][gridY]->getChecked() || needWeights))
@@ -109,12 +104,11 @@ std::vector<std::shared_ptr<tile>> tile::getNeighbours(std::shared_ptr<tile>(gri
 			{
 				grid[gridX - 1][gridY]->setChecked(true);
 			}
-			m_neighbourVisited[LEFT] = true;
 			ans.push_back(grid[gridX - 1][gridY]);
 		}
 	}
 	
-	if (gridX < numRows - 1)
+	if (gridX < V - 3)
 	{
 		checked = grid[gridX + 1][gridY]->getChecked();
 		if (!grid[gridX + 1][gridY]->getCollision() && (!grid[gridX + 1][gridY]->getChecked() || needWeights))
@@ -123,7 +117,6 @@ std::vector<std::shared_ptr<tile>> tile::getNeighbours(std::shared_ptr<tile>(gri
 			{
 				grid[gridX + 1][gridY]->setChecked(true);
 			}
-			m_neighbourVisited[RIGHT] = true;
 			ans.push_back(grid[gridX + 1][gridY]);
 		}
 	}
@@ -351,17 +344,15 @@ void Level::path(std::shared_ptr<tile>(grid)[V][V], sf::Vector2i start, sf::Vect
 
 void Level::reset(std::shared_ptr<tile>(grid)[V][V])
 {
-	/*for (int i = 0; i < V; i++)
+	for (int i = 3; i < V - 3; i++)
 	{
-		for (int j = 0; j < V; j++)
+		for (int j = 3; j < V - 3; j++)
 		{
-			
-			grid[i][j]->reset();
-			
+			grid[i][j]->reset();		
 		}
-	}*/
+	}
 
-	grid = emptyGrid;
+	//grid = emptyGrid;
 }
 
 void Level::updateWeights(sf::Vector2i p)
@@ -375,22 +366,21 @@ void Level::giveWeights(std::shared_ptr<tile>(grid)[V][V], sf::Vector2i goal)
 	std::vector<std::shared_ptr<tile>> queue;
 	std::vector<std::shared_ptr<tile>> neighbours;
 	queue.push_back(grid[goal.x][goal.y]);
-
-	int LargestX = goal.x;
-	int LargestY = goal.y;
+	int checkRadius = 20;
 
 	while (queue.size() > 0)
-	{
-		LargestX = queue[0]->getGridPos().x;
-		LargestY = queue[0]->getGridPos().y;
-		
+	{		
 		queue[0]->setNeighbourWeights(grid);
 		neighbours = grid[queue[0]->getGridPos().x][queue[0]->getGridPos().y]->getNeighbours(grid, false);
 		for (int i = 0; i < neighbours.size(); i++)
 		{
-			if (neighbours[i]->getWeight() == INT_MAX)
+			
+			if ((goal.x + checkRadius > neighbours[i]->getGridPos().x && goal.y + checkRadius > neighbours[i]->getGridPos().y) && (goal.x - checkRadius < neighbours[i]->getGridPos().x && goal.y - checkRadius < neighbours[i]->getGridPos().y))
 			{
-				queue.push_back(neighbours[i]);
+				if (neighbours[i]->getWeight() == INT_MAX)
+				{
+					queue.push_back(neighbours[i]);
+				}
 			}
 		}
 		queue.erase(queue.begin());

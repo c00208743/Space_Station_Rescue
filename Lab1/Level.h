@@ -56,7 +56,6 @@ struct tile {
 	// Path finding variables
 	std::vector<std::shared_ptr<tile>> m_neighbours;
 	bool m_checked;
-	std::map<Direction, bool> m_neighbourVisited;
 	int m_weight;
 
 };

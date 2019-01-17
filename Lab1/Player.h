@@ -20,6 +20,7 @@ public:
 	sf::Vector2f getVelocity();
 	void setScore(int enemyS);
 	void setHealth(int dam);
+	void hit(int d);
 
 private:
 	

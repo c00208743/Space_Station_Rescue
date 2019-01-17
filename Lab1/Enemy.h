@@ -23,6 +23,9 @@ public:
 	virtual bool workerRadar(sf::Vector2f pos) = 0;
 	virtual void hit(int damage) = 0;
 	virtual bool checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive) = 0;
+	virtual void setPos(sf::Vector2f newPos) = 0;
+	virtual void spawn(sf::Vector2f pos) = 0;
+
 protected:
-	Enemy() {}
+	Enemy() {};
 };

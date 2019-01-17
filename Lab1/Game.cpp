@@ -33,10 +33,26 @@ Game::Game()
 	Enemy* m_alienNest = new Alien_Nest();
 	Enemy* m_predatorShip = new Predator_Ship();
 	Enemy* m_sweeperBot = new Sweeper_Bot();
+
+
+	Enemy* m_alienNestRoom2 = new Alien_Nest();
+	m_alienNestRoom2->setPos(sf::Vector2f(1728, 384));
+	Enemy* m_ANR2P1 = new Predator_Ship();
+	Enemy* m_ANR2P2 = new Predator_Ship();
+	Enemy* m_ANR2P3 = new Predator_Ship();
+	Enemy* m_ANR2P4 = new Predator_Ship();
+	Enemy* m_ANR2P5 = new Predator_Ship();
 	
 	enemies.push_back(m_alienNest);
-	enemies.push_back(m_predatorShip);
+	//enemies.push_back(m_predatorShip);
 	enemies.push_back(m_sweeperBot);
+
+	nest.push_back(m_alienNestRoom2);
+	nest.push_back(m_ANR2P1);
+	nest.push_back(m_ANR2P2);
+	nest.push_back(m_ANR2P3);
+	nest.push_back(m_ANR2P4);
+	nest.push_back(m_ANR2P5);
 
 
 	m_level = new Level("Main Level");
@@ -139,12 +155,15 @@ void Game::update(double dt)
  				enemies[i]->hit(25);
 			}
 		}
-		if (enemies[i]->getId() == 1)
+		if (enemies[i]->getId() == 1 || enemies[i]->getId() == 2)
 		{
 			enemies[i]->radar(m_player->getPosition());
 			//set player health
 			m_player->setHealth(enemies[i]->getDamageToPlayer());
 		}
+
+		
+
 		if (enemies[i]->getId() == 3)
 		{
 			enemies[i]->radar(m_player->getPosition());
@@ -167,6 +186,27 @@ void Game::update(double dt)
 			
 		}
 		
+	}
+
+	for (int i = 0; i < nest.size(); i++)
+	{
+		
+		nest[i]->update(m_player->getPosition(), m_player, nest, m_level);
+		//wrapper this in gethealth 
+		if (nest[i]->getHealth() > 0) {
+			if (m_player->checkBulletCollision(nest[i]->getPosition(), nest[i]->getWidth(), nest[i]->getHeight()) == true)
+			{
+				nest[i]->hit(25);
+			}
+		}
+		if (nest[i]->getId() == 1 || nest[i]->getId() == 2)
+		{
+			nest[i]->radar(m_player->getPosition());
+			//set player health
+			m_player->setHealth(nest[i]->getDamageToPlayer());
+		}
+
+		// If i == 0 is dead the clear vector
 	}
 }
 
@@ -191,7 +231,10 @@ void Game::render()
 	{
 		enemies[i]->render(m_window);
 	}
-	
+	for (int i = 0; i < nest.size(); i++)
+	{
+		nest[i]->render(m_window);
+	}
 
 	m_window.setView(m_follow);
 	m_player->render(m_window);
@@ -203,6 +246,10 @@ void Game::render()
 	for (int i = 0; i < enemies.size(); i++)
 	{
 		enemies[i]->render(m_window);
+	}
+	for (int i = 0; i < nest.size(); i++)
+	{
+		nest[i]->render(m_window);
 	}
 	m_window.display();
 	

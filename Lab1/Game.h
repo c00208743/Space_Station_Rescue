@@ -30,6 +30,7 @@ private:
 	//Worker* m_worker;
 	std::vector<Worker*> workers;
 	std::vector<Enemy*> enemies;
+	std::vector<Enemy*> nest;
 	Level* m_level;
 	std::string const path = "assets/maps/Practice.tmx";
 	

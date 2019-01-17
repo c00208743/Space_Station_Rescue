@@ -39,6 +39,7 @@ Alien_Nest::~Alien_Nest()
 
 }
 
+
 float Alien_Nest::getNewOrientation(float currentOrientation, float velocity)
 {
 	if (velocity >0)
@@ -49,6 +50,11 @@ float Alien_Nest::getNewOrientation(float currentOrientation, float velocity)
 		return currentOrientation;
 	}
 
+}
+
+void Alien_Nest::setPos(sf::Vector2f newPos)
+{
+	m_position = newPos;
 }
 
 void Alien_Nest::boundary(float x, float y)
@@ -118,10 +124,44 @@ void Alien_Nest::update(sf::Vector2f playerPosition, Player* player, std::vector
 		if (m_missile->getStatus() == true) {
 			m_missile->kinematicSeek(playerPosition);
 		}
+
+		// if Timer is above limit
+		if (m_spawnCounter > m_spawnTimerLimit)
+		{
+			m_spawnCounter = 0;
+			for (int i = 1; i < enemies.size(); i++)
+			{
+				// if dead
+				if (enemies[i]->getHealth() <= 0)
+				{
+					std::cout << "Enemy spawned: " << i << std::endl;
+					enemies[i]->spawn(m_position);
+					break;
+				}
+			}
+
+		}
+		else
+		{
+			m_spawnCounter++;
+		}
 	}
 	
 }
 
+void Alien_Nest::spawn(sf::Vector2f pos)
+{
+	m_position = pos;
+	health = 50;
+	timer = 0;
+	animate = 0;
+	finishAnimate = false;
+
+	m_sprite.setPosition(m_position);
+	m_velocity.x = getRandom(20, -10);
+	m_velocity.y = getRandom(20, -10);
+
+}
 
 void Alien_Nest::render(sf::RenderWindow & window)
 {

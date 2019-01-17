@@ -2,7 +2,6 @@
 #include <iostream>
 #include "math.h"
 
-
 #define M_PI   3.14159265358979323846264338327950288
 
 Player::Player() :
@@ -61,7 +60,7 @@ Player::Player() :
 
 	previousTile = sf::Vector2i(m_sprite.getPosition().x / 32, m_sprite.getPosition().y / 32);
 
-	m_bullet = new Bullet();
+	m_bullet = new Bullet(true);
 }
 
 /// <summary>
@@ -198,6 +197,11 @@ void Player::update(double dt, Level * cLevel)
 
 }
 
+void Player::hit(int d)
+{
+	health -= d;
+}
+
 void Player::render(sf::RenderWindow & window)
 {
 	m_bullet->render(window);
@@ -305,7 +309,7 @@ void Player::currentTile(Level * cLevel)
 	{
 		previousTile = sf::Vector2i(m_sprite.getPosition().x / 32, m_sprite.getPosition().y / 32);
 		cLevel->updateWeights(previousTile);
-		std::cout << "X: " << previousTile.x << std::endl;
+		//std::cout << "Weight: " << cLevel->getWeight(previousTile) << std::endl;
 	}
 
 	m_bullet->checkWall(cLevel);
