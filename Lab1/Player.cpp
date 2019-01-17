@@ -116,29 +116,13 @@ void Player::update(double dt, Level * cLevel)
 	}
 
 	//Apply direction to sprite
-	float radians = m_sprite.getRotation()* M_PI / 180;
-	direction.x = (cos(radians));
-	direction.y = (sin(radians));
-	m_sprite.setPosition(m_sprite.getPosition().x + (direction.x * speed), m_sprite.getPosition().y + (direction.y * speed));
+	if (health > 0) {
+		float radians = m_sprite.getRotation()* M_PI / 180;
+		direction.x = (cos(radians));
+		direction.y = (sin(radians));
+		m_sprite.setPosition(m_sprite.getPosition().x + (direction.x * speed), m_sprite.getPosition().y + (direction.y * speed));
+	}
 
-
-	//looping screen 
-	if (m_sprite.getPosition().x > 6100)
-	{
-		m_sprite.setPosition(-100, m_sprite.getPosition().y);
-	}
-	if (m_sprite.getPosition().x < -100)
-	{
-		m_sprite.setPosition(6100, m_sprite.getPosition().y);
-	}
-	if (m_sprite.getPosition().y < -100)
-	{
-		m_sprite.setPosition(m_sprite.getPosition().x, 6100);
-	}
-	if (m_sprite.getPosition().y > 6100)
-	{
-		m_sprite.setPosition(m_sprite.getPosition().x, -100);
-	}
 
 	//fire bullet
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
@@ -199,7 +183,7 @@ void Player::update(double dt, Level * cLevel)
 
 void Player::hit(int d)
 {
-	health -= d;
+		health -= d;
 }
 
 void Player::render(sf::RenderWindow & window)
@@ -208,9 +192,10 @@ void Player::render(sf::RenderWindow & window)
 	window.draw(m_text);
 	window.draw(m_textScore);
 	window.draw(scoreNu);
-	window.draw(m_health);
+	
 	if (health > 0) {
 		window.draw(m_sprite);
+		window.draw(m_health);
 	}
 	else {
 		window.draw(m_gameOver);
@@ -277,7 +262,6 @@ void Player::setHealth(int dam) {
 		m_health.setString("Health : "+ s);
 	}
 	
-	//std::cout << health << std::endl;
 }
 
 void Player::currentTile(Level * cLevel)

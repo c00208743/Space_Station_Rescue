@@ -14,7 +14,7 @@ public:
 
 	//wall collison +player collison
 	
-	void kinematicWander(sf::Vector2f playerPosition);
+	void kinematicWander(sf::Vector2f targetPosition);
 	float getNewOrientation(float currentOrientation, float velocity);
 	float getRandom(int x, int y);
 	sf::Vector2f getPosition();

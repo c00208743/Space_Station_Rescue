@@ -63,4 +63,6 @@ private:
 
 	sf::Vector2i previousTile;
 
+	sf::RectangleShape m_radar;
+
 };

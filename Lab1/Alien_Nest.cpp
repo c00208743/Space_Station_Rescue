@@ -5,9 +5,7 @@ Alien_Nest::Alien_Nest() :
 	m_velocity(0, 0),
 	m_maxSpeed(1.5f),
 	m_maxRotation(20.0f),
-	m_timeToTarget(100.0f),
-	radius(200.0f),
-	m_threshold(30.0f)
+	m_timeToTarget(100.0f)
 {
 
 
@@ -134,7 +132,7 @@ void Alien_Nest::update(sf::Vector2f playerPosition, Player* player, std::vector
 				// if dead
 				if (enemies[i]->getHealth() <= 0)
 				{
-					std::cout << "Enemy spawned: " << i << std::endl;
+					//std::cout << "Enemy spawned: " << i << std::endl;
 					enemies[i]->spawn(m_position);
 					break;
 				}

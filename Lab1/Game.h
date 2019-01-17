@@ -35,7 +35,7 @@ private:
 	std::string const path = "assets/maps/Practice.tmx";
 	
 	//std::vector<Enemy*> enemies;
-
+	sf::RectangleShape m_radar;
 };
 
 
