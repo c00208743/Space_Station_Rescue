@@ -92,16 +92,16 @@ void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vecto
 		
 		if (workerInRange) {
 			kinematicSeek(playerPosition);
-			std::cout << "SEEK" << std::endl;
+			//std::cout << "SEEK" << std::endl;
 		}
 		else {
 			kinematicWander(target);
-			std::cout << "Wander" << std::endl;
+			//std::cout << "Wander" << std::endl;
 		}
 	}
 	else {
 		kinematicFlee(playerPosition);
-		std::cout << "FLEE" << std::endl;
+		//std::cout << "FLEE" << std::endl;
 	}
 
 	
@@ -117,6 +117,10 @@ void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vecto
 
 	checkWall(cLevel);
 	
+	if (inRange == true && wall == true) {
+		m_velocity.x = 0;
+		m_velocity.y = 0;
+	}
 
 	//boundray
 	if (m_sprite.getPosition().x > 5850)
@@ -341,6 +345,10 @@ void Sweeper_Bot::checkWall(Level * cLevel)
 	if (cLevel->collide(sf::Vector2i(x, y)))
 	{
 		newTarget();
+		wall = true;
+	}
+	else {
+		wall = false;
 	}
 }
 sf::Vector2f Sweeper_Bot::rotate(sf::Vector2f P, sf::Vector2f O, float theta)

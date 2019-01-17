@@ -76,4 +76,5 @@ private:
 	float length(sf::Vector2f vel);
 	sf::Vector2f normalize(sf::Vector2f vel);
 	sf::Vector2f worker;
+	bool wall = false;
 };
