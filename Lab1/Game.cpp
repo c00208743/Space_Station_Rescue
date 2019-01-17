@@ -62,7 +62,7 @@ Game::Game()
 		Enemy* m_sweeperBot = new Sweeper_Bot();
 		enemies.push_back(m_sweeperBot);
 	}
-	enemies[0]->setPos(sf::Vector2f(1025, 8050));
+	enemies[0]->setPos(sf::Vector2f(1025, 1050));
 	enemies[1]->setPos(sf::Vector2f(2100, 4125));
 	enemies[2]->setPos(sf::Vector2f(4300, 5750));
 	enemies[3]->setPos(sf::Vector2f(4400, 4275));

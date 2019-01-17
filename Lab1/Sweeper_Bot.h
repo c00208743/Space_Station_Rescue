@@ -10,14 +10,13 @@ public:
 	Sweeper_Bot();
 	~Sweeper_Bot();
 	float getNewOrientation(float currentOrientation, float velocity);
-	void boundary(float x, float y);
 	float getRandom(int x, int y);
 	void update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies, Level * cLevel);
 	void render(sf::RenderWindow & window);
 
 	void kinematicSeek(sf::Vector2f pos);
 	void kinematicFlee(sf::Vector2f playerPosition);
-	void kinematicWander(sf::Vector2f playerPosition);
+	void kinematicWander(sf::Vector2f targetPosition);
 	bool checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive);
 
 	sf::Vector2f getPosition();
@@ -44,7 +43,6 @@ private:
 	float m_rotation;
 	float m_velocityF;
 	float m_maxSpeed;
-	float m_maxRotation;
 	sf::Sprite m_sprite;
 	sf::Texture m_texture;
 
@@ -59,18 +57,23 @@ private:
 	int radarDistance = 100000;
 	int workerRadarDis = 100000;
 	bool workerInRange = false;
+
 	//wander
+	bool collison = false;
+	int score = 0;
+	int m_timerCount;
+	const int m_timerCountLimit = 500;
 	float wanderOrientation = 0;
 	float targetOrientation = 0;
 	float wanderRate = 0.3f;
+	const float m_maxRotation = 360.0f;
 	sf::Vector2f target;
 	sf::Vector2f orientationAsVector;
 	sf::Vector2f targetOrientationAsVector;
-
-	sf::Vector2f asVector(float orientation);
+	void newTarget();
+	void checkWall(Level * cLevel);
+	sf::Vector2f rotate(sf::Vector2f P, sf::Vector2f Q, float theta);
+	float length(sf::Vector2f vel);
+	sf::Vector2f normalize(sf::Vector2f vel);
 	sf::Vector2f worker;
-	bool collison = false;
-	int score = 0;
-	
-
 };

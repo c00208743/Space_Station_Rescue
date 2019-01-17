@@ -67,26 +67,6 @@ void Sweeper_Bot::spawn(sf::Vector2f pos)
 
 }
 
-void Sweeper_Bot::boundary(float x, float y)
-{
-	if (x > 6100)
-	{
-		m_position.x = -100;
-	}
-	if (x < -100)
-	{
-		m_position.x = 6100;
-	}
-	if (y < -100)
-	{
-		m_position.y = 6100;
-	}
-	if (y > 6100)
-	{
-		m_position.y = -100;
-	}
-
-}
 
 float Sweeper_Bot::getRandom(int a, int b)
 {
@@ -111,38 +91,48 @@ void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vecto
 	if (inRange ==false) {
 		
 		if (workerInRange) {
-			kinematicSeek(worker);
-			//std::cout << "SEEK" << std::endl;
+			kinematicSeek(playerPosition);
+			std::cout << "SEEK" << std::endl;
 		}
 		else {
-			kinematicWander(playerPosition);
-			//std::cout << "Wander" << std::endl;
+			kinematicWander(target);
+			std::cout << "Wander" << std::endl;
 		}
 	}
 	else {
 		kinematicFlee(playerPosition);
-		//std::cout << "FLEE" << std::endl;
+		std::cout << "FLEE" << std::endl;
 	}
+
+	
+	if (m_timerCount >= m_timerCountLimit)
+	{
+		m_timerCount = 0;
+		newTarget();
+	}
+	else
+	{
+		m_timerCount++;
+	}
+
+	checkWall(cLevel);
+	
 
 	//boundray
 	if (m_sprite.getPosition().x > 5850)
 	{
-		//m_sprite.setPosition(5850, m_sprite.getPosition().y);
 		m_position.x = 5850;
 	}
 	if (m_sprite.getPosition().x < 150)
 	{
-		//m_sprite.setPosition(5850, m_sprite.getPosition().y);
 		m_position.x = 150;
 	}
 	if (m_sprite.getPosition().y < 150)
 	{
-		//m_sprite.setPosition(m_sprite.getPosition().x, 5850);
 		m_position.y = 150;
 	}
 	if (m_sprite.getPosition().y > 5850)
 	{
-		//m_sprite.setPosition(m_sprite.getPosition().x, 150);
 		m_position.y = 150;
 	}
 
@@ -155,7 +145,6 @@ void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vecto
 	m_sprite.setPosition(m_position);
 	m_sprite.setRotation(m_orientation);
 
-	boundary(m_sprite.getPosition().x, m_sprite.getPosition().y);
 
 	if (health <= 0) {
 		timer++;
@@ -257,39 +246,14 @@ void Sweeper_Bot::kinematicFlee(sf::Vector2f playerPosition)
 
 }
 
-void Sweeper_Bot::kinematicWander(sf::Vector2f playerPosition)
+void Sweeper_Bot::kinematicWander(sf::Vector2f targetPosition)
 {
-	//steering = new SteeringOutput()
-	//steering = velocity
-
-	wanderOrientation += getRandom(-1, +1) * wanderRate;
-
-
-	targetOrientation = wanderOrientation + m_orientation;
-	//sf::Vector2f wanderOffset(25.f, 25.f);
-	float wanderOffset(25.f);
-	float wanderRadius(250.f);
-	orientationAsVector = asVector(m_orientation);
-	target = m_position + wanderOffset * orientationAsVector;
-	targetOrientationAsVector = asVector(targetOrientation);
-	target += wanderRadius * targetOrientationAsVector;
-	//face(target)
-	m_velocity = target - m_position;
-
-	//Get magnitude of vector#
-	m_velocityF = std::sqrt(m_velocity.x*m_velocity.x + m_velocity.y*m_velocity.y);
-
-	//Normalize vector
-	m_velocity.x = m_velocity.x / m_velocityF;
-	m_velocity.y = m_velocity.y / m_velocityF;
-
-	//get new orientation
-	m_orientation = getNewOrientation(m_orientation, m_velocityF);
-	//steering.linear = maxAcc * my.orientation.asVector()
-	orientationAsVector = asVector(m_orientation);
-	m_velocity = m_maxSpeed * orientationAsVector;
-
-	//return steering
+	m_velocity = targetPosition - m_position;
+	m_velocity = normalize(m_velocity);
+	float orientation = getNewOrientation(m_sprite.getRotation(), length(m_velocity));
+	orientation = orientation + m_maxRotation * ((rand() % 2) - 1);
+	m_sprite.setRotation(orientation);
+	m_velocity = sf::Vector2f(-sin(orientation), cos(orientation)) * m_maxSpeed;
 
 }
 
@@ -330,11 +294,6 @@ bool Sweeper_Bot::workerRadar(sf::Vector2f pos) {
 
 }
 
-sf::Vector2f Sweeper_Bot::asVector(float orientation)
-{
-	return sf::Vector2f(sinf(orientation), cosf(orientation));
-
-}
 bool Sweeper_Bot::checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive)
 {
 	//box collsion formula 
@@ -361,4 +320,44 @@ int Sweeper_Bot::getDamageToPlayer()
 {
 	//how much damage has been inflicted to the player
 	return 0;
+}
+
+void Sweeper_Bot::newTarget()
+{
+	target = sf::Vector2f(rand() % 6000, rand() % 6000);
+}
+
+void Sweeper_Bot::checkWall(Level * cLevel)
+{
+	// Get the square in front
+	float posX = m_position.x + 32;
+	float posY = m_position.y;
+
+	sf::Vector2f tileAhead = rotate(sf::Vector2f(posX, posY), m_position, m_sprite.getRotation());
+
+	int x = floor(tileAhead.x / 32);
+	int y = floor(tileAhead.y / 32);
+
+	if (cLevel->collide(sf::Vector2i(x, y)))
+	{
+		newTarget();
+	}
+}
+sf::Vector2f Sweeper_Bot::rotate(sf::Vector2f P, sf::Vector2f O, float theta)
+{
+	sf::Transform rotTran;
+	rotTran.rotate(theta, O.x, O.y);
+	return rotTran.transformPoint(P);
+}
+float Sweeper_Bot::length(sf::Vector2f vel)
+{
+	return (sqrt((vel.x * vel.x) + (vel.y * vel.y)));
+}
+
+sf::Vector2f Sweeper_Bot::normalize(sf::Vector2f vel)
+{
+	if (length(vel) != 0)
+		return sf::Vector2f(vel.x / length(vel), vel.y / length(vel));
+	else
+		return vel;
 }

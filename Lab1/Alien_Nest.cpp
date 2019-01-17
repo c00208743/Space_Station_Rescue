@@ -132,7 +132,7 @@ void Alien_Nest::update(sf::Vector2f playerPosition, Player* player, std::vector
 				// if dead
 				if (enemies[i]->getHealth() <= 0)
 				{
-					std::cout << "Enemy spawned: " << i << std::endl;
+					//std::cout << "Enemy spawned: " << i << std::endl;
 					enemies[i]->spawn(m_position);
 					break;
 				}
