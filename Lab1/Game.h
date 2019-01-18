@@ -31,11 +31,14 @@ private:
 	std::vector<Worker*> workers;
 	std::vector<Enemy*> enemies;
 	std::vector<Enemy*> nest;
+	std::vector<Enemy*> nest2;
+	std::vector<Enemy*> nest3;
+	std::vector<Enemy*> nest4;
 	Level* m_level;
 	std::string const path = "assets/maps/Practice.tmx";
 	
 	//std::vector<Enemy*> enemies;
-
+	sf::RectangleShape m_radar;
 };
 
 

@@ -19,6 +19,8 @@ public:
 	bool checkCollision();
 	bool getStatus();
 
+	void die();
+
 	float getNewOrientation(float currentOrientation, float velocity);
 	void kinematicSeek(sf::Vector2f playerPosition);
 	void checkWall(Level * cLevel);
