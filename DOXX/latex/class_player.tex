@@ -1,0 +1,178 @@
+\hypertarget{class_player}{}\section{Player Class Reference}
+\label{class_player}\index{Player@{Player}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_a749d2c00e1fe0f5c2746f7505a58c062}{$\sim$\+Player}} ()
+\begin{DoxyCompactList}\small\item\em Update the game world \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_player_addfbb89aac34e1c3d7e4403f70db719d}\label{class_player_addfbb89aac34e1c3d7e4403f70db719d}} 
+void {\bfseries update} (double dt, \mbox{\hyperlink{class_level}{Level}} $\ast$c\+Level)
+\item 
+\mbox{\Hypertarget{class_player_a53938857e80374e79726309e78d1c15c}\label{class_player_a53938857e80374e79726309e78d1c15c}} 
+void {\bfseries render} (sf\+::\+Render\+Window \&window)
+\item 
+\mbox{\Hypertarget{class_player_a8a8f6e52dcdfdbe54dfa95108b426a86}\label{class_player_a8a8f6e52dcdfdbe54dfa95108b426a86}} 
+bool {\bfseries check\+Bullet\+Collision} (sf\+::\+Vector2f pos, int width, int height)
+\item 
+\mbox{\Hypertarget{class_player_acaf76638c7aab982a89d8c6a162b71b9}\label{class_player_acaf76638c7aab982a89d8c6a162b71b9}} 
+bool {\bfseries check\+Worker\+Collision} (sf\+::\+Vector2f pos, int width, int height, bool alive)
+\item 
+\mbox{\Hypertarget{class_player_a23356f99a9de86d3d47eadb679b332dc}\label{class_player_a23356f99a9de86d3d47eadb679b332dc}} 
+sf\+::\+Vector2f {\bfseries get\+Position} ()
+\item 
+\mbox{\Hypertarget{class_player_a363489e11401d5a1549e315c8c8aa220}\label{class_player_a363489e11401d5a1549e315c8c8aa220}} 
+sf\+::\+Vector2f {\bfseries get\+Velocity} ()
+\item 
+\mbox{\Hypertarget{class_player_a909949fdf7cd75ffcbaacd1a1fd68179}\label{class_player_a909949fdf7cd75ffcbaacd1a1fd68179}} 
+void {\bfseries set\+Score} (int enemyS)
+\item 
+\mbox{\Hypertarget{class_player_a9738cd9c17abc8be5b6aa01c9e3e3254}\label{class_player_a9738cd9c17abc8be5b6aa01c9e3e3254}} 
+void {\bfseries set\+Health} (int dam)
+\item 
+\mbox{\Hypertarget{class_player_aafd5c7053af0b22d8ab1235efbc99635}\label{class_player_aafd5c7053af0b22d8ab1235efbc99635}} 
+void {\bfseries hit} (int d)
+\item 
+\mbox{\Hypertarget{class_player_add99cecd25ff0a29010c6d87c419c990}\label{class_player_add99cecd25ff0a29010c6d87c419c990}} 
+int {\bfseries join\+Formation} ()
+\item 
+\mbox{\Hypertarget{class_player_aec11a56f2f445d25d39cc67609bafbf3}\label{class_player_aec11a56f2f445d25d39cc67609bafbf3}} 
+void {\bfseries leave\+Formation} (int i)
+\item 
+\mbox{\Hypertarget{class_player_afe599740ba70a105db44bc4bbb9cbbc7}\label{class_player_afe599740ba70a105db44bc4bbb9cbbc7}} 
+int {\bfseries get\+Num\+In\+Form} ()
+\item 
+\mbox{\Hypertarget{class_player_a2499ac296a8437ee4bec6c0bd47f2f5b}\label{class_player_a2499ac296a8437ee4bec6c0bd47f2f5b}} 
+int {\bfseries get\+Free\+Position} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_a5419a17a9a89eb5a1db87dedb8b4ff67}\label{class_player_a5419a17a9a89eb5a1db87dedb8b4ff67}} 
+sf\+::\+Vector2f {\bfseries rotate} (sf\+::\+Vector2f P, sf\+::\+Vector2f Q, float theta)
+\item 
+\mbox{\Hypertarget{class_player_a05ce846b9e86ad62b7ce8338e1f0ed57}\label{class_player_a05ce846b9e86ad62b7ce8338e1f0ed57}} 
+void {\bfseries current\+Tile} (\mbox{\hyperlink{class_level}{Level}} $\ast$c\+Level)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_a36aa39fc04866810640a5e361b8c8246}\label{class_player_a36aa39fc04866810640a5e361b8c8246}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_player_a59323f7c0100a4b82ae0fa149ebddad7}\label{class_player_a59323f7c0100a4b82ae0fa149ebddad7}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+velocity}
+\item 
+\mbox{\Hypertarget{class_player_ad91d5e38da6431406f38143d57fdbb5f}\label{class_player_ad91d5e38da6431406f38143d57fdbb5f}} 
+sf\+::\+Vector2f {\bfseries direction}
+\item 
+\mbox{\Hypertarget{class_player_a002270b4acd57124f20fb4d5d9d29717}\label{class_player_a002270b4acd57124f20fb4d5d9d29717}} 
+int {\bfseries size}
+\item 
+\mbox{\Hypertarget{class_player_a6234571f981d393eadb47c048bfb3e5c}\label{class_player_a6234571f981d393eadb47c048bfb3e5c}} 
+int {\bfseries animate} = 0
+\item 
+\mbox{\Hypertarget{class_player_a75f6a3934feaf87dfb4b4d4c1cce54e7}\label{class_player_a75f6a3934feaf87dfb4b4d4c1cce54e7}} 
+int {\bfseries timer} = 0
+\item 
+\mbox{\Hypertarget{class_player_aae7dcca69c2a189e640624e48654a71b}\label{class_player_aae7dcca69c2a189e640624e48654a71b}} 
+const float {\bfseries PI} = 3.\+14159265359
+\item 
+\mbox{\Hypertarget{class_player_aa3ceecff26f0110f78461528c3edede3}\label{class_player_aa3ceecff26f0110f78461528c3edede3}} 
+float {\bfseries orientation}
+\item 
+\mbox{\Hypertarget{class_player_ad94d3e5ab67795f8f848a7fd565f376f}\label{class_player_ad94d3e5ab67795f8f848a7fd565f376f}} 
+float {\bfseries rotation}
+\item 
+\mbox{\Hypertarget{class_player_a2c45aef68a4799af9e5fd2054d32e3b3}\label{class_player_a2c45aef68a4799af9e5fd2054d32e3b3}} 
+double {\bfseries speed}
+\item 
+\mbox{\Hypertarget{class_player_a032cc077cd941af92b185e147eb6fb76}\label{class_player_a032cc077cd941af92b185e147eb6fb76}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture}
+\item 
+\mbox{\Hypertarget{class_player_acea3e1bbd92be7a0fbf26764ec919b24}\label{class_player_acea3e1bbd92be7a0fbf26764ec919b24}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite}
+\item 
+\mbox{\Hypertarget{class_player_ab25a9e6ee9b69b52a1bcc5daa845c3c8}\label{class_player_ab25a9e6ee9b69b52a1bcc5daa845c3c8}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture\+Shield}
+\item 
+\mbox{\Hypertarget{class_player_a3cb6d3db4c07adfc0d3d13670903984a}\label{class_player_a3cb6d3db4c07adfc0d3d13670903984a}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite\+Shield}
+\item 
+\mbox{\Hypertarget{class_player_af76dac5de6255cdaf5a581eb821ef4ca}\label{class_player_af76dac5de6255cdaf5a581eb821ef4ca}} 
+\mbox{\hyperlink{class_bullet}{Bullet}} $\ast$ {\bfseries m\+\_\+bullet}
+\item 
+\mbox{\Hypertarget{class_player_a9344b3d4b21620e95eea29fca8d420bc}\label{class_player_a9344b3d4b21620e95eea29fca8d420bc}} 
+bool {\bfseries shield} = false
+\item 
+\mbox{\Hypertarget{class_player_a158df05d843b319b92e4cbb8ff72a5b9}\label{class_player_a158df05d843b319b92e4cbb8ff72a5b9}} 
+bool {\bfseries shield\+Ready} = false
+\item 
+\mbox{\Hypertarget{class_player_ac3bfc671016375a214b1560053fa5b94}\label{class_player_ac3bfc671016375a214b1560053fa5b94}} 
+bool {\bfseries collison} = false
+\item 
+\mbox{\Hypertarget{class_player_aec9532a5074f38a900348bc61b41cb3c}\label{class_player_aec9532a5074f38a900348bc61b41cb3c}} 
+int {\bfseries shield\+Cool\+Down} = 0
+\item 
+\mbox{\Hypertarget{class_player_ab875840beeff39c125c267aab8c4dcfb}\label{class_player_ab875840beeff39c125c267aab8c4dcfb}} 
+int {\bfseries shield\+Timer} = 0
+\item 
+\mbox{\Hypertarget{class_player_a3b6b2902f7755600b8a784928ecd1ae7}\label{class_player_a3b6b2902f7755600b8a784928ecd1ae7}} 
+sf\+::\+Font {\bfseries m\+\_\+font}
+\item 
+\mbox{\Hypertarget{class_player_abba760d345058e6d222c7a9941a52bfb}\label{class_player_abba760d345058e6d222c7a9941a52bfb}} 
+sf\+::\+Text {\bfseries m\+\_\+text}
+\item 
+\mbox{\Hypertarget{class_player_a999b2e311ded33b76d854f590a155635}\label{class_player_a999b2e311ded33b76d854f590a155635}} 
+sf\+::\+Text {\bfseries m\+\_\+text\+Score}
+\item 
+\mbox{\Hypertarget{class_player_ad9671e533baf6a79aa7fe5e73955118b}\label{class_player_ad9671e533baf6a79aa7fe5e73955118b}} 
+sf\+::\+Text {\bfseries score\+Nu}
+\item 
+\mbox{\Hypertarget{class_player_a25c6d64fe2b6187b757712b76208f1e1}\label{class_player_a25c6d64fe2b6187b757712b76208f1e1}} 
+sf\+::\+Text {\bfseries m\+\_\+game\+Over}
+\item 
+\mbox{\Hypertarget{class_player_af526699fe84cfc5381940f5b76a264b7}\label{class_player_af526699fe84cfc5381940f5b76a264b7}} 
+sf\+::\+Text {\bfseries m\+\_\+health}
+\item 
+\mbox{\Hypertarget{class_player_ace6abae8d66534ad0a1fd6458f786a6e}\label{class_player_ace6abae8d66534ad0a1fd6458f786a6e}} 
+int {\bfseries score} = 0
+\item 
+\mbox{\Hypertarget{class_player_aad33b52bfe73c4c978a3135172f286a0}\label{class_player_aad33b52bfe73c4c978a3135172f286a0}} 
+int {\bfseries health} = 100
+\item 
+\mbox{\Hypertarget{class_player_a6bdcecc3d6ba47869296f24105a3c224}\label{class_player_a6bdcecc3d6ba47869296f24105a3c224}} 
+sf\+::\+Vector2i {\bfseries previous\+Tile}
+\item 
+\mbox{\Hypertarget{class_player_a7616de349ade92d40448e2c29b3564a8}\label{class_player_a7616de349ade92d40448e2c29b3564a8}} 
+std\+::vector$<$ bool $>$ {\bfseries num\+In\+Form}
+\item 
+\mbox{\Hypertarget{class_player_a25825edb64d9cc5ac3da3b78314be268}\label{class_player_a25825edb64d9cc5ac3da3b78314be268}} 
+std\+::vector$<$ int $>$ {\bfseries free\+Form\+Pos}
+\item 
+\mbox{\Hypertarget{class_player_ac3ef394ba3cea77cb234349ed1fe1026}\label{class_player_ac3ef394ba3cea77cb234349ed1fe1026}} 
+sf\+::\+Rectangle\+Shape {\bfseries m\+\_\+radar}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_player_a749d2c00e1fe0f5c2746f7505a58c062}\label{class_player_a749d2c00e1fe0f5c2746f7505a58c062}} 
+\index{Player@{Player}!````~Player@{$\sim$Player}}
+\index{````~Player@{$\sim$Player}!Player@{Player}}
+\subsubsection{\texorpdfstring{$\sim$Player()}{~Player()}}
+{\footnotesize\ttfamily Player\+::$\sim$\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Update the game world 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t\+\_\+delta\+Time} & time interval per frame\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Player.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Player.\+cpp\end{DoxyCompactItemize}

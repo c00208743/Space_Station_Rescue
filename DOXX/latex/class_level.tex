@@ -1,0 +1,74 @@
+\hypertarget{class_level}{}\section{Level Class Reference}
+\label{class_level}\index{Level@{Level}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_level_a4c7d4e89ea59866f0fc760b382cedaec}\label{class_level_a4c7d4e89ea59866f0fc760b382cedaec}} 
+{\bfseries Level} (const std\+::string \&name)
+\item 
+\mbox{\Hypertarget{class_level_ac27645024bdde2e14f0d3be90199c540}\label{class_level_ac27645024bdde2e14f0d3be90199c540}} 
+void {\bfseries load} (const std\+::string \&path, sf\+::\+Render\+Window $\ast$ren)
+\item 
+\mbox{\Hypertarget{class_level_aef8f00034e8ad8c09c2a6fb94d2846d3}\label{class_level_aef8f00034e8ad8c09c2a6fb94d2846d3}} 
+void {\bfseries draw} (sf\+::\+Render\+Window $\ast$ren)
+\item 
+\mbox{\Hypertarget{class_level_a17e945e060e654672dce586d1b8e88f0}\label{class_level_a17e945e060e654672dce586d1b8e88f0}} 
+void {\bfseries update\+Weights} (sf\+::\+Vector2i p)
+\item 
+\mbox{\Hypertarget{class_level_a147e3a6d92281a66ca1ad7b70ffc91be}\label{class_level_a147e3a6d92281a66ca1ad7b70ffc91be}} 
+bool {\bfseries collide} (sf\+::\+Vector2i pos)
+\item 
+\mbox{\Hypertarget{class_level_a0d6e676af9f752ef8de6c13a429da176}\label{class_level_a0d6e676af9f752ef8de6c13a429da176}} 
+int {\bfseries get\+Weight} (sf\+::\+Vector2i gp)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_level_a995a3e186077e659f3b60619963d8006}\label{class_level_a995a3e186077e659f3b60619963d8006}} 
+void {\bfseries path} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structtile}{tile}} $>$(grid)\mbox{[}V\mbox{]}\mbox{[}V\mbox{]}, sf\+::\+Vector2i start, sf\+::\+Vector2i goal)
+\item 
+\mbox{\Hypertarget{class_level_a660630201931d2c723089eac5ccdba4c}\label{class_level_a660630201931d2c723089eac5ccdba4c}} 
+void {\bfseries reset} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structtile}{tile}} $>$(grid)\mbox{[}V\mbox{]}\mbox{[}V\mbox{]})
+\item 
+\mbox{\Hypertarget{class_level_a6b85c06556c61bad34e6795226f79389}\label{class_level_a6b85c06556c61bad34e6795226f79389}} 
+void {\bfseries give\+Weights} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structtile}{tile}} $>$(grid)\mbox{[}V\mbox{]}\mbox{[}V\mbox{]}, sf\+::\+Vector2i goal)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_level_a7ae61b37551918b3a4ecba7b46135968}\label{class_level_a7ae61b37551918b3a4ecba7b46135968}} 
+std\+::string {\bfseries name}
+\item 
+\mbox{\Hypertarget{class_level_a837c1265cab57878edc482c83b24f1f1}\label{class_level_a837c1265cab57878edc482c83b24f1f1}} 
+int {\bfseries rows}
+\item 
+\mbox{\Hypertarget{class_level_ae0123b3a20149c5cf8ea3720764fbe1b}\label{class_level_ae0123b3a20149c5cf8ea3720764fbe1b}} 
+int {\bfseries cols}
+\item 
+\mbox{\Hypertarget{class_level_ac846cb2f8b1bd0f92a60a484ce1e50ef}\label{class_level_ac846cb2f8b1bd0f92a60a484ce1e50ef}} 
+int {\bfseries tile\+\_\+width}
+\item 
+\mbox{\Hypertarget{class_level_a75ae0539332f57c52edac380fa0fc0c3}\label{class_level_a75ae0539332f57c52edac380fa0fc0c3}} 
+int {\bfseries tile\+\_\+height}
+\item 
+\mbox{\Hypertarget{class_level_ad854b95257631dee88a8b8ddc2f895ef}\label{class_level_ad854b95257631dee88a8b8ddc2f895ef}} 
+sf\+::\+Texture {\bfseries texture}
+\item 
+\mbox{\Hypertarget{class_level_a4312beb9ab25f98b40638caadb542095}\label{class_level_a4312beb9ab25f98b40638caadb542095}} 
+std\+::vector$<$ std\+::vector$<$ \mbox{\hyperlink{structtile}{tile}} $>$ $>$ {\bfseries tiles}
+\item 
+\mbox{\Hypertarget{class_level_ab97f6164c171d40f8a201e07a4cd3438}\label{class_level_ab97f6164c171d40f8a201e07a4cd3438}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structtile}{tile}} $>$ {\bfseries grid} \mbox{[}V\mbox{]}\mbox{[}V\mbox{]}
+\item 
+\mbox{\Hypertarget{class_level_a6eafb2f0e961203fc7d0cdd0dc8da373}\label{class_level_a6eafb2f0e961203fc7d0cdd0dc8da373}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structtile}{tile}} $>$ {\bfseries empty\+Grid} \mbox{[}V\mbox{]}\mbox{[}V\mbox{]}
+\item 
+\mbox{\Hypertarget{class_level_a5f6dda7f33634fa6fb2400060a7fa29a}\label{class_level_a5f6dda7f33634fa6fb2400060a7fa29a}} 
+std\+::map$<$ gid, sf\+::\+Sprite $\ast$ $>$ {\bfseries tilesets}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Level.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Level.\+cpp\end{DoxyCompactItemize}

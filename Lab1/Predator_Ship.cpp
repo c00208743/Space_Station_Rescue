@@ -500,21 +500,36 @@ sf::Vector2f Predator_Ship::normalize(sf::Vector2f vel)
 
 void Predator_Ship::checkWall(Level * cLevel)
 {
-	// Get the square in front
-	float posX = m_position.x + 64;
-	float posY = m_position.y;
-
-	sf::Vector2f tileAhead = rotate(sf::Vector2f(posX, posY), m_sprite.getPosition(), m_sprite.getRotation());
-
-	int x = floor(tileAhead.x / 32);
-	int y = floor(tileAhead.y / 32);
 	if (m_wallCount > m_wallCountLimit)
 	{
-		if (cLevel->collide(sf::Vector2i(x, y)))
+		// Get the square in front
+		float posX = m_position.x + 96;
+		float posYL = m_position.y - 32;
+		float posYC = m_position.y - 32;
+		float posYR = m_position.y + 32;
+
+		sf::Vector2f tileAheadL = rotate(sf::Vector2f(posX, posYL), m_sprite.getPosition(), m_sprite.getRotation());
+
+		int xL = floor(tileAheadL.x / 32);
+		int yL = floor(tileAheadL.y / 32);
+
+		sf::Vector2f tileAheadC = rotate(sf::Vector2f(posX, posYC), m_sprite.getPosition(), m_sprite.getRotation());
+
+		int xC = floor(tileAheadC.x / 32);
+		int yC = floor(tileAheadC.y / 32);
+
+		sf::Vector2f tileAheadR = rotate(sf::Vector2f(posX, posYR), m_sprite.getPosition(), m_sprite.getRotation());
+
+		int yR = floor(tileAheadR.y / 32);
+		int xR = floor(tileAheadR.x / 32);
+
+	
+		if (cLevel->collide(sf::Vector2i(xC, yC)) || cLevel->collide(sf::Vector2i(xL, yL)) || cLevel->collide(sf::Vector2i(xR, yR)))
 		{
 			//std::cout << "Wall" << std::endl;
 			target.x = -target.x;
 			target.y = -target.y;
+			m_velocity = sf::Vector2f(0, 0);
 			m_wallCount = 0;
 		}
 	}

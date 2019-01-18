@@ -1,0 +1,98 @@
+\hypertarget{class_missile}{}\section{Missile Class Reference}
+\label{class_missile}\index{Missile@{Missile}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_missile_a2579630767ba1a39870e104d4758185b}\label{class_missile_a2579630767ba1a39870e104d4758185b}} 
+void {\bfseries update} (\mbox{\hyperlink{class_level}{Level}} $\ast$c\+Level)
+\item 
+\mbox{\Hypertarget{class_missile_a882289a30763d8307727a674655c7367}\label{class_missile_a882289a30763d8307727a674655c7367}} 
+void {\bfseries render} (sf\+::\+Render\+Window \&window)
+\item 
+\mbox{\Hypertarget{class_missile_a31514bcf230dca0d35b2fdb1429faa63}\label{class_missile_a31514bcf230dca0d35b2fdb1429faa63}} 
+void {\bfseries fire} (sf\+::\+Vector2f pos)
+\item 
+\mbox{\Hypertarget{class_missile_af9e2b5c6307be347dfd7bf4a7f180c74}\label{class_missile_af9e2b5c6307be347dfd7bf4a7f180c74}} 
+bool {\bfseries check\+Collision} ()
+\item 
+\mbox{\Hypertarget{class_missile_a79db5983bd89eeee6cee4c26d82b8590}\label{class_missile_a79db5983bd89eeee6cee4c26d82b8590}} 
+bool {\bfseries get\+Status} ()
+\item 
+\mbox{\Hypertarget{class_missile_a7445546874de0c4eab323a5a3b7735e5}\label{class_missile_a7445546874de0c4eab323a5a3b7735e5}} 
+void {\bfseries die} ()
+\item 
+\mbox{\Hypertarget{class_missile_ae47648fe82da5832c7d60b3da6276779}\label{class_missile_ae47648fe82da5832c7d60b3da6276779}} 
+float {\bfseries get\+New\+Orientation} (float current\+Orientation, float velocity)
+\item 
+\mbox{\Hypertarget{class_missile_ac00042df1e9ee3980b21620b0057df5d}\label{class_missile_ac00042df1e9ee3980b21620b0057df5d}} 
+void {\bfseries kinematic\+Seek} (sf\+::\+Vector2f player\+Position)
+\item 
+\mbox{\Hypertarget{class_missile_a39109aec345178ed3585189bb7d7746b}\label{class_missile_a39109aec345178ed3585189bb7d7746b}} 
+void {\bfseries check\+Wall} (\mbox{\hyperlink{class_level}{Level}} $\ast$c\+Level)
+\item 
+\mbox{\Hypertarget{class_missile_ab6e683a5b94aa4bfb3262f6a94ce2517}\label{class_missile_ab6e683a5b94aa4bfb3262f6a94ce2517}} 
+int {\bfseries damaged\+Player} ()
+\item 
+\mbox{\Hypertarget{class_missile_a878a1c7465ef494437ad43ad2da9a833}\label{class_missile_a878a1c7465ef494437ad43ad2da9a833}} 
+void {\bfseries set\+Speed} (float s)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_missile_ae3d54aa52663b42c2e0eb3360b62c8dd}\label{class_missile_ae3d54aa52663b42c2e0eb3360b62c8dd}} 
+float {\bfseries m\+\_\+speed}
+\item 
+\mbox{\Hypertarget{class_missile_aee138dea114b6d8f0aec3bb95ea71f50}\label{class_missile_aee138dea114b6d8f0aec3bb95ea71f50}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_missile_a813a9064ce0d32cc33b21d7ae4eea1e3}\label{class_missile_a813a9064ce0d32cc33b21d7ae4eea1e3}} 
+sf\+::\+Vector2f {\bfseries velocity}
+\item 
+\mbox{\Hypertarget{class_missile_a3fc3fb9c33dd7e50d2129931f0e31fc0}\label{class_missile_a3fc3fb9c33dd7e50d2129931f0e31fc0}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+explosion}
+\item 
+\mbox{\Hypertarget{class_missile_af7044329604e4a9edb2330e065d29a00}\label{class_missile_af7044329604e4a9edb2330e065d29a00}} 
+bool {\bfseries m\+\_\+alive} = false
+\item 
+\mbox{\Hypertarget{class_missile_a9219f26e1a3b7344459dd1551295329f}\label{class_missile_a9219f26e1a3b7344459dd1551295329f}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture}
+\item 
+\mbox{\Hypertarget{class_missile_ac006e17dd989f5a3659c72060883dd3d}\label{class_missile_ac006e17dd989f5a3659c72060883dd3d}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite}
+\item 
+\mbox{\Hypertarget{class_missile_a1cd59867341b545dce071bfb4c370494}\label{class_missile_a1cd59867341b545dce071bfb4c370494}} 
+bool {\bfseries collison} = false
+\item 
+\mbox{\Hypertarget{class_missile_adece61cab5a74c7be1e50fdb9cbe7f64}\label{class_missile_adece61cab5a74c7be1e50fdb9cbe7f64}} 
+int {\bfseries timer} = 0
+\item 
+\mbox{\Hypertarget{class_missile_a39265408e1ef59988d1fd4a83856e807}\label{class_missile_a39265408e1ef59988d1fd4a83856e807}} 
+int {\bfseries animate} = 0
+\item 
+\mbox{\Hypertarget{class_missile_aa36d8d7569ae95104fed5ed1a0b90440}\label{class_missile_aa36d8d7569ae95104fed5ed1a0b90440}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+velocity}
+\item 
+\mbox{\Hypertarget{class_missile_a24ae8e5b654c799c373ce0a7a857575c}\label{class_missile_a24ae8e5b654c799c373ce0a7a857575c}} 
+float {\bfseries m\+\_\+velocityF}
+\item 
+\mbox{\Hypertarget{class_missile_af12716759ccd2413a5a263c86a16e5c4}\label{class_missile_af12716759ccd2413a5a263c86a16e5c4}} 
+float {\bfseries m\+\_\+orientation}
+\item 
+\mbox{\Hypertarget{class_missile_a3ccc502b5011696ebc71f204e7ff9a6a}\label{class_missile_a3ccc502b5011696ebc71f204e7ff9a6a}} 
+float {\bfseries m\+\_\+max\+Speed} = 0.\+5f
+\item 
+\mbox{\Hypertarget{class_missile_a673358086a6cd8ebf2003a8ac2a8dfed}\label{class_missile_a673358086a6cd8ebf2003a8ac2a8dfed}} 
+int {\bfseries player\+Damage} = 0
+\item 
+\mbox{\Hypertarget{class_missile_aac6f30b12d72dcd1533f70b28a5a4e52}\label{class_missile_aac6f30b12d72dcd1533f70b28a5a4e52}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+player\+Pos}
+\item 
+\mbox{\Hypertarget{class_missile_adb7636e214da483237cf0bd8d0f1ea29}\label{class_missile_adb7636e214da483237cf0bd8d0f1ea29}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+nest\+Pos}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Missile.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Missile.\+cpp\end{DoxyCompactItemize}

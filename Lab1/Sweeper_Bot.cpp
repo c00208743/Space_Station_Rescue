@@ -272,10 +272,10 @@ void Sweeper_Bot::kinematicWander(sf::Vector2f targetPosition)
 	//pick a random direction and move towards it
 	m_velocity = targetPosition - m_position;
 	m_velocity = normalize(m_velocity);
-	float orientation = getNewOrientation(m_sprite.getRotation(), length(m_velocity));
-	orientation = orientation + m_maxRotation * ((rand() % 2) - 1);
-	m_sprite.setRotation(orientation);
-	m_velocity = sf::Vector2f(-sin(orientation), cos(orientation)) * m_maxSpeed;
+	m_orientation = getNewOrientation(m_sprite.getRotation(), length(m_velocity));
+	m_orientation = m_orientation + m_maxRotation * ((rand() % 2) - 1);
+	m_sprite.setRotation(m_orientation);
+	m_velocity = sf::Vector2f(-sin(m_orientation), cos(m_orientation)) * m_maxSpeed;
 
 }
 

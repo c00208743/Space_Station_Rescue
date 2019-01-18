@@ -1,0 +1,116 @@
+\hypertarget{class_game}{}\section{Game Class Reference}
+\label{class_game}\index{Game@{Game}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_a1ab78f5ed0d5ea879157357cf2fb2afa}{run}} ()
+\begin{DoxyCompactList}\small\item\em Main game entry point -\/ runs untfil user quits. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_game_aa8c8ca9efb596230614be2f2f9e61b86}{update}} (double dt)
+\begin{DoxyCompactList}\small\item\em Method to handle all game updates \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_a15ddd769261d923827a3cdf41499c843}{render}} ()
+\item 
+void \mbox{\hyperlink{class_game_a79f698dda206dd7a9bed28b3f88bdc38}{process\+Events}} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}\label{class_game_a22a61b5ea27c609be8cf2724c33d7ae5}} 
+sf\+::\+Render\+Window {\bfseries m\+\_\+window}
+\item 
+\mbox{\Hypertarget{class_game_a7631b3b50dd764980ebd57b43ef31f5a}\label{class_game_a7631b3b50dd764980ebd57b43ef31f5a}} 
+sf\+::\+View {\bfseries mini\+Map}
+\item 
+\mbox{\Hypertarget{class_game_a2fa78a9321217a3189c22874437569bc}\label{class_game_a2fa78a9321217a3189c22874437569bc}} 
+sf\+::\+View {\bfseries m\+\_\+follow}
+\item 
+\mbox{\Hypertarget{class_game_a371bdca8d00e1837a11a06e59fa9f44a}\label{class_game_a371bdca8d00e1837a11a06e59fa9f44a}} 
+\mbox{\hyperlink{class_player}{Player}} $\ast$ {\bfseries m\+\_\+player}
+\item 
+\mbox{\Hypertarget{class_game_adfcf58551ecd8d9c2462f745a667499d}\label{class_game_adfcf58551ecd8d9c2462f745a667499d}} 
+std\+::vector$<$ \mbox{\hyperlink{class_worker}{Worker}} $\ast$ $>$ {\bfseries workers}
+\item 
+\mbox{\Hypertarget{class_game_a29e5e11978d28aac90748d484ddd1219}\label{class_game_a29e5e11978d28aac90748d484ddd1219}} 
+std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $\ast$ $>$ {\bfseries enemies}
+\item 
+\mbox{\Hypertarget{class_game_a6eefe1ff7e009858700e7ed1ea86026c}\label{class_game_a6eefe1ff7e009858700e7ed1ea86026c}} 
+std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $\ast$ $>$ {\bfseries nest}
+\item 
+\mbox{\Hypertarget{class_game_a3925e2f941ba1d5146d20ccd29e6b6f9}\label{class_game_a3925e2f941ba1d5146d20ccd29e6b6f9}} 
+std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $\ast$ $>$ {\bfseries nest2}
+\item 
+\mbox{\Hypertarget{class_game_a5c5253e36a880b0d90211e326cf810f6}\label{class_game_a5c5253e36a880b0d90211e326cf810f6}} 
+std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $\ast$ $>$ {\bfseries nest3}
+\item 
+\mbox{\Hypertarget{class_game_aab02c0eda6f87cddbe2b50255771b32a}\label{class_game_aab02c0eda6f87cddbe2b50255771b32a}} 
+std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $\ast$ $>$ {\bfseries nest4}
+\item 
+\mbox{\Hypertarget{class_game_af1c31b114bdac892e4e7f723d661ad03}\label{class_game_af1c31b114bdac892e4e7f723d661ad03}} 
+\mbox{\hyperlink{class_level}{Level}} $\ast$ {\bfseries m\+\_\+level}
+\item 
+\mbox{\Hypertarget{class_game_a3c9b0c30c64b794e8df746f7f64baaea}\label{class_game_a3c9b0c30c64b794e8df746f7f64baaea}} 
+std\+::string const {\bfseries path} = \char`\"{}assets/maps/Practice.\+tmx\char`\"{}
+\item 
+\mbox{\Hypertarget{class_game_a96d52913282699c05809b06863f1166b}\label{class_game_a96d52913282699c05809b06863f1166b}} 
+sf\+::\+Rectangle\+Shape {\bfseries m\+\_\+radar}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_a79f698dda206dd7a9bed28b3f88bdc38}\label{class_game_a79f698dda206dd7a9bed28b3f88bdc38}} 
+\index{Game@{Game}!processEvents@{processEvents}}
+\index{processEvents@{processEvents}!Game@{Game}}
+\subsubsection{\texorpdfstring{processEvents()}{processEvents()}}
+{\footnotesize\ttfamily void Game\+::process\+Events (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+
+
+Check for events
+
+Allows window to function and exit. \mbox{\Hypertarget{class_game_a15ddd769261d923827a3cdf41499c843}\label{class_game_a15ddd769261d923827a3cdf41499c843}} 
+\index{Game@{Game}!render@{render}}
+\index{render@{render}!Game@{Game}}
+\subsubsection{\texorpdfstring{render()}{render()}}
+{\footnotesize\ttfamily void Game\+::render (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+
+
+draw the window for the game.
+
+draw buttons and text on left side \mbox{\Hypertarget{class_game_a1ab78f5ed0d5ea879157357cf2fb2afa}\label{class_game_a1ab78f5ed0d5ea879157357cf2fb2afa}} 
+\index{Game@{Game}!run@{run}}
+\index{run@{run}!Game@{Game}}
+\subsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void Game\+::run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main game entry point -\/ runs untfil user quits. 
+
+\mbox{\Hypertarget{class_game_aa8c8ca9efb596230614be2f2f9e61b86}\label{class_game_aa8c8ca9efb596230614be2f2f9e61b86}} 
+\index{Game@{Game}!update@{update}}
+\index{update@{update}!Game@{Game}}
+\subsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Game\+::update (\begin{DoxyParamCaption}\item[{double}]{dt }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Method to handle all game updates 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & update delta time\\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Game.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Game.\+cpp\end{DoxyCompactItemize}

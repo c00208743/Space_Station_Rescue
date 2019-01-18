@@ -1,0 +1,278 @@
+\hypertarget{class_predator___ship}{}\section{Predator\+\_\+\+Ship Class Reference}
+\label{class_predator___ship}\index{Predator\_Ship@{Predator\_Ship}}
+Inheritance diagram for Predator\+\_\+\+Ship\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_predator___ship}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a2aca3f5e5b20cade0fa0b0fdc5dd2d5b}\label{class_predator___ship_a2aca3f5e5b20cade0fa0b0fdc5dd2d5b}} 
+float {\bfseries get\+New\+Orientation} (float current\+Orientation, float velocity)
+\item 
+\mbox{\Hypertarget{class_predator___ship_a5d99c7962fcf761e25ccb649d320e275}\label{class_predator___ship_a5d99c7962fcf761e25ccb649d320e275}} 
+void {\bfseries kinematic\+Seek} (sf\+::\+Vector2f player\+Position)
+\item 
+\mbox{\Hypertarget{class_predator___ship_a3278a4890635cad41502506e8d543f5a}\label{class_predator___ship_a3278a4890635cad41502506e8d543f5a}} 
+void {\bfseries kinematic\+Arrive} (sf\+::\+Vector2f player\+Position)
+\item 
+\mbox{\Hypertarget{class_predator___ship_a5b52e918a2de3d02c594d22f855767b5}\label{class_predator___ship_a5b52e918a2de3d02c594d22f855767b5}} 
+void {\bfseries boundary} (float x, float y)
+\item 
+\mbox{\Hypertarget{class_predator___ship_a34ebd4a3822d2218e5d6eb28944f9ce5}\label{class_predator___ship_a34ebd4a3822d2218e5d6eb28944f9ce5}} 
+float {\bfseries get\+Random} (int x, int y)
+\item 
+\mbox{\Hypertarget{class_predator___ship_a9a8f721534b1e96f2bc27071f2dd80c5}\label{class_predator___ship_a9a8f721534b1e96f2bc27071f2dd80c5}} 
+void {\bfseries update} (sf\+::\+Vector2f player\+Position, \mbox{\hyperlink{class_player}{Player}} $\ast$player, std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $\ast$ $>$ enemies, \mbox{\hyperlink{class_level}{Level}} $\ast$c\+Level)
+\item 
+\mbox{\Hypertarget{class_predator___ship_a8da57d46ee1127ad67c6304cfc83024e}\label{class_predator___ship_a8da57d46ee1127ad67c6304cfc83024e}} 
+void {\bfseries render} (sf\+::\+Render\+Window \&window)
+\item 
+\mbox{\Hypertarget{class_predator___ship_aa9bd97c27edf97caa6c5f7fceb950a30}\label{class_predator___ship_aa9bd97c27edf97caa6c5f7fceb950a30}} 
+int {\bfseries get\+Id} ()
+\item 
+\mbox{\Hypertarget{class_predator___ship_a5977666a735ee7535bbff99c19352620}\label{class_predator___ship_a5977666a735ee7535bbff99c19352620}} 
+bool {\bfseries radar} (sf\+::\+Vector2f pos)
+\item 
+\mbox{\Hypertarget{class_predator___ship_afe058a9aff06a9fc4113021df8cd1381}\label{class_predator___ship_afe058a9aff06a9fc4113021df8cd1381}} 
+sf\+::\+Vector2f {\bfseries get\+Position} ()
+\item 
+\mbox{\Hypertarget{class_predator___ship_aadb8afe210cffcf453f2a6d14d7ba186}\label{class_predator___ship_aadb8afe210cffcf453f2a6d14d7ba186}} 
+sf\+::\+Vector2f {\bfseries get\+Velocity} ()
+\item 
+\mbox{\Hypertarget{class_predator___ship_a4795b1f5a0e4fc89ec76d5320b75c036}\label{class_predator___ship_a4795b1f5a0e4fc89ec76d5320b75c036}} 
+int {\bfseries get\+Width} ()
+\item 
+\mbox{\Hypertarget{class_predator___ship_a7a0edb94e58718dd30d0803132e68e79}\label{class_predator___ship_a7a0edb94e58718dd30d0803132e68e79}} 
+int {\bfseries get\+Height} ()
+\item 
+\mbox{\Hypertarget{class_predator___ship_a6cc0211a134ac56f11a2e1f4172fc32c}\label{class_predator___ship_a6cc0211a134ac56f11a2e1f4172fc32c}} 
+int {\bfseries get\+Health} ()
+\item 
+\mbox{\Hypertarget{class_predator___ship_a7e2990cfdf148f330898715c384706c0}\label{class_predator___ship_a7e2990cfdf148f330898715c384706c0}} 
+void {\bfseries hit} (int damage)
+\item 
+\mbox{\Hypertarget{class_predator___ship_ad8342d6a74425727e5e6e8f65e92e3a5}\label{class_predator___ship_ad8342d6a74425727e5e6e8f65e92e3a5}} 
+bool {\bfseries worker\+Radar} (sf\+::\+Vector2f pos)
+\item 
+\mbox{\Hypertarget{class_predator___ship_ace25b7dc8a35303462ea776ce28cc1c1}\label{class_predator___ship_ace25b7dc8a35303462ea776ce28cc1c1}} 
+void {\bfseries collison} (std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $\ast$ $>$ enemies)
+\item 
+\mbox{\Hypertarget{class_predator___ship_aebf2b4fc48e1337064441e79ddb5913f}\label{class_predator___ship_aebf2b4fc48e1337064441e79ddb5913f}} 
+int {\bfseries get\+Score} ()
+\item 
+\mbox{\Hypertarget{class_predator___ship_a51cef7c74250e2dbf2e362d6ada33e0e}\label{class_predator___ship_a51cef7c74250e2dbf2e362d6ada33e0e}} 
+void {\bfseries set\+Score} ()
+\item 
+\mbox{\Hypertarget{class_predator___ship_aeba4c0d0b23edbf52c04dbb8c158737c}\label{class_predator___ship_aeba4c0d0b23edbf52c04dbb8c158737c}} 
+bool {\bfseries check\+Worker\+Collision} (sf\+::\+Vector2f pos, int width, int height, bool alive)
+\item 
+\mbox{\Hypertarget{class_predator___ship_a92d3654825e098d7e134133f7356609d}\label{class_predator___ship_a92d3654825e098d7e134133f7356609d}} 
+int {\bfseries get\+Damage\+To\+Player} ()
+\item 
+\mbox{\Hypertarget{class_predator___ship_adac9b29921a21f03dbb1b3b55efb0f9b}\label{class_predator___ship_adac9b29921a21f03dbb1b3b55efb0f9b}} 
+bool {\bfseries check\+Bullet\+Collision} (sf\+::\+Vector2f pos, int width, int height)
+\item 
+\mbox{\Hypertarget{class_predator___ship_ac252c8ede68457e853aa6b8c4a8e898c}\label{class_predator___ship_ac252c8ede68457e853aa6b8c4a8e898c}} 
+void {\bfseries spawn} (sf\+::\+Vector2f pos)
+\item 
+\mbox{\Hypertarget{class_predator___ship_aad3f7d20092db3baff96590b51a7b351}\label{class_predator___ship_aad3f7d20092db3baff96590b51a7b351}} 
+void {\bfseries set\+Pos} (sf\+::\+Vector2f new\+Pos)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_predator___ship_ac1953d8f1f581219dc5ac8cbe2166ead}\label{class_predator___ship_ac1953d8f1f581219dc5ac8cbe2166ead}} 
+void {\bfseries new\+Target} ()
+\item 
+\mbox{\Hypertarget{class_predator___ship_acdc3d20c03731ead7f0f3e07fcca6231}\label{class_predator___ship_acdc3d20c03731ead7f0f3e07fcca6231}} 
+void {\bfseries check\+Wall} (\mbox{\hyperlink{class_level}{Level}} $\ast$c\+Level)
+\item 
+\mbox{\Hypertarget{class_predator___ship_aa94d873c392291d03ebd4e04750e6c9c}\label{class_predator___ship_aa94d873c392291d03ebd4e04750e6c9c}} 
+sf\+::\+Vector2f {\bfseries rotate} (sf\+::\+Vector2f P, sf\+::\+Vector2f Q, float theta)
+\item 
+\mbox{\Hypertarget{class_predator___ship_a26f117f575ed46b73789e794a105cee4}\label{class_predator___ship_a26f117f575ed46b73789e794a105cee4}} 
+void {\bfseries kinematic\+Wander} (sf\+::\+Vector2f target\+Position)
+\item 
+\mbox{\Hypertarget{class_predator___ship_abc955e49984bac9a0f70aa37c1f028ee}\label{class_predator___ship_abc955e49984bac9a0f70aa37c1f028ee}} 
+sf\+::\+Vector2f {\bfseries next\+Tile} (\mbox{\hyperlink{class_level}{Level}} $\ast$c\+Level, sf\+::\+Vector2f player\+Pos)
+\item 
+\mbox{\Hypertarget{class_predator___ship_abe2c4efa6647cff94b3821c66da58376}\label{class_predator___ship_abe2c4efa6647cff94b3821c66da58376}} 
+float {\bfseries length} (sf\+::\+Vector2f vel)
+\item 
+\mbox{\Hypertarget{class_predator___ship_a4e5b670464b01250b2d2e2e3de575e85}\label{class_predator___ship_a4e5b670464b01250b2d2e2e3de575e85}} 
+sf\+::\+Vector2f {\bfseries normalize} (sf\+::\+Vector2f vel)
+\item 
+\mbox{\Hypertarget{class_predator___ship_ac831147851a25408a83145f481aafbd0}\label{class_predator___ship_ac831147851a25408a83145f481aafbd0}} 
+void {\bfseries in\+Formation} (int num\+In\+Form, sf\+::\+Vector2f player\+Pos)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a492c7ed1daac06fdffed4f8239e1cb04}\label{class_predator___ship_a492c7ed1daac06fdffed4f8239e1cb04}} 
+float {\bfseries m\+\_\+time\+To\+Target}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a39a53ee005dee171361615029350ccd8}\label{class_predator___ship_a39a53ee005dee171361615029350ccd8}} 
+sf\+::\+Vector2f {\bfseries target}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a1ea46bacc686640d393798bbe11a4985}\label{class_predator___ship_a1ea46bacc686640d393798bbe11a4985}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_predator___ship_adc072555a69331ff9928d52e90aee7ab}\label{class_predator___ship_adc072555a69331ff9928d52e90aee7ab}} 
+float {\bfseries m\+\_\+orientation}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a2f5bf8b05c1a5416e62afbcd91ee838b}\label{class_predator___ship_a2f5bf8b05c1a5416e62afbcd91ee838b}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+velocity}
+\item 
+\mbox{\Hypertarget{class_predator___ship_ac9be7f951bc2a8be1f096043456f4f15}\label{class_predator___ship_ac9be7f951bc2a8be1f096043456f4f15}} 
+float {\bfseries m\+\_\+rotation}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a515307d342c4544b8abc4ec124b7ad3e}\label{class_predator___ship_a515307d342c4544b8abc4ec124b7ad3e}} 
+float {\bfseries m\+\_\+velocityF}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a428d6cddea6a47b7f2243ba4494aa7e9}\label{class_predator___ship_a428d6cddea6a47b7f2243ba4494aa7e9}} 
+float {\bfseries m\+\_\+max\+Speed}
+\item 
+\mbox{\Hypertarget{class_predator___ship_aa87038e8c93c81d37e322e0a94892841}\label{class_predator___ship_aa87038e8c93c81d37e322e0a94892841}} 
+float {\bfseries m\+\_\+max\+Rotation}
+\item 
+\mbox{\Hypertarget{class_predator___ship_af46743489905b4228fb3521841266b85}\label{class_predator___ship_af46743489905b4228fb3521841266b85}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite}
+\item 
+\mbox{\Hypertarget{class_predator___ship_abb2bd1e5ae675a65e0f120279c0f7e0a}\label{class_predator___ship_abb2bd1e5ae675a65e0f120279c0f7e0a}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a766360035d78dc97b695ab510d784a9f}\label{class_predator___ship_a766360035d78dc97b695ab510d784a9f}} 
+double {\bfseries shortest\+Time} = 2000
+\item 
+\mbox{\Hypertarget{class_predator___ship_a87ce1e27f4b7acba2109fb19fcfffabb}\label{class_predator___ship_a87ce1e27f4b7acba2109fb19fcfffabb}} 
+sf\+::\+Vector2f {\bfseries first\+Target}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a8a79aefe02d7766c544a0e84bfbe9cd9}\label{class_predator___ship_a8a79aefe02d7766c544a0e84bfbe9cd9}} 
+sf\+::\+Vector2f {\bfseries first\+Relative\+Pos}
+\item 
+\mbox{\Hypertarget{class_predator___ship_ac9b31d1cf4ad7de403908321712c7c94}\label{class_predator___ship_ac9b31d1cf4ad7de403908321712c7c94}} 
+sf\+::\+Vector2f {\bfseries first\+Relative\+Vel}
+\item 
+\mbox{\Hypertarget{class_predator___ship_ab2988fef531155a0c5292f16fee98bbd}\label{class_predator___ship_ab2988fef531155a0c5292f16fee98bbd}} 
+sf\+::\+Vector2f {\bfseries relative\+Pos}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a573c4221ce78b24a13f99b88cfb5813a}\label{class_predator___ship_a573c4221ce78b24a13f99b88cfb5813a}} 
+sf\+::\+Vector2f {\bfseries relative\+Vel}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a7899567dbc689ee8c89d888d08a23492}\label{class_predator___ship_a7899567dbc689ee8c89d888d08a23492}} 
+sf\+::\+Vector2f {\bfseries steering}
+\item 
+\mbox{\Hypertarget{class_predator___ship_ac94eea686e71b9eaae62ab91cf1e11dc}\label{class_predator___ship_ac94eea686e71b9eaae62ab91cf1e11dc}} 
+double {\bfseries first\+Min\+Separation} = 0
+\item 
+\mbox{\Hypertarget{class_predator___ship_a30e15bc6842e326228c68b96d80b0b94}\label{class_predator___ship_a30e15bc6842e326228c68b96d80b0b94}} 
+double {\bfseries first\+Distance} = 0
+\item 
+\mbox{\Hypertarget{class_predator___ship_a34ff3d9e30e951c0d08a77f05e8ea6c1}\label{class_predator___ship_a34ff3d9e30e951c0d08a77f05e8ea6c1}} 
+double {\bfseries distance} = 0
+\item 
+\mbox{\Hypertarget{class_predator___ship_ac0137c2fd164e5ee66a6f4f262d336f8}\label{class_predator___ship_ac0137c2fd164e5ee66a6f4f262d336f8}} 
+float {\bfseries radius} = 300
+\item 
+\mbox{\Hypertarget{class_predator___ship_aa539966401fc9a3c9bb95154a1cbf4e8}\label{class_predator___ship_aa539966401fc9a3c9bb95154a1cbf4e8}} 
+float {\bfseries relative\+Speed} = 0
+\item 
+\mbox{\Hypertarget{class_predator___ship_a0a54ce2996e50047ae4d943943d1c8d4}\label{class_predator___ship_a0a54ce2996e50047ae4d943943d1c8d4}} 
+float {\bfseries max\+Acceleration} = 3
+\item 
+\mbox{\Hypertarget{class_predator___ship_a5496a7f2a00d6c9d58d5a2a5c8ddc807}\label{class_predator___ship_a5496a7f2a00d6c9d58d5a2a5c8ddc807}} 
+double {\bfseries time\+To\+Collision} = 0
+\item 
+\mbox{\Hypertarget{class_predator___ship_a3d986f8d8553c407b317467be153231e}\label{class_predator___ship_a3d986f8d8553c407b317467be153231e}} 
+double {\bfseries min\+Separation} = 0
+\item 
+\mbox{\Hypertarget{class_predator___ship_a76735ad1bbc8aa7230d5542056051c6d}\label{class_predator___ship_a76735ad1bbc8aa7230d5542056051c6d}} 
+int {\bfseries m\+\_\+timer\+Count}
+\item 
+\mbox{\Hypertarget{class_predator___ship_ad9cbfeb6b832eb8c49582385b457faab}\label{class_predator___ship_ad9cbfeb6b832eb8c49582385b457faab}} 
+const int {\bfseries m\+\_\+timer\+Count\+Limit} = 500
+\item 
+\mbox{\Hypertarget{class_predator___ship_ae025fd76c02a001324589fe73814d942}\label{class_predator___ship_ae025fd76c02a001324589fe73814d942}} 
+int {\bfseries m\+\_\+wall\+Count}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a49d4f617410172c406dd9eae183dfd88}\label{class_predator___ship_a49d4f617410172c406dd9eae183dfd88}} 
+const int {\bfseries m\+\_\+wall\+Count\+Limit} = 50
+\item 
+\mbox{\Hypertarget{class_predator___ship_a6d6241dc7a8967bd1c4a924ee4e6b706}\label{class_predator___ship_a6d6241dc7a8967bd1c4a924ee4e6b706}} 
+sf\+::\+Vector2f {\bfseries n\+\_\+direction}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a480eab97efe647097e6e733351605bc2}\label{class_predator___ship_a480eab97efe647097e6e733351605bc2}} 
+float {\bfseries n\+\_\+orientation}
+\item 
+\mbox{\Hypertarget{class_predator___ship_ab50c051ae598f4d6f5f509f231df4d30}\label{class_predator___ship_ab50c051ae598f4d6f5f509f231df4d30}} 
+double {\bfseries n\+\_\+distance} = 0
+\item 
+\mbox{\Hypertarget{class_predator___ship_ac26bf90391923abdb9a9e13b6f2944df}\label{class_predator___ship_ac26bf90391923abdb9a9e13b6f2944df}} 
+float {\bfseries m\+\_\+threshold}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a1560bdf55c9a26e76c6307d4f491282c}\label{class_predator___ship_a1560bdf55c9a26e76c6307d4f491282c}} 
+bool {\bfseries crash} = false
+\item 
+\mbox{\Hypertarget{class_predator___ship_a6506c0608a984ce5224245f518eec2e1}\label{class_predator___ship_a6506c0608a984ce5224245f518eec2e1}} 
+int {\bfseries health} = 50
+\item 
+\mbox{\Hypertarget{class_predator___ship_a028b987906bf02843111cace9aca5f5e}\label{class_predator___ship_a028b987906bf02843111cace9aca5f5e}} 
+int {\bfseries timer} = 0
+\item 
+\mbox{\Hypertarget{class_predator___ship_aa39c5b5086175d7d5e340a0965187809}\label{class_predator___ship_aa39c5b5086175d7d5e340a0965187809}} 
+int {\bfseries animate} = 0
+\item 
+\mbox{\Hypertarget{class_predator___ship_a98c0779726b951f27e3c1f5ffbd32baf}\label{class_predator___ship_a98c0779726b951f27e3c1f5ffbd32baf}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+explosion}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a9aaf33a95b6d94ddb70dc0439cee7b29}\label{class_predator___ship_a9aaf33a95b6d94ddb70dc0439cee7b29}} 
+bool {\bfseries finish\+Animate} = false
+\item 
+\mbox{\Hypertarget{class_predator___ship_aae54d4ccee746e1d751c75abdba8f3f2}\label{class_predator___ship_aae54d4ccee746e1d751c75abdba8f3f2}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture\+Explosion}
+\item 
+\mbox{\Hypertarget{class_predator___ship_ac7bab68802396eec86aee6305b9e11bc}\label{class_predator___ship_ac7bab68802396eec86aee6305b9e11bc}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite\+Explosion}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a178dfbce68db85c72a45d2c5ad83f167}\label{class_predator___ship_a178dfbce68db85c72a45d2c5ad83f167}} 
+int {\bfseries radar\+Distance} = 100000
+\item 
+\mbox{\Hypertarget{class_predator___ship_aef44914807f49c3c920de3a6ea7f7843}\label{class_predator___ship_aef44914807f49c3c920de3a6ea7f7843}} 
+\mbox{\hyperlink{class_missile}{Missile}} $\ast$ {\bfseries m\+\_\+missile}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a5d9ba1653ed1301d0edbc06fd8d17c05}\label{class_predator___ship_a5d9ba1653ed1301d0edbc06fd8d17c05}} 
+\mbox{\hyperlink{class_bullet}{Bullet}} $\ast$ {\bfseries m\+\_\+bullet}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a43c4801f79d50a1c82aa659cf044eb29}\label{class_predator___ship_a43c4801f79d50a1c82aa659cf044eb29}} 
+int {\bfseries m\+\_\+fire\+Cooldown\+Counter}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a0c68e83d91ef662911bb5ed0f99e4e7c}\label{class_predator___ship_a0c68e83d91ef662911bb5ed0f99e4e7c}} 
+const int {\bfseries m\+\_\+fire\+Cooldown\+Limit} = 200
+\item 
+\mbox{\Hypertarget{class_predator___ship_a7a45c977a7c37489218b558e0d17d784}\label{class_predator___ship_a7a45c977a7c37489218b558e0d17d784}} 
+bool {\bfseries m\+\_\+fire\+Bullet}
+\item 
+\mbox{\Hypertarget{class_predator___ship_ac9264a8b26d437cd7f66be147672c5d6}\label{class_predator___ship_ac9264a8b26d437cd7f66be147672c5d6}} 
+int {\bfseries m\+\_\+bullets\+Shot}
+\item 
+\mbox{\Hypertarget{class_predator___ship_abeb511ba94c16d740d7ab89a88523c9b}\label{class_predator___ship_abeb511ba94c16d740d7ab89a88523c9b}} 
+const int {\bfseries m\+\_\+bullets\+Shot\+Limit} = 4
+\item 
+\mbox{\Hypertarget{class_predator___ship_a12c8ffce8f35c32fec854ebd885d204f}\label{class_predator___ship_a12c8ffce8f35c32fec854ebd885d204f}} 
+int {\bfseries formation\+Pos}
+\item 
+\mbox{\Hypertarget{class_predator___ship_a0283158196fd65094bc1aa82f97d493e}\label{class_predator___ship_a0283158196fd65094bc1aa82f97d493e}} 
+const float {\bfseries formation\+Radius} = 200.\+0f
+\item 
+\mbox{\Hypertarget{class_predator___ship_a069741b7edd324f1e1dd04177a00f7ec}\label{class_predator___ship_a069741b7edd324f1e1dd04177a00f7ec}} 
+sf\+::\+Vector2f {\bfseries form\+Pos}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Predator\+\_\+\+Ship.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Predator\+\_\+\+Ship.\+cpp\end{DoxyCompactItemize}

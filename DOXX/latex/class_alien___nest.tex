@@ -1,0 +1,146 @@
+\hypertarget{class_alien___nest}{}\section{Alien\+\_\+\+Nest Class Reference}
+\label{class_alien___nest}\index{Alien\_Nest@{Alien\_Nest}}
+Inheritance diagram for Alien\+\_\+\+Nest\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_alien___nest}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_alien___nest_ab95047267d26135822ca8e7e0bc9db4c}\label{class_alien___nest_ab95047267d26135822ca8e7e0bc9db4c}} 
+float {\bfseries get\+New\+Orientation} (float current\+Orientation, float velocity)
+\item 
+\mbox{\Hypertarget{class_alien___nest_a01cf40be4d9bdb1da0eef820795e331d}\label{class_alien___nest_a01cf40be4d9bdb1da0eef820795e331d}} 
+void {\bfseries boundary} (float x, float y)
+\item 
+\mbox{\Hypertarget{class_alien___nest_aac52cb47dab7a0f9d8c3caf30ef7ecb5}\label{class_alien___nest_aac52cb47dab7a0f9d8c3caf30ef7ecb5}} 
+float {\bfseries get\+Random} (int x, int y)
+\item 
+\mbox{\Hypertarget{class_alien___nest_aed015a2524d3f71f5c94e2b61f78d52a}\label{class_alien___nest_aed015a2524d3f71f5c94e2b61f78d52a}} 
+void {\bfseries update} (sf\+::\+Vector2f player\+Position, \mbox{\hyperlink{class_player}{Player}} $\ast$player, std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $\ast$ $>$ enemies, \mbox{\hyperlink{class_level}{Level}} $\ast$c\+Level)
+\item 
+\mbox{\Hypertarget{class_alien___nest_a2ec31dbb8294132204e7d8732b28017d}\label{class_alien___nest_a2ec31dbb8294132204e7d8732b28017d}} 
+void {\bfseries render} (sf\+::\+Render\+Window \&window)
+\item 
+\mbox{\Hypertarget{class_alien___nest_ad1fe97aa53f3ade1eb4904edc3a0a599}\label{class_alien___nest_ad1fe97aa53f3ade1eb4904edc3a0a599}} 
+sf\+::\+Vector2f {\bfseries get\+Position} ()
+\item 
+\mbox{\Hypertarget{class_alien___nest_a3b72683c62e86aa312014d81c76dde7c}\label{class_alien___nest_a3b72683c62e86aa312014d81c76dde7c}} 
+sf\+::\+Vector2f {\bfseries get\+Velocity} ()
+\item 
+\mbox{\Hypertarget{class_alien___nest_a1f2e66f5aed35c33b58d1ccd906e65c0}\label{class_alien___nest_a1f2e66f5aed35c33b58d1ccd906e65c0}} 
+int {\bfseries get\+Width} ()
+\item 
+\mbox{\Hypertarget{class_alien___nest_ae7306e80a0471341e9254ac87e592555}\label{class_alien___nest_ae7306e80a0471341e9254ac87e592555}} 
+int {\bfseries get\+Height} ()
+\item 
+\mbox{\Hypertarget{class_alien___nest_aabf87cad33d2e3444bafe84e05aee024}\label{class_alien___nest_aabf87cad33d2e3444bafe84e05aee024}} 
+int {\bfseries get\+Health} ()
+\item 
+\mbox{\Hypertarget{class_alien___nest_ac32256e6a34173dded60894bc705c7e0}\label{class_alien___nest_ac32256e6a34173dded60894bc705c7e0}} 
+int {\bfseries get\+Score} ()
+\item 
+\mbox{\Hypertarget{class_alien___nest_a173230317cb5cd9923b4aaca6f997ba1}\label{class_alien___nest_a173230317cb5cd9923b4aaca6f997ba1}} 
+void {\bfseries set\+Score} ()
+\item 
+\mbox{\Hypertarget{class_alien___nest_ac7c5bce486f1f5c7970bb0edc6929ec0}\label{class_alien___nest_ac7c5bce486f1f5c7970bb0edc6929ec0}} 
+int {\bfseries get\+Id} ()
+\item 
+\mbox{\Hypertarget{class_alien___nest_aeeb7dc26762b53af3f6c704e6239731a}\label{class_alien___nest_aeeb7dc26762b53af3f6c704e6239731a}} 
+int {\bfseries get\+Damage\+To\+Player} ()
+\item 
+\mbox{\Hypertarget{class_alien___nest_adf04a988d45b866ddd45d27f6d3d526c}\label{class_alien___nest_adf04a988d45b866ddd45d27f6d3d526c}} 
+void {\bfseries hit} (int damage)
+\item 
+\mbox{\Hypertarget{class_alien___nest_aa5db788eb8a1ad79a95fc149bb35d1e9}\label{class_alien___nest_aa5db788eb8a1ad79a95fc149bb35d1e9}} 
+bool {\bfseries radar} (sf\+::\+Vector2f pos)
+\item 
+\mbox{\Hypertarget{class_alien___nest_a10a9977f3570dbf2d265cf9f4f908f4e}\label{class_alien___nest_a10a9977f3570dbf2d265cf9f4f908f4e}} 
+bool {\bfseries worker\+Radar} (sf\+::\+Vector2f pos)
+\item 
+\mbox{\Hypertarget{class_alien___nest_af3247982f459062107fb9f5042f52522}\label{class_alien___nest_af3247982f459062107fb9f5042f52522}} 
+bool {\bfseries check\+Worker\+Collision} (sf\+::\+Vector2f pos, int width, int height, bool alive)
+\item 
+\mbox{\Hypertarget{class_alien___nest_a4e5723aa90a545823ea46b9019579255}\label{class_alien___nest_a4e5723aa90a545823ea46b9019579255}} 
+void {\bfseries set\+Pos} (sf\+::\+Vector2f new\+Pos)
+\item 
+\mbox{\Hypertarget{class_alien___nest_a30b3307cd3508c5c2e64c07f8353fa12}\label{class_alien___nest_a30b3307cd3508c5c2e64c07f8353fa12}} 
+void {\bfseries spawn} (sf\+::\+Vector2f pos)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_alien___nest_aa365fb7ff574b026945ff530b7982c9d}\label{class_alien___nest_aa365fb7ff574b026945ff530b7982c9d}} 
+float {\bfseries m\+\_\+time\+To\+Target}
+\item 
+\mbox{\Hypertarget{class_alien___nest_a090635365607b0ecbeb208fc92e9f91a}\label{class_alien___nest_a090635365607b0ecbeb208fc92e9f91a}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_alien___nest_a124c62a9a7c2c190491d3e29c676d6be}\label{class_alien___nest_a124c62a9a7c2c190491d3e29c676d6be}} 
+float {\bfseries m\+\_\+orientation}
+\item 
+\mbox{\Hypertarget{class_alien___nest_a721efa1280800799d904ab2d2c86caaf}\label{class_alien___nest_a721efa1280800799d904ab2d2c86caaf}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+velocity}
+\item 
+\mbox{\Hypertarget{class_alien___nest_af4169fe6d83e36db8d30dc1d685b6bf3}\label{class_alien___nest_af4169fe6d83e36db8d30dc1d685b6bf3}} 
+float {\bfseries m\+\_\+rotation}
+\item 
+\mbox{\Hypertarget{class_alien___nest_ad13f53f4e943f5dee75215b28b60a67f}\label{class_alien___nest_ad13f53f4e943f5dee75215b28b60a67f}} 
+float {\bfseries m\+\_\+velocityF}
+\item 
+\mbox{\Hypertarget{class_alien___nest_a26861cef5664c9285dc7427fcfe1668d}\label{class_alien___nest_a26861cef5664c9285dc7427fcfe1668d}} 
+float {\bfseries m\+\_\+max\+Speed}
+\item 
+\mbox{\Hypertarget{class_alien___nest_a6de72ed9689167e403d2d17165d2fcaf}\label{class_alien___nest_a6de72ed9689167e403d2d17165d2fcaf}} 
+float {\bfseries m\+\_\+max\+Rotation}
+\item 
+\mbox{\Hypertarget{class_alien___nest_a381cb3eee94ea3bcc022f671059ea461}\label{class_alien___nest_a381cb3eee94ea3bcc022f671059ea461}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite}
+\item 
+\mbox{\Hypertarget{class_alien___nest_a322f22ef6a28a13b07f4355cf8992f32}\label{class_alien___nest_a322f22ef6a28a13b07f4355cf8992f32}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture}
+\item 
+\mbox{\Hypertarget{class_alien___nest_ab74ed10dc1640b1a3545618544143bae}\label{class_alien___nest_ab74ed10dc1640b1a3545618544143bae}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture\+Explosion}
+\item 
+\mbox{\Hypertarget{class_alien___nest_a34b67cfb4ef9ebabb5f6f282c9cb173f}\label{class_alien___nest_a34b67cfb4ef9ebabb5f6f282c9cb173f}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite\+Explosion}
+\item 
+\mbox{\Hypertarget{class_alien___nest_a94f70503efac5979e6505a38b77ecb0b}\label{class_alien___nest_a94f70503efac5979e6505a38b77ecb0b}} 
+int {\bfseries m\+\_\+spawn\+Counter}
+\item 
+\mbox{\Hypertarget{class_alien___nest_a30bc0c5b936c0f58394d604480ae8da6}\label{class_alien___nest_a30bc0c5b936c0f58394d604480ae8da6}} 
+const int {\bfseries m\+\_\+spawn\+Timer\+Limit} = 600
+\item 
+\mbox{\Hypertarget{class_alien___nest_aa722384f6f0711d010e88be41caff779}\label{class_alien___nest_aa722384f6f0711d010e88be41caff779}} 
+int {\bfseries health} = 100
+\item 
+\mbox{\Hypertarget{class_alien___nest_aa71753d64d1035e1dee8769bf3a1e2f9}\label{class_alien___nest_aa71753d64d1035e1dee8769bf3a1e2f9}} 
+int {\bfseries timer} = 0
+\item 
+\mbox{\Hypertarget{class_alien___nest_a7fb338ef35b3920745006082d7dc18a7}\label{class_alien___nest_a7fb338ef35b3920745006082d7dc18a7}} 
+int {\bfseries animate} = 0
+\item 
+\mbox{\Hypertarget{class_alien___nest_adb2e1cdef0aefe61acfc499537ee9da2}\label{class_alien___nest_adb2e1cdef0aefe61acfc499537ee9da2}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+explosion}
+\item 
+\mbox{\Hypertarget{class_alien___nest_a9cb127802460789d22974795192ebfc3}\label{class_alien___nest_a9cb127802460789d22974795192ebfc3}} 
+bool {\bfseries finish\+Animate} =false
+\item 
+\mbox{\Hypertarget{class_alien___nest_ab85938cac3e9c04f359ccb797c8a0bbe}\label{class_alien___nest_ab85938cac3e9c04f359ccb797c8a0bbe}} 
+bool {\bfseries in\+Range} = false
+\item 
+\mbox{\Hypertarget{class_alien___nest_aa02bfcffc5882dc93edf80e4b34013ca}\label{class_alien___nest_aa02bfcffc5882dc93edf80e4b34013ca}} 
+int {\bfseries radar\+Distance} = 100000
+\item 
+\mbox{\Hypertarget{class_alien___nest_aaa8717a866ff7add88b145fab7455cb9}\label{class_alien___nest_aaa8717a866ff7add88b145fab7455cb9}} 
+\mbox{\hyperlink{class_missile}{Missile}} $\ast$ {\bfseries m\+\_\+missile}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Alien\+\_\+\+Nest.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Alien\+\_\+\+Nest.\+cpp\end{DoxyCompactItemize}

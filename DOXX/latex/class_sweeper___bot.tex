@@ -1,0 +1,203 @@
+\hypertarget{class_sweeper___bot}{}\section{Sweeper\+\_\+\+Bot Class Reference}
+\label{class_sweeper___bot}\index{Sweeper\_Bot@{Sweeper\_Bot}}
+Inheritance diagram for Sweeper\+\_\+\+Bot\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sweeper___bot}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a684db4c0fb076fd1812b05876863a3e3}\label{class_sweeper___bot_a684db4c0fb076fd1812b05876863a3e3}} 
+float {\bfseries get\+New\+Orientation} (float current\+Orientation, float velocity)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_ae99af2103eef40756369ee0eafddb520}\label{class_sweeper___bot_ae99af2103eef40756369ee0eafddb520}} 
+float {\bfseries get\+Random} (int x, int y)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_aff44c33059269efdfbb5ef82e2fd6008}\label{class_sweeper___bot_aff44c33059269efdfbb5ef82e2fd6008}} 
+void {\bfseries update} (sf\+::\+Vector2f player\+Position, \mbox{\hyperlink{class_player}{Player}} $\ast$player, std\+::vector$<$ \mbox{\hyperlink{class_enemy}{Enemy}} $\ast$ $>$ enemies, \mbox{\hyperlink{class_level}{Level}} $\ast$c\+Level)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a45a0fac2eabeedc7f4085e7efc4d7925}\label{class_sweeper___bot_a45a0fac2eabeedc7f4085e7efc4d7925}} 
+void {\bfseries render} (sf\+::\+Render\+Window \&window)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_acc630babc907050eb680988ba5122fe9}\label{class_sweeper___bot_acc630babc907050eb680988ba5122fe9}} 
+void {\bfseries kinematic\+Seek} (sf\+::\+Vector2f pos)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a9b1fe870eebc2dbfb23fd7c6b7285697}\label{class_sweeper___bot_a9b1fe870eebc2dbfb23fd7c6b7285697}} 
+void {\bfseries kinematic\+Flee} (sf\+::\+Vector2f player\+Position)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a82560a44032091b93239a36a06206c8d}\label{class_sweeper___bot_a82560a44032091b93239a36a06206c8d}} 
+void {\bfseries kinematic\+Wander} (sf\+::\+Vector2f target\+Position)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a23f1bedfe14947b118b5b63a4a8e05a1}\label{class_sweeper___bot_a23f1bedfe14947b118b5b63a4a8e05a1}} 
+bool {\bfseries check\+Worker\+Collision} (sf\+::\+Vector2f pos, int width, int height, bool alive)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a99091094ce865cf7b339f28b900e98b3}\label{class_sweeper___bot_a99091094ce865cf7b339f28b900e98b3}} 
+sf\+::\+Vector2f {\bfseries get\+Position} ()
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a185c2888dbfa06a1f4780dfb34957c4e}\label{class_sweeper___bot_a185c2888dbfa06a1f4780dfb34957c4e}} 
+sf\+::\+Vector2f {\bfseries get\+Velocity} ()
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a4f1f74dda3a8c51a92ee1877d607a4e1}\label{class_sweeper___bot_a4f1f74dda3a8c51a92ee1877d607a4e1}} 
+int {\bfseries get\+Width} ()
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a5d13a59b69e656339c76b819f3980eb8}\label{class_sweeper___bot_a5d13a59b69e656339c76b819f3980eb8}} 
+int {\bfseries get\+Height} ()
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_ac1510eedcef5e36a0d23d0d97a8e4514}\label{class_sweeper___bot_ac1510eedcef5e36a0d23d0d97a8e4514}} 
+int {\bfseries get\+Health} ()
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a70939620981b56792b6c27ff1e178e3a}\label{class_sweeper___bot_a70939620981b56792b6c27ff1e178e3a}} 
+int {\bfseries get\+Score} ()
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_aa9500481b1a885766d944922c6f179c3}\label{class_sweeper___bot_aa9500481b1a885766d944922c6f179c3}} 
+void {\bfseries set\+Score} ()
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a0cec6d3e006baff5db7e585314210697}\label{class_sweeper___bot_a0cec6d3e006baff5db7e585314210697}} 
+int {\bfseries get\+Id} ()
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a3a6103ccb072402c1a2bf9e843b58266}\label{class_sweeper___bot_a3a6103ccb072402c1a2bf9e843b58266}} 
+void {\bfseries hit} (int damage)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a642ac4f6616c9ac0dec7a6832573179d}\label{class_sweeper___bot_a642ac4f6616c9ac0dec7a6832573179d}} 
+bool {\bfseries radar} (sf\+::\+Vector2f pos)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a0e3815aff7e706c8312a202dccd82af6}\label{class_sweeper___bot_a0e3815aff7e706c8312a202dccd82af6}} 
+bool {\bfseries worker\+Radar} (sf\+::\+Vector2f pos)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_ab5fc45b3cb5abab0e07e41cca965417a}\label{class_sweeper___bot_ab5fc45b3cb5abab0e07e41cca965417a}} 
+int {\bfseries get\+Damage\+To\+Player} ()
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_aff6ed7c0c8fbea1b33dbfb743f31d1bc}\label{class_sweeper___bot_aff6ed7c0c8fbea1b33dbfb743f31d1bc}} 
+void {\bfseries set\+Pos} (sf\+::\+Vector2f new\+Pos)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_aed5d09b619d5d5cca530b091b6e778c5}\label{class_sweeper___bot_aed5d09b619d5d5cca530b091b6e778c5}} 
+void {\bfseries spawn} (sf\+::\+Vector2f pos)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a20a47dbdd1e8d8d47da2e83e1152b0f6}\label{class_sweeper___bot_a20a47dbdd1e8d8d47da2e83e1152b0f6}} 
+void {\bfseries new\+Target} ()
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a51010ff1bd1220b45d881689b9447c54}\label{class_sweeper___bot_a51010ff1bd1220b45d881689b9447c54}} 
+void {\bfseries check\+Wall} (\mbox{\hyperlink{class_level}{Level}} $\ast$c\+Level)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a84ab323444aa0389b468fe98263ba972}\label{class_sweeper___bot_a84ab323444aa0389b468fe98263ba972}} 
+sf\+::\+Vector2f {\bfseries rotate} (sf\+::\+Vector2f P, sf\+::\+Vector2f Q, float theta)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a78ddb701e3848b3f530ee6c3dcf229a3}\label{class_sweeper___bot_a78ddb701e3848b3f530ee6c3dcf229a3}} 
+float {\bfseries length} (sf\+::\+Vector2f vel)
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_aa0166dfb400d45e4dafce93002c78db6}\label{class_sweeper___bot_aa0166dfb400d45e4dafce93002c78db6}} 
+sf\+::\+Vector2f {\bfseries normalize} (sf\+::\+Vector2f vel)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_adb3a3fa4bd2319691bd6fdfd1a79ec6b}\label{class_sweeper___bot_adb3a3fa4bd2319691bd6fdfd1a79ec6b}} 
+float {\bfseries m\+\_\+time\+To\+Target}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_aadbb8e579669dcf4b78f86cefa557716}\label{class_sweeper___bot_aadbb8e579669dcf4b78f86cefa557716}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a8b3433ef2ce8f49eefca4427174bd18f}\label{class_sweeper___bot_a8b3433ef2ce8f49eefca4427174bd18f}} 
+float {\bfseries m\+\_\+orientation}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_ad671851c4757d5e3f61ed722e1b446c4}\label{class_sweeper___bot_ad671851c4757d5e3f61ed722e1b446c4}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+velocity}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_aa4067ea2f292cfeae18d3d60ed37690f}\label{class_sweeper___bot_aa4067ea2f292cfeae18d3d60ed37690f}} 
+float {\bfseries m\+\_\+rotation}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_aedd8c0da76bc56be233086d1631b72dc}\label{class_sweeper___bot_aedd8c0da76bc56be233086d1631b72dc}} 
+float {\bfseries m\+\_\+velocityF}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a832e3242d7fd9845727adce1e505a280}\label{class_sweeper___bot_a832e3242d7fd9845727adce1e505a280}} 
+float {\bfseries m\+\_\+max\+Speed}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a52b65000c9592fb683e5623337b526b6}\label{class_sweeper___bot_a52b65000c9592fb683e5623337b526b6}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_ae1bd7bdfb81df43c08d1bc6983456969}\label{class_sweeper___bot_ae1bd7bdfb81df43c08d1bc6983456969}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a2b60639f79116d5db9b09fb079309b91}\label{class_sweeper___bot_a2b60639f79116d5db9b09fb079309b91}} 
+int {\bfseries health} = 25
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a842b1f70845a80f48b1702f11edfb492}\label{class_sweeper___bot_a842b1f70845a80f48b1702f11edfb492}} 
+int {\bfseries timer} = 0
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a65cf6c2c5018cf251e32f53089ce58c3}\label{class_sweeper___bot_a65cf6c2c5018cf251e32f53089ce58c3}} 
+int {\bfseries animate} = 0
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a0225b14eede50e7f8b543b97faf0035b}\label{class_sweeper___bot_a0225b14eede50e7f8b543b97faf0035b}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+explosion}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a767caee5796564f3cfe52aa7800d3dc5}\label{class_sweeper___bot_a767caee5796564f3cfe52aa7800d3dc5}} 
+bool {\bfseries finish\+Animate} = false
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a898d0b720bd7232aec84ea6622ed5cc0}\label{class_sweeper___bot_a898d0b720bd7232aec84ea6622ed5cc0}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture\+Explosion}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_ab78dd44094051153ddfa575706ec7bc9}\label{class_sweeper___bot_ab78dd44094051153ddfa575706ec7bc9}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite\+Explosion}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a106dd432375c3bd32a09a149343dbbed}\label{class_sweeper___bot_a106dd432375c3bd32a09a149343dbbed}} 
+bool {\bfseries in\+Range} = false
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a79f11ac256c774be6f220f48c0d418c3}\label{class_sweeper___bot_a79f11ac256c774be6f220f48c0d418c3}} 
+int {\bfseries radar\+Distance} = 100000
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a9e72ff7e462f11ed8e9ef49c42d82f54}\label{class_sweeper___bot_a9e72ff7e462f11ed8e9ef49c42d82f54}} 
+int {\bfseries worker\+Radar\+Dis} = 100000
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_aa49bbb3076e130bd7e8fc39707604278}\label{class_sweeper___bot_aa49bbb3076e130bd7e8fc39707604278}} 
+bool {\bfseries worker\+In\+Range} = false
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a87fc9864027d9f5b5062d69f2b33a8ea}\label{class_sweeper___bot_a87fc9864027d9f5b5062d69f2b33a8ea}} 
+bool {\bfseries collison} = false
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_aab463003aa423ce85432c74cdde02387}\label{class_sweeper___bot_aab463003aa423ce85432c74cdde02387}} 
+int {\bfseries score} = 0
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a94dc7c2ba4f1b2c6cb05503f8d57058e}\label{class_sweeper___bot_a94dc7c2ba4f1b2c6cb05503f8d57058e}} 
+int {\bfseries m\+\_\+timer\+Count}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a64f87d417fc8c8ca65d2350645a6956d}\label{class_sweeper___bot_a64f87d417fc8c8ca65d2350645a6956d}} 
+const int {\bfseries m\+\_\+timer\+Count\+Limit} = 500
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a87ef355a7efc0e5655c0d61d07217015}\label{class_sweeper___bot_a87ef355a7efc0e5655c0d61d07217015}} 
+float {\bfseries wander\+Orientation} = 0
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a344ef0575d5be1748a9f58c6487b65b1}\label{class_sweeper___bot_a344ef0575d5be1748a9f58c6487b65b1}} 
+float {\bfseries target\+Orientation} = 0
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a69eb9e368eb0e0507f7fd5190e607efb}\label{class_sweeper___bot_a69eb9e368eb0e0507f7fd5190e607efb}} 
+float {\bfseries wander\+Rate} = 0.\+3f
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a436178d2fbc26859be4fd1e544c9183c}\label{class_sweeper___bot_a436178d2fbc26859be4fd1e544c9183c}} 
+const float {\bfseries m\+\_\+max\+Rotation} = 360.\+0f
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a59a863940e14b3c2dd17756c0b3462df}\label{class_sweeper___bot_a59a863940e14b3c2dd17756c0b3462df}} 
+sf\+::\+Vector2f {\bfseries target}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_afdd0ff7a5ecc39f1b21c724a8a87201f}\label{class_sweeper___bot_afdd0ff7a5ecc39f1b21c724a8a87201f}} 
+sf\+::\+Vector2f {\bfseries orientation\+As\+Vector}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_a2bcb6b1e3be80211cdc927f8026c2b21}\label{class_sweeper___bot_a2bcb6b1e3be80211cdc927f8026c2b21}} 
+sf\+::\+Vector2f {\bfseries target\+Orientation\+As\+Vector}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_ad08eadbec453e38b951bcb36c9aa5001}\label{class_sweeper___bot_ad08eadbec453e38b951bcb36c9aa5001}} 
+sf\+::\+Vector2f {\bfseries worker}
+\item 
+\mbox{\Hypertarget{class_sweeper___bot_aff14e5de000fd56ccf0ec47f3d5ee053}\label{class_sweeper___bot_aff14e5de000fd56ccf0ec47f3d5ee053}} 
+bool {\bfseries wall} = false
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Sweeper\+\_\+\+Bot.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Sweeper\+\_\+\+Bot.\+cpp\end{DoxyCompactItemize}

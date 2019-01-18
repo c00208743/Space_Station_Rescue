@@ -1,0 +1,128 @@
+\hypertarget{class_worker}{}\section{Worker Class Reference}
+\label{class_worker}\index{Worker@{Worker}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_worker_a49e7401ac47258027acc58bec1cea653}\label{class_worker_a49e7401ac47258027acc58bec1cea653}} 
+void {\bfseries update} (\mbox{\hyperlink{class_level}{Level}} $\ast$c\+Level)
+\item 
+\mbox{\Hypertarget{class_worker_a18940af5e921feefc2373e120d66ff24}\label{class_worker_a18940af5e921feefc2373e120d66ff24}} 
+void {\bfseries render} (sf\+::\+Render\+Window \&window)
+\item 
+\mbox{\Hypertarget{class_worker_a2a4d4dae45d5a44fdb6dbae89fdf734e}\label{class_worker_a2a4d4dae45d5a44fdb6dbae89fdf734e}} 
+void {\bfseries kinematic\+Wander} (sf\+::\+Vector2f target\+Position)
+\item 
+\mbox{\Hypertarget{class_worker_ab9bf14bfc025aede1ef9aed4c4cafd5f}\label{class_worker_ab9bf14bfc025aede1ef9aed4c4cafd5f}} 
+float {\bfseries get\+New\+Orientation} (float current\+Orientation, float velocity)
+\item 
+\mbox{\Hypertarget{class_worker_adc26f6c33bf87fe8464924b688b35924}\label{class_worker_adc26f6c33bf87fe8464924b688b35924}} 
+float {\bfseries get\+Random} (int x, int y)
+\item 
+\mbox{\Hypertarget{class_worker_a47aa8d5eb21900530255e6a66b7801d9}\label{class_worker_a47aa8d5eb21900530255e6a66b7801d9}} 
+sf\+::\+Vector2f {\bfseries get\+Position} ()
+\item 
+\mbox{\Hypertarget{class_worker_a1abc543386dd19c59dd6ba7cde956a6d}\label{class_worker_a1abc543386dd19c59dd6ba7cde956a6d}} 
+void {\bfseries set\+Position} (float x, float y)
+\item 
+\mbox{\Hypertarget{class_worker_ab9a4b4b8fea6bd8abefd465bfbbf37fe}\label{class_worker_ab9a4b4b8fea6bd8abefd465bfbbf37fe}} 
+void {\bfseries set\+Collected} ()
+\item 
+\mbox{\Hypertarget{class_worker_aa6e42c6c398e3758ec7093db3cf4dc4d}\label{class_worker_aa6e42c6c398e3758ec7093db3cf4dc4d}} 
+bool {\bfseries get\+Collected} ()
+\item 
+\mbox{\Hypertarget{class_worker_a70dc1ab67651cc41baee826cbc4e12ac}\label{class_worker_a70dc1ab67651cc41baee826cbc4e12ac}} 
+sf\+::\+Vector2f {\bfseries get\+Velocity} ()
+\item 
+\mbox{\Hypertarget{class_worker_aa0e0a33dce4927628261dc8184b15d7a}\label{class_worker_aa0e0a33dce4927628261dc8184b15d7a}} 
+sf\+::\+Vector2f {\bfseries as\+Vector} (float orientation)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_worker_a93dac33d94587b0b9448daf414be8a3f}\label{class_worker_a93dac33d94587b0b9448daf414be8a3f}} 
+void {\bfseries new\+Target} ()
+\item 
+\mbox{\Hypertarget{class_worker_a83dee6dec3f7582f360b5d4bc9de77b0}\label{class_worker_a83dee6dec3f7582f360b5d4bc9de77b0}} 
+void {\bfseries check\+Wall} (\mbox{\hyperlink{class_level}{Level}} $\ast$c\+Level)
+\item 
+\mbox{\Hypertarget{class_worker_ab86300a949fcc3177c0d011b61fc2e93}\label{class_worker_ab86300a949fcc3177c0d011b61fc2e93}} 
+sf\+::\+Vector2f {\bfseries rotate} (sf\+::\+Vector2f P, sf\+::\+Vector2f Q, float theta)
+\item 
+\mbox{\Hypertarget{class_worker_ad9fe38db620d1d56108976544714a7cd}\label{class_worker_ad9fe38db620d1d56108976544714a7cd}} 
+float {\bfseries length} (sf\+::\+Vector2f vel)
+\item 
+\mbox{\Hypertarget{class_worker_aaa104317266247a5eb37ca4fbd7a24b2}\label{class_worker_aaa104317266247a5eb37ca4fbd7a24b2}} 
+sf\+::\+Vector2f {\bfseries normalize} (sf\+::\+Vector2f vel)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_worker_a00add12299316bd66a2dd67c7bc1e25f}\label{class_worker_a00add12299316bd66a2dd67c7bc1e25f}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+position}
+\item 
+\mbox{\Hypertarget{class_worker_a64f6c47c236420b91e3c0b28915b7434}\label{class_worker_a64f6c47c236420b91e3c0b28915b7434}} 
+sf\+::\+Vector2f {\bfseries m\+\_\+velocity}
+\item 
+\mbox{\Hypertarget{class_worker_a39a0712f09a6f1480b6708642ae0c32c}\label{class_worker_a39a0712f09a6f1480b6708642ae0c32c}} 
+float {\bfseries m\+\_\+velocityF}
+\item 
+\mbox{\Hypertarget{class_worker_a2df995afdf662071de7f91561258d360}\label{class_worker_a2df995afdf662071de7f91561258d360}} 
+float {\bfseries m\+\_\+orientation}
+\item 
+\mbox{\Hypertarget{class_worker_aa1e56f4c5d068951031bac3af8a77ab7}\label{class_worker_aa1e56f4c5d068951031bac3af8a77ab7}} 
+float {\bfseries m\+\_\+max\+Speed}
+\item 
+\mbox{\Hypertarget{class_worker_acb380861dc02132223bf409070ffe068}\label{class_worker_acb380861dc02132223bf409070ffe068}} 
+int {\bfseries m\+\_\+size}
+\item 
+\mbox{\Hypertarget{class_worker_a80bb7652c6d7e6d347d62338783317df}\label{class_worker_a80bb7652c6d7e6d347d62338783317df}} 
+double {\bfseries speed} = 0.\+3
+\item 
+\mbox{\Hypertarget{class_worker_a25d3d27ab6daa29501406e09008878d8}\label{class_worker_a25d3d27ab6daa29501406e09008878d8}} 
+double {\bfseries max\+Rotation} = 180
+\item 
+\mbox{\Hypertarget{class_worker_a9481ed4c5e482e600cad5f4039c9dac5}\label{class_worker_a9481ed4c5e482e600cad5f4039c9dac5}} 
+int {\bfseries timer} =0
+\item 
+\mbox{\Hypertarget{class_worker_ad5ef4caeba7332642a64ff135669020b}\label{class_worker_ad5ef4caeba7332642a64ff135669020b}} 
+sf\+::\+Texture {\bfseries m\+\_\+texture}
+\item 
+\mbox{\Hypertarget{class_worker_a25d12889e0e55055b8731d3b52dd6e1e}\label{class_worker_a25d12889e0e55055b8731d3b52dd6e1e}} 
+sf\+::\+Sprite {\bfseries m\+\_\+sprite}
+\item 
+\mbox{\Hypertarget{class_worker_ae7a3d7ad109fbb8cf0c9ce859fe13d62}\label{class_worker_ae7a3d7ad109fbb8cf0c9ce859fe13d62}} 
+bool {\bfseries collected} = false
+\item 
+\mbox{\Hypertarget{class_worker_af5fe60a92d20f78e27a959d291167f2d}\label{class_worker_af5fe60a92d20f78e27a959d291167f2d}} 
+int {\bfseries m\+\_\+timer\+Count}
+\item 
+\mbox{\Hypertarget{class_worker_a3a430998cd1b2f5da3703714a74026ce}\label{class_worker_a3a430998cd1b2f5da3703714a74026ce}} 
+const int {\bfseries m\+\_\+timer\+Count\+Limit} = 500
+\item 
+\mbox{\Hypertarget{class_worker_a2a575469fd3437b8fe555221d157fd41}\label{class_worker_a2a575469fd3437b8fe555221d157fd41}} 
+float {\bfseries wander\+Orientation} =0
+\item 
+\mbox{\Hypertarget{class_worker_a8c06b04da4e53ab6846363b894b370cf}\label{class_worker_a8c06b04da4e53ab6846363b894b370cf}} 
+float {\bfseries target\+Orientation} =0
+\item 
+\mbox{\Hypertarget{class_worker_a2df167342a7c3e601a49abfd64f4fbfe}\label{class_worker_a2df167342a7c3e601a49abfd64f4fbfe}} 
+float {\bfseries wander\+Rate} = 0.\+3f
+\item 
+\mbox{\Hypertarget{class_worker_a753f027804ccaa25888a136e183faca4}\label{class_worker_a753f027804ccaa25888a136e183faca4}} 
+const float {\bfseries m\+\_\+max\+Rotation} = 360.\+0f
+\item 
+\mbox{\Hypertarget{class_worker_a5082ded2c0b017f2b90eff17c8280a0d}\label{class_worker_a5082ded2c0b017f2b90eff17c8280a0d}} 
+sf\+::\+Vector2f {\bfseries target}
+\item 
+\mbox{\Hypertarget{class_worker_a8de88f633cbe8e265ce3e5182c097087}\label{class_worker_a8de88f633cbe8e265ce3e5182c097087}} 
+sf\+::\+Vector2f {\bfseries orientation\+As\+Vector}
+\item 
+\mbox{\Hypertarget{class_worker_a027fd2c1a2333bd347b2332c8af68e00}\label{class_worker_a027fd2c1a2333bd347b2332c8af68e00}} 
+sf\+::\+Vector2f {\bfseries target\+Orientation\+As\+Vector}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Worker.\+h\item 
+C\+:/\+Users/gameuser/\+Desktop/\+Space\+\_\+\+Station\+\_\+\+Rescue/\+Lab1/Worker.\+cpp\end{DoxyCompactItemize}

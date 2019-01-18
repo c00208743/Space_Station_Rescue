@@ -79,7 +79,7 @@ private:
 	const int m_timerCountLimit = 500;
 
 	int m_wallCount;
-	const int m_wallCountLimit = 50;
+	const int m_wallCountLimit = 10;
 
 
 	//cone of vision
