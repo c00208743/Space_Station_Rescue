@@ -5,7 +5,7 @@
 Predator_Ship::Predator_Ship() :
 	m_position(5000, 5000),
 	m_velocity(0, 0),
-	m_maxSpeed(1.0f),
+	m_maxSpeed(3.0f),
 	m_maxRotation(20.0f),
 	m_timeToTarget(100.0f),
 	radius(200.0f),
@@ -39,12 +39,17 @@ Predator_Ship::Predator_Ship() :
 
 	// Missile
 	m_missile = new Missile();
-	m_missile->setSpeed(2.0f);
+	m_missile->setSpeed(4.0f);
 
 	// Bullet
 	m_bullet = new Bullet(false);
 	m_fireCooldownCounter = 0;
+
 	m_fireBullet = true;
+	m_bulletsShot = 0;
+
+	//Formation
+	formationPos = -1;
 
 }
 
@@ -78,7 +83,6 @@ void Predator_Ship::setPos(sf::Vector2f newPos)
 {
 	m_position = newPos;
 }
-
 
 float Predator_Ship::getNewOrientation(float currentOrientation, float velocity)
 {
@@ -163,7 +167,6 @@ void Predator_Ship::kinematicArrive(sf::Vector2f playerPosition)
 
 }
 
-
 void Predator_Ship::collison(std::vector<Enemy*> enemies)
 {
 	for (int i = 0; i < enemies.size(); i++)
@@ -197,11 +200,11 @@ void Predator_Ship::collison(std::vector<Enemy*> enemies)
 	}
 }
 
-
 sf::Vector2f Predator_Ship::getPosition()
 {
 	return m_sprite.getPosition();
 }
+
 sf::Vector2f Predator_Ship::getVelocity()
 {
 	return m_velocity;
@@ -217,7 +220,31 @@ void Predator_Ship::update(sf::Vector2f playerPosition, Player* player, std::vec
 		int gridY = std::floor(m_position.y / 32);
 		if (cLevel->getWeight(sf::Vector2i(gridX, gridY)) != INT_MAX) // Current tile isn't max it
 		{
-			kinematicSeek(nextTile(cLevel));
+			float x = playerPosition.x - m_position.x;
+			float y = playerPosition.y - m_position.y;
+			float dist = std::sqrt((x*x) + (y*y));
+			if (dist > 300.0f)
+			{
+				m_maxSpeed = 3.0f;
+				kinematicSeek(nextTile(cLevel, playerPosition));
+				if (formationPos >= 0)
+				{
+					player->leaveFormation(formationPos);
+					formationPos = -1;
+				}
+			}
+			else
+			{
+				if (formationPos == -1)
+				{
+					formationPos = player->joinFormation();
+				}
+				if (formationPos >= player->getNumInForm())
+				{
+					formationPos = player->getFreePosition();
+				}
+				inFormation(player->getNumInForm(), playerPosition);
+			}
 		}
 		else
 		{
@@ -230,7 +257,7 @@ void Predator_Ship::update(sf::Vector2f playerPosition, Player* player, std::vec
 			{
 				m_timerCount++;
 			}
-
+			m_maxSpeed = 1.0f;
 			kinematicSeek(target);
 			checkWall(cLevel);
 		}
@@ -283,30 +310,45 @@ bool Predator_Ship::checkBulletCollision(sf::Vector2f pos, int width, int height
 	return m_bullet->checkCollision(pos, width, height);
 }
 
-sf::Vector2f Predator_Ship::nextTile(Level * cLevel)
+sf::Vector2f Predator_Ship::nextTile(Level * cLevel, sf::Vector2f playerPos)
 {
 	int gridPosX = std::floor(m_position.x / 32);
 	int gridPosY = std::floor(m_position.y / 32);
 
-	
+	float tempDist;
  	std::vector<int> neighbourWeights;
+	std::vector<float> neighbourDistances;
 	std::vector<sf::Vector2f> neighbourPos;
 
-	neighbourWeights.push_back(cLevel->getWeight(sf::Vector2i(gridPosX, gridPosY - 1))); // Above
-	neighbourPos.push_back(sf::Vector2f(gridPosX * 32 + 16, ((gridPosY - 1) * 32) + 16)); // Above
-	neighbourWeights.push_back(cLevel->getWeight(sf::Vector2i(gridPosX, gridPosY + 1))); // Below
-	neighbourPos.push_back(sf::Vector2f(gridPosX * 32 + 16, ((gridPosY + 1) * 32) + 16)); // Below
-	neighbourWeights.push_back(cLevel->getWeight(sf::Vector2i(gridPosX - 1, gridPosY))); // Left
-	neighbourPos.push_back(sf::Vector2f(((gridPosX - 1) * 32) + 16, gridPosY * 32 + 16)); // Left
-	neighbourWeights.push_back(cLevel->getWeight(sf::Vector2i(gridPosX + 1, gridPosY))); // Right
-	neighbourPos.push_back(sf::Vector2f(((gridPosX + 1) * 32) + 16 , gridPosY * 32 + 16)); // Right
+	// Above
+	neighbourWeights.push_back(cLevel->getWeight(sf::Vector2i(gridPosX, gridPosY - 1))); 
+	neighbourPos.push_back(sf::Vector2f(gridPosX * 32 + 16, ((gridPosY - 1) * 32) + 16));
+	tempDist = std::sqrt((playerPos.x - neighbourPos[neighbourPos.size() - 1].x )*(playerPos.x - neighbourPos[neighbourPos.size() - 1].x) + (playerPos.y - neighbourPos[neighbourPos.size() - 1].y)*(playerPos.y - neighbourPos[neighbourPos.size() - 1].y));
+	neighbourDistances.push_back(tempDist);
+	// Below
+	neighbourWeights.push_back(cLevel->getWeight(sf::Vector2i(gridPosX, gridPosY + 1))); 
+	neighbourPos.push_back(sf::Vector2f(gridPosX * 32 + 16, ((gridPosY + 1) * 32) + 16)); 
+	tempDist = std::sqrt((playerPos.x - neighbourPos[neighbourPos.size() - 1].x)*(playerPos.x - neighbourPos[neighbourPos.size() - 1].x) + (playerPos.y - neighbourPos[neighbourPos.size() - 1].y)*(playerPos.y - neighbourPos[neighbourPos.size() - 1].y));
+	neighbourDistances.push_back(tempDist);
+	// Left
+	neighbourWeights.push_back(cLevel->getWeight(sf::Vector2i(gridPosX - 1, gridPosY))); 
+	neighbourPos.push_back(sf::Vector2f(((gridPosX - 1) * 32) + 16, gridPosY * 32 + 16)); 
+	tempDist = std::sqrt((playerPos.x - neighbourPos[neighbourPos.size() - 1].x )*(playerPos.x - neighbourPos[neighbourPos.size() - 1].x) + (playerPos.y - neighbourPos[neighbourPos.size() - 1].y)*(playerPos.y - neighbourPos[neighbourPos.size() - 1].y));
+	neighbourDistances.push_back(tempDist);
+	//Right
+	neighbourWeights.push_back(cLevel->getWeight(sf::Vector2i(gridPosX + 1, gridPosY))); 
+	neighbourPos.push_back(sf::Vector2f(((gridPosX + 1) * 32) + 16 , gridPosY * 32 + 16));
+	tempDist = std::sqrt((playerPos.x - neighbourPos[neighbourPos.size() - 1].x)*(playerPos.x - neighbourPos[neighbourPos.size() - 1].x) + (playerPos.y - neighbourPos[neighbourPos.size() - 1].y)*(playerPos.y - neighbourPos[neighbourPos.size() - 1].y));
+	neighbourDistances.push_back(tempDist);
 
 	int smallest = INT_MAX;
+	int smallestDist = INT_MAX;
 	int smallestIndexPos = 0;
 	for (int i = 0; i < neighbourWeights.size(); i++)
 	{
-		if (neighbourWeights[i] < smallest)
+		if (neighbourWeights[i] < smallest && neighbourDistances[i] < smallestDist)
 		{
+			smallestDist = neighbourDistances[i];
 			smallest = neighbourWeights[i];
 			smallestIndexPos = i;
 		}
@@ -336,6 +378,7 @@ int Predator_Ship::getWidth()
 {
 	return  128; 
 }
+
 int Predator_Ship::getHeight()
 {
 	return  256;
@@ -379,7 +422,14 @@ bool Predator_Ship::radar(sf::Vector2f pos) {
 		direction.y = (sin(radians));
 		m_bullet->fire(direction, m_sprite.getPosition(), m_sprite.getRotation());
 		m_fireCooldownCounter = 0; 
-		m_fireBullet = false;
+		std::cout << "Bullets shot: " << m_bulletsShot << std::endl;
+		if (m_bulletsShot >= m_bulletsShotLimit)
+		{
+			m_fireBullet = false;
+		}		
+		m_bulletsShot++;
+		
+
 		return true;
 	}
 	else if (radarDistance < 750 && !m_missile->getStatus() && m_fireCooldownCounter > m_fireCooldownLimit && !m_fireBullet) {
@@ -387,6 +437,7 @@ bool Predator_Ship::radar(sf::Vector2f pos) {
 		m_missile->fire(m_sprite.getPosition());
 		m_fireCooldownCounter = 0;
 		m_fireBullet = true;
+		m_bulletsShot = 0;
 		return true;
 	}
 	else {
@@ -397,13 +448,16 @@ bool Predator_Ship::radar(sf::Vector2f pos) {
 
 
 }
+
 bool Predator_Ship::workerRadar(sf::Vector2f pos) {
 	return 0;
 }
+
 int Predator_Ship::getId()
 {
 	return 2;
 }
+
 int Predator_Ship::getScore()
 {
 	return 0;
@@ -473,4 +527,44 @@ sf::Vector2f Predator_Ship::rotate(sf::Vector2f P, sf::Vector2f O, float theta)
 	sf::Transform rotTran;
 	rotTran.rotate(theta, O.x, O.y);
 	return rotTran.transformPoint(P);
+}
+
+void Predator_Ship::inFormation(int numInForm, sf::Vector2f playerPos)
+{
+	int multiples = 360 / numInForm;
+	int posInCircle = multiples * formationPos;
+	formPos.x = playerPos.x;
+	formPos.y = playerPos.y - formationRadius;
+
+	formPos = rotate(formPos, playerPos, posInCircle);
+
+	float x = formPos.x - m_position.x;
+	float y = formPos.y - m_position.y;
+	float dist = std::sqrt((x*x) + (y*y)) / 100;
+	if (dist > 1.0f)
+	{
+		dist = 1.0f;
+	}
+
+	m_velocity = sf::Vector2f(0, 0);
+	if (formPos.x < m_position.x)
+	{
+		m_velocity.x -= m_maxSpeed * dist;
+	}
+	else if (formPos.x > m_position.x)
+	{
+		m_velocity.x += m_maxSpeed * dist;
+	}
+
+	if (formPos.y < m_position.y)
+	{
+		m_velocity.y -= m_maxSpeed * dist;
+	}
+	else if (formPos.y > m_position.y)
+	{
+		m_velocity.y += m_maxSpeed * dist;
+	}
+
+	m_orientation = 90 + (std::atan2(playerPos.y - m_position.y, playerPos.x - m_position.x) * 180 / M_PI);
+
 }

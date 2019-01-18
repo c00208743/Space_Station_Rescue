@@ -10,12 +10,12 @@ Player::Player() :
 	size(50),
 	speed(0)
 {
-	
+
 	if (!m_texture.loadFromFile("assets/player/body_02.png"))
 	{
 		// error...
 	}
-	
+
 	m_sprite.setTexture(m_texture);
 	m_sprite.setOrigin(64, 32);
 	m_sprite.setPosition(m_position);
@@ -27,7 +27,7 @@ Player::Player() :
 	m_text.setFillColor(sf::Color::White);
 	m_text.setCharacterSize(30);
 	m_text.setString("Shield: Not Ready");
-	
+
 	m_textScore.setFont(m_font);
 	m_textScore.setFillColor(sf::Color::White);
 	m_textScore.setCharacterSize(30);
@@ -52,7 +52,7 @@ Player::Player() :
 	{
 		// error...
 	}
-;
+	;
 	m_spriteShield.setTexture(m_textureShield);
 	m_spriteShield.setOrigin(160, 160);
 	m_spriteShield.setPosition(m_position);
@@ -61,6 +61,7 @@ Player::Player() :
 	previousTile = sf::Vector2i(m_sprite.getPosition().x / 32, m_sprite.getPosition().y / 32);
 
 	m_bullet = new Bullet(true);
+
 }
 
 /// <summary>
@@ -107,94 +108,78 @@ void Player::update(double dt, Level * cLevel)
 		//change rotation 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			m_sprite.rotate(-0.5);
+			m_sprite.rotate(-1.0);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			m_sprite.rotate(0.5);
+			m_sprite.rotate(1.0);
 		}
-	}
-
-	//Apply direction to sprite
-	float radians = m_sprite.getRotation()* M_PI / 180;
-	direction.x = (cos(radians));
-	direction.y = (sin(radians));
-	m_sprite.setPosition(m_sprite.getPosition().x + (direction.x * speed), m_sprite.getPosition().y + (direction.y * speed));
 
 
-	//looping screen 
-	if (m_sprite.getPosition().x > 6100)
-	{
-		m_sprite.setPosition(-100, m_sprite.getPosition().y);
-	}
-	if (m_sprite.getPosition().x < -100)
-	{
-		m_sprite.setPosition(6100, m_sprite.getPosition().y);
-	}
-	if (m_sprite.getPosition().y < -100)
-	{
-		m_sprite.setPosition(m_sprite.getPosition().x, 6100);
-	}
-	if (m_sprite.getPosition().y > 6100)
-	{
-		m_sprite.setPosition(m_sprite.getPosition().x, -100);
-	}
-
-	//fire bullet
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-	{
-		m_bullet->fire(direction, m_sprite.getPosition(), m_sprite.getRotation());
-	}
-	m_bullet->update();
+		//Apply direction to sprite
+		float radians = m_sprite.getRotation()* M_PI / 180;
+		direction.x = (cos(radians));
+		direction.y = (sin(radians));
+		m_sprite.setPosition(m_sprite.getPosition().x + (direction.x * speed), m_sprite.getPosition().y + (direction.y * speed));
 
 
-	//shield
-	m_spriteShield.setPosition(m_sprite.getPosition());
-	m_spriteShield.setRotation(m_sprite.getRotation());
-	m_text.setPosition(m_sprite.getPosition().x-900, m_sprite.getPosition().y+ 900);
-	m_textScore.setPosition(m_sprite.getPosition().x - 900, m_sprite.getPosition().y - 900);
-	scoreNu.setPosition(m_sprite.getPosition().x - 800, m_sprite.getPosition().y - 900);
-	m_gameOver.setPosition(m_sprite.getPosition().x, m_sprite.getPosition().y);
-	m_health.setPosition(m_sprite.getPosition().x - 900, m_sprite.getPosition().y- 860);
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && shieldReady ==true)
-	{
-		shield = true;
-		shieldTimer++;
-	}
-	else {
-		shield = false; 
-	}
-	
-	if (shield) {
-		timer++;
-		if (timer % 10 == 0)
-		{
-			animate++;
-		}
-		//animate++;
-		m_spriteShield.setTextureRect(sf::IntRect(320 * animate, 0, 320, 320));
-		if (animate>11) {
-			animate = 0;
-		}
-	 }
-
-	shieldCoolDown++;
-	if (shieldCoolDown > 1000) {
-		shieldReady = true;
-		m_text.setString("Shield : READY!!!");
 		
-	}
-	if (shieldTimer > 1000) {
-		shieldReady = false;
-		m_text.setString("Shield : Not Ready");
-		shieldCoolDown = 0;
-		shieldTimer = 0;
-	}
-	
-	
-	
-	currentTile(cLevel);
 
+		//fire bullet
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+		{
+			m_bullet->fire(direction, m_sprite.getPosition(), m_sprite.getRotation());
+		}
+		m_bullet->update();
+
+
+		//shield
+		m_spriteShield.setPosition(m_sprite.getPosition());
+		m_spriteShield.setRotation(m_sprite.getRotation());
+		m_text.setPosition(m_sprite.getPosition().x - 900, m_sprite.getPosition().y + 900);
+		m_textScore.setPosition(m_sprite.getPosition().x - 900, m_sprite.getPosition().y - 900);
+		scoreNu.setPosition(m_sprite.getPosition().x - 800, m_sprite.getPosition().y - 900);
+		m_gameOver.setPosition(m_sprite.getPosition().x, m_sprite.getPosition().y);
+		m_health.setPosition(m_sprite.getPosition().x - 900, m_sprite.getPosition().y - 860);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) && shieldReady == true)
+		{
+			shield = true;
+			shieldTimer++;
+		}
+		else {
+			shield = false;
+		}
+
+		if (shield) {
+			timer++;
+			if (timer % 10 == 0)
+			{
+				animate++;
+			}
+			//animate++;
+			m_spriteShield.setTextureRect(sf::IntRect(320 * animate, 0, 320, 320));
+			if (animate > 11) {
+				animate = 0;
+			}
+		}
+
+		shieldCoolDown++;
+		if (shieldCoolDown > 1000) {
+			shieldReady = true;
+			m_text.setString("Shield : READY!!!");
+
+		}
+		if (shieldTimer > 1000) {
+			shieldReady = false;
+			m_text.setString("Shield : Not Ready");
+			shieldCoolDown = 0;
+			shieldTimer = 0;
+		}
+
+
+
+		currentTile(cLevel);
+	}
 }
 
 void Player::hit(int d)
@@ -208,9 +193,9 @@ void Player::render(sf::RenderWindow & window)
 	window.draw(m_text);
 	window.draw(m_textScore);
 	window.draw(scoreNu);
-	window.draw(m_health);
 	if (health > 0) {
 		window.draw(m_sprite);
+		window.draw(m_health);
 	}
 	else {
 		window.draw(m_gameOver);
@@ -228,6 +213,7 @@ sf::Vector2f Player::getPosition()
 {
 	return m_sprite.getPosition();
 }
+
 sf::Vector2f Player::getVelocity()
 {
 	direction.x * speed;
@@ -290,7 +276,6 @@ void Player::currentTile(Level * cLevel)
 	sf::Vector2f tileAhead = rotate(sf::Vector2f(posX, posY), m_sprite.getPosition(), m_sprite.getRotation());
 	sf::Vector2f tileBehind = rotate(sf::Vector2f(posXB, posY), m_sprite.getPosition(), m_sprite.getRotation());
 
-
 	int x = floor(tileAhead.x / 32);
 	int y = floor(tileAhead.y / 32);
 
@@ -309,7 +294,6 @@ void Player::currentTile(Level * cLevel)
 	{
 		previousTile = sf::Vector2i(m_sprite.getPosition().x / 32, m_sprite.getPosition().y / 32);
 		cLevel->updateWeights(previousTile);
-		//std::cout << "Weight: " << cLevel->getWeight(previousTile) << std::endl;
 	}
 
 	m_bullet->checkWall(cLevel);
@@ -320,4 +304,29 @@ sf::Vector2f Player::rotate(sf::Vector2f P, sf::Vector2f O, float theta)
 	sf::Transform rotTran;
 	rotTran.rotate(theta, O.x, O.y);
 	return rotTran.transformPoint(P);
+}
+
+int Player::joinFormation()
+{
+	numInForm.push_back(true);
+	return numInForm.size() - 1;
+}
+
+void Player::leaveFormation(int i)
+{
+	numInForm.pop_back();
+	freeFormPos.push_back(i);
+}
+
+int Player::getNumInForm()
+{
+	return numInForm.size();
+}
+
+int Player::getFreePosition()
+{
+	numInForm.push_back(true);
+	int i = freeFormPos[freeFormPos.size() - 1];
+	freeFormPos.pop_back();
+	return i;
 }

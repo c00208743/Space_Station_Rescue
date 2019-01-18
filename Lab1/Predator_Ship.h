@@ -46,7 +46,7 @@ private:
 	void checkWall(Level * cLevel);
 	sf::Vector2f rotate(sf::Vector2f P, sf::Vector2f Q, float theta);
 	void kinematicWander(sf::Vector2f targetPosition);
-	sf::Vector2f nextTile(Level * cLevel);
+	sf::Vector2f nextTile(Level * cLevel, sf::Vector2f playerPos);
 	float m_timeToTarget;
 	sf::Vector2f target;
 	sf::Vector2f m_position;
@@ -109,8 +109,17 @@ private:
 	// Bullet
 	Bullet* m_bullet;
 	int m_fireCooldownCounter;
-	const int m_fireCooldownLimit = 100;
-
+	const int m_fireCooldownLimit = 200;
+	
+	//Projectiles
 	bool m_fireBullet;
+	int m_bulletsShot;
+	const int m_bulletsShotLimit = 4;
+
+	// Formation
+	void inFormation(int numInForm, sf::Vector2f playerPos);
+	int formationPos;
+	const float formationRadius = 200.0f;
+	sf::Vector2f formPos;
 
 };

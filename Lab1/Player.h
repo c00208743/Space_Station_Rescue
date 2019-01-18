@@ -21,6 +21,10 @@ public:
 	void setScore(int enemyS);
 	void setHealth(int dam);
 	void hit(int d);
+	int joinFormation();
+	void leaveFormation(int i);
+	int getNumInForm();
+	int getFreePosition();
 
 private:
 	
@@ -57,10 +61,14 @@ private:
 	sf::Text m_gameOver;
 	sf::Text m_health;
 	int score = 0;
-	int health = 100;
+	int health = 100000;
 
 	void currentTile(Level * cLevel);
 
 	sf::Vector2i previousTile;
+
+	// Formation
+	std::vector<bool> numInForm;
+	std::vector<int> freeFormPos;
 
 };
