@@ -61,7 +61,7 @@ private:
 	sf::Text m_gameOver;
 	sf::Text m_health;
 	int score = 0;
-	int health = 100000;
+	int health = 100;
 
 	void currentTile(Level * cLevel);
 
@@ -70,5 +70,6 @@ private:
 	// Formation
 	std::vector<bool> numInForm;
 	std::vector<int> freeFormPos;
+	sf::RectangleShape m_radar;
 
 };

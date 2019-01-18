@@ -26,8 +26,6 @@ Worker::Worker() :
 	srand(time(NULL));
 
 	newTarget();
-	//m_position.x = rand() % 400 + 1;
-	//m_position.y = rand() % 400 + 1;
 
 	m_timerCount = 0;
 }
@@ -39,11 +37,13 @@ Worker::~Worker()
 
 void Worker::newTarget()
 {
+	//create a vector with randomized vaules
 	target = sf::Vector2f(rand() % 6000, rand() % 6000);
 }
 
 sf::Vector2f Worker::rotate(sf::Vector2f P, sf::Vector2f O, float theta)
 {
+	//rotate is use to let the ship face the right direction
 	sf::Transform rotTran;
 	rotTran.rotate(theta, O.x, O.y);
 	return rotTran.transformPoint(P);
@@ -51,6 +51,7 @@ sf::Vector2f Worker::rotate(sf::Vector2f P, sf::Vector2f O, float theta)
 
 void Worker::update(Level * cLevel)
 {
+	//only update if a worker is collected
 	if (collected == false) {
 		if (m_timerCount >= m_timerCountLimit)
 		{
@@ -103,6 +104,7 @@ float Worker::getNewOrientation(float currentOrientation, float velocity)
 
 float Worker::getRandom(int a, int b)
 {
+	//get random number between two choosen values
 	srand(time(NULL));
 	float randVal = rand() % a + b;
 	return randVal;
@@ -110,22 +112,25 @@ float Worker::getRandom(int a, int b)
 
 sf::Vector2f Worker::getPosition()
 {
+	//get position of ship
 	return m_sprite.getPosition();
 }
 void Worker::setPosition(float x, float y)
 {
-	
+	//set position using two variables
 	m_position.x = x;
 	m_position.y = y;
 }
 
 sf::Vector2f Worker::getVelocity()
 {
+	//get current velocity
 	return m_velocity;
 }
 
 void Worker::kinematicWander(sf::Vector2f targetPosition)
 {
+	//move towards a target with randomized x and y
 	m_velocity = targetPosition - m_position;
 	m_velocity = normalize(m_velocity);
 	float orientation = getNewOrientation(m_sprite.getRotation(), length(m_velocity));
@@ -143,6 +148,7 @@ sf::Vector2f Worker::asVector(float orientation)
 
 void Worker::render(sf::RenderWindow & window)
 {
+	//only render if not collected
 	if (collected == false) {
 		window.draw(m_sprite);
 	}
@@ -151,11 +157,13 @@ void Worker::render(sf::RenderWindow & window)
 
 void Worker::setCollected()
 {
+	//on collsion with player or sweeper = collected
 	collected = true;
 
 }
 bool Worker::getCollected()
 {
+	//check if worker has been collected
 	return collected;
 
 }
@@ -163,11 +171,13 @@ bool Worker::getCollected()
 
 float Worker::length(sf::Vector2f vel)
 {
+	//legnth formula
 	return (sqrt((vel.x * vel.x) + (vel.y * vel.y)));
 }
 
 sf::Vector2f Worker::normalize(sf::Vector2f vel)
 {
+	//how to normalize a vector
 	if (length(vel) != 0)
 		return sf::Vector2f(vel.x / length(vel), vel.y / length(vel));
 	else

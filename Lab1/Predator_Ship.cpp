@@ -214,7 +214,7 @@ sf::Vector2f Predator_Ship::getVelocity()
 void Predator_Ship::update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies, Level * cLevel)
 {
 	//collison(enemies);
-	if (crash == false)
+	if (crash == false && health > 0)
 	{
 		int gridX = std::floor(m_position.x / 32);
 		int gridY = std::floor(m_position.y / 32);
@@ -276,19 +276,20 @@ void Predator_Ship::update(sf::Vector2f playerPosition, Player* player, std::vec
 		m_bullet->update();
 
 		m_bullet->checkWall(cLevel);
+
+
+		//m_position = m_position + m_velocity;
+
+		m_sprite.setPosition(m_position);
+		m_sprite.setRotation(m_orientation);
+
+		if (m_bullet->checkCollision(playerPosition, 64, 128))
+		{
+			player->hit(10);
+		}
+
+		boundary(m_sprite.getPosition().x, m_sprite.getPosition().y);
 	}
-
-	//m_position = m_position + m_velocity;
-
-	m_sprite.setPosition(m_position);
-	m_sprite.setRotation(m_orientation);
-
-	if (m_bullet->checkCollision(playerPosition, 64, 128))
-	{
-		player->hit(10);
-	}
-
-	boundary(m_sprite.getPosition().x, m_sprite.getPosition().y);
 
 	if (health <= 0) {
 		timer++;
@@ -422,7 +423,7 @@ bool Predator_Ship::radar(sf::Vector2f pos) {
 		direction.y = (sin(radians));
 		m_bullet->fire(direction, m_sprite.getPosition(), m_sprite.getRotation());
 		m_fireCooldownCounter = 0; 
-		std::cout << "Bullets shot: " << m_bulletsShot << std::endl;
+		//std::cout << "Bullets shot: " << m_bulletsShot << std::endl;
 		if (m_bulletsShot >= m_bulletsShotLimit)
 		{
 			m_fireBullet = false;
@@ -474,7 +475,14 @@ bool Predator_Ship::checkWorkerCollision(sf::Vector2f pos, int width, int height
 int Predator_Ship::getDamageToPlayer()
 {
 	//how much damage has been inflicted to the player
-	return m_missile->damagedPlayer();
+	if (m_missile->getStatus())
+	{
+		return m_missile->damagedPlayer();
+	}
+	else
+	{
+		return 0;
+	}
 }
 
 float Predator_Ship::length(sf::Vector2f vel)

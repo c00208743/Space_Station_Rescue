@@ -23,6 +23,7 @@ Missile::~Missile()
 
 void Missile::render(sf::RenderWindow & window)
 {
+	//only render when alive
 	if (m_alive) {
 		window.draw(m_sprite);
 	}
@@ -30,9 +31,9 @@ void Missile::render(sf::RenderWindow & window)
 
 void Missile::update(Level * cLevel)
 {
+	//missile is only functioning when alive
 	if (m_alive)
 	{
-
 		checkCollision();
 		checkWall(cLevel);
 		m_position = m_position + m_velocity;
@@ -40,10 +41,7 @@ void Missile::update(Level * cLevel)
 		m_sprite.setRotation(m_orientation);
 
 	}
-	/*if (collison) {
-		m_alive = false;
-		collison = false;
-	}*/
+
 }
 
 
@@ -52,14 +50,11 @@ void Missile::fire(sf::Vector2f pos)
 {
 	m_nestPos = pos;
 	//start on Alien Nest position
-	
-	//if (timer % 1000 == 0) {
-		m_position.x = pos.x;
-		m_position.y = pos.y;
-	//}
-	//timer++;
 
+	m_position.x = pos.x;
+	m_position.y = pos.y;
 	
+	//bring missile to life
 	m_alive = true;
 	
 }
@@ -85,6 +80,12 @@ bool Missile::checkCollision()
 	}
 	return collison;
 
+}
+
+void Missile::die()
+{
+	m_alive = false;
+	collison = false;
 }
 
 void Missile::checkWall(Level * cLevel)
@@ -117,6 +118,7 @@ void Missile::kinematicSeek(sf::Vector2f playerPosition)
 	m_velocity.x = m_velocity.x * m_maxSpeed;
 	m_velocity.y = m_velocity.y * m_maxSpeed;
 
+	//get missile to face the right direction
 	m_orientation = getNewOrientation(m_orientation, m_velocityF);
 	m_orientation = m_orientation + 180;
 
@@ -133,6 +135,7 @@ float Missile::getNewOrientation(float currentOrientation, float velocity)
 
 }
 bool Missile::getStatus() {
+	//get if missile is dead or alive
 	return m_alive;
 }
 int Missile::damagedPlayer() {
@@ -151,5 +154,6 @@ int Missile::damagedPlayer() {
 
 void Missile::setSpeed(float s)
 {
+	//set the speed of the bullet to varible s
 	m_maxSpeed = s;
 }
