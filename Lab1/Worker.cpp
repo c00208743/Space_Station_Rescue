@@ -75,7 +75,7 @@ void Worker::update(Level * cLevel)
 void Worker::checkWall(Level * cLevel)
 {
 	// Get the square in front
-	float posX = m_position.x + 32;
+	float posX = m_position.x + 64;
 	float posY = m_position.y;
 	
 	sf::Vector2f tileAhead = rotate(sf::Vector2f(posX, posY), m_sprite.getPosition(), m_sprite.getRotation());
@@ -85,7 +85,10 @@ void Worker::checkWall(Level * cLevel)
 
 	if (cLevel->collide(sf::Vector2i(x, y)))
 	{
-		newTarget();
+		m_velocity = sf::Vector2f(0, 0);
+		target.x = -target.x;
+		target.y = -target.y;
+		//newTarget();
 	}
 }
 

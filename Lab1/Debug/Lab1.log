@@ -1,27 +1,13 @@
-﻿  Game.cpp
+﻿  Sweeper_Bot.cpp
 c:\users\gameuser\desktop\test\space_station_rescue\lab1\player.h(39): warning C4305: 'initializing': truncation from 'double' to 'const float'
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(161): warning C4244: '-=': conversion from 'const double' to 'sf::Int32', possible loss of data
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(197): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(199): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(219): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(250): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(266): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(285): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(304): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(323): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(354): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(361): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(365): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(369): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(373): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(379): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(385): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(395): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(399): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(404): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(409): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(414): warning C4018: '<': signed/unsigned mismatch
-c:\users\gameuser\desktop\test\space_station_rescue\lab1\game.cpp(419): warning C4018: '<': signed/unsigned mismatch
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\sweeper_bot.cpp(43): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\sweeper_bot.cpp(76): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\sweeper_bot.cpp(77): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\sweeper_bot.cpp(284): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\sweeper_bot.cpp(303): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\sweeper_bot.cpp(352): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\sweeper_bot.cpp(363): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\gameuser\desktop\test\space_station_rescue\lab1\sweeper_bot.cpp(364): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   Lab1.vcxproj -> C:\Users\gameuser\Desktop\Test\Space_Station_Rescue\Debug\Lab1.exe
   C:\Users\gameuser\Desktop\Test\Space_Station_Rescue\\dlls\libtmxlite-d.dll
   C:\Users\gameuser\Desktop\Test\Space_Station_Rescue\\dlls\libtmxlite.dll
