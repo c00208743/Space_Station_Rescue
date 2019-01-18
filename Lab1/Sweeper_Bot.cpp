@@ -50,11 +50,13 @@ float Sweeper_Bot::getNewOrientation(float currentOrientation, float velocity)
 
 void Sweeper_Bot::setPos(sf::Vector2f newPos)
 {
+	//set positson to varible
 	m_position = newPos;
 }
 
 void Sweeper_Bot::spawn(sf::Vector2f pos)
 {
+	//set sweeper bot varibles to set values
 	m_position = pos;
 	health = 50;
 	timer = 0;
@@ -70,6 +72,7 @@ void Sweeper_Bot::spawn(sf::Vector2f pos)
 
 float Sweeper_Bot::getRandom(int a, int b)
 {
+	//get random number between two integers
 	srand(time(NULL));
 	float randVal = rand() % a + b;
 	return randVal;
@@ -87,7 +90,7 @@ sf::Vector2f Sweeper_Bot::getVelocity()
 
 void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vector<Enemy*> enemies, Level * cLevel)
 {
-	//player
+	//in range of the player
 	if (inRange ==false) {
 		
 		if (workerInRange) {
@@ -115,8 +118,11 @@ void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vecto
 		m_timerCount++;
 	}
 
+	//check for wall collison
 	checkWall(cLevel);
 	
+	//fleeing from player and colliding with a wall
+	//then stop 
 	if (inRange == true && wall == true) {
 		m_velocity.x = 0;
 		m_velocity.y = 0;
@@ -141,7 +147,7 @@ void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vecto
 	}
 
 	
-
+	//only move when alive
 	if (health > 0) {
 		m_position = m_position + m_velocity;
 	}
@@ -156,7 +162,7 @@ void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vecto
 		{
 			animate++;
 		}
-		//animate++;
+		//animate explosion sprite when dead
 		m_spriteExplosion.setTextureRect(sf::IntRect(310 * animate, 0, 320, 320));
 		if (animate>15) {
 			animate = 0;
@@ -168,6 +174,7 @@ void Sweeper_Bot::update(sf::Vector2f playerPosition, Player* player, std::vecto
 
 void Sweeper_Bot::render(sf::RenderWindow & window)
 {
+	//draw explosion when dead
 	if (health <= 0) {
 		if (finishAnimate == false) {
 			window.draw(m_spriteExplosion);
@@ -175,21 +182,25 @@ void Sweeper_Bot::render(sf::RenderWindow & window)
 
 	}
 	else {
+		//else draw ship 
 		window.draw(m_sprite);
 	}
 }
 
 int Sweeper_Bot::getWidth()
 {
+	//return width
 	return  32; 
 }
 int Sweeper_Bot::getHeight()
 {
+	//return height
 	return  64;
 }
 
 void Sweeper_Bot::hit(int damage)
 {
+	//assign damage via int variable to the ship
 	//std::cout << "Sweeper bot hit" << std::endl;
 	health = health - damage;
 	m_explosion.x = m_position.x;
@@ -198,20 +209,24 @@ void Sweeper_Bot::hit(int damage)
 }
 int Sweeper_Bot::getHealth()
 {
+	//get health variable
 	return health;
 }
 
 int Sweeper_Bot::getId()
 {
+	//return id value
 	return 3;
 }
 
 int Sweeper_Bot::getScore()
 {
+	//get current score
 	return score;
 }
 void Sweeper_Bot::setScore()
 {
+	//make score 0 when player takes score
 	score = 0;
 }
 
@@ -228,6 +243,7 @@ void Sweeper_Bot::kinematicSeek(sf::Vector2f pos)
 	m_velocity.x = m_velocity.x * m_maxSpeed;
 	m_velocity.y = m_velocity.y * m_maxSpeed;
 
+	//face the right direction
 	m_orientation = getNewOrientation(m_orientation, m_velocityF);
 	m_orientation = m_orientation + 180;
 
@@ -246,12 +262,14 @@ void Sweeper_Bot::kinematicFlee(sf::Vector2f playerPosition)
 	m_velocity.x = m_velocity.x * m_maxSpeed;
 	m_velocity.y = m_velocity.y * m_maxSpeed;
 
+	//face the right direction
 	m_orientation = getNewOrientation(m_orientation, m_velocityF);
 
 }
 
 void Sweeper_Bot::kinematicWander(sf::Vector2f targetPosition)
 {
+	//pick a random direction and move towards it
 	m_velocity = targetPosition - m_position;
 	m_velocity = normalize(m_velocity);
 	float orientation = getNewOrientation(m_sprite.getRotation(), length(m_velocity));
@@ -262,10 +280,11 @@ void Sweeper_Bot::kinematicWander(sf::Vector2f targetPosition)
 }
 
 bool Sweeper_Bot::radar(sf::Vector2f pos) {
+	//get distance of oncoming object
 	radarDistance = sqrt((pos.x - m_sprite.getPosition().x)*(pos.x - m_sprite.getPosition().x)
 		+ (pos.y - m_sprite.getPosition().y)*(pos.y - m_sprite.getPosition().y));
 	
-
+	//check if object distance close to ship
 	if (radarDistance < 200) {
 		inRange = true;
 		//std::cout << "in range " << std::endl;
@@ -280,10 +299,11 @@ bool Sweeper_Bot::radar(sf::Vector2f pos) {
 }
 
 bool Sweeper_Bot::workerRadar(sf::Vector2f pos) {
+	//get distance of oncoming object
 	workerRadarDis = sqrt((pos.x - m_sprite.getPosition().x)*(pos.x - m_sprite.getPosition().x)
 		+ (pos.y - m_sprite.getPosition().y)*(pos.y - m_sprite.getPosition().y));
 
-
+	//check if object distance close to ship
 	if (workerRadarDis < 1000) {
 		workerInRange = true;
 		//std::cout << "in range " << std::endl;
@@ -328,6 +348,7 @@ int Sweeper_Bot::getDamageToPlayer()
 
 void Sweeper_Bot::newTarget()
 {
+	//get a new random target for wander
 	target = sf::Vector2f(rand() % 6000, rand() % 6000);
 }
 
@@ -353,17 +374,20 @@ void Sweeper_Bot::checkWall(Level * cLevel)
 }
 sf::Vector2f Sweeper_Bot::rotate(sf::Vector2f P, sf::Vector2f O, float theta)
 {
+	//rotate ship to wander towards target
 	sf::Transform rotTran;
 	rotTran.rotate(theta, O.x, O.y);
 	return rotTran.transformPoint(P);
 }
 float Sweeper_Bot::length(sf::Vector2f vel)
 {
+	//distance formula
 	return (sqrt((vel.x * vel.x) + (vel.y * vel.y)));
 }
 
 sf::Vector2f Sweeper_Bot::normalize(sf::Vector2f vel)
 {
+	//how to normalize a vector
 	if (length(vel) != 0)
 		return sf::Vector2f(vel.x / length(vel), vel.y / length(vel));
 	else

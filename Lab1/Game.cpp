@@ -23,7 +23,8 @@ Game::Game()
 		Worker* m_worker = new Worker();
 		workers.push_back(m_worker);
 	}
-	//hardcore start positions of worker bots
+
+	//hardcode start positions of worker bots
 	workers[0]->setPosition(1050, 425);
 	workers[1]->setPosition(1100, 1750);
 	workers[2]->setPosition(1400, 2950);
@@ -53,21 +54,20 @@ Game::Game()
 	Enemy* m_ANR2P3 = new Predator_Ship();
 	Enemy* m_ANR2P4 = new Predator_Ship();
 	Enemy* m_ANR2P5 = new Predator_Ship();
-	
-	//enemies.push_back(m_alienNest);
-	//enemies.push_back(m_predatorShip);
-	//enemies.push_back(m_sweeperBot);
+
 
 	for (int i = 0; i < 5; i++) {
 		Enemy* m_sweeperBot = new Sweeper_Bot();
 		enemies.push_back(m_sweeperBot);
 	}
+	//set positions of the sweepers
 	enemies[0]->setPos(sf::Vector2f(1025, 1050));
 	enemies[1]->setPos(sf::Vector2f(2100, 4125));
 	enemies[2]->setPos(sf::Vector2f(4300, 5750));
 	enemies[3]->setPos(sf::Vector2f(4400, 4275));
 	enemies[4]->setPos(sf::Vector2f(3125, 1500));
 
+	//add alien nests and preds to nest vector
 	nest.push_back(m_alienNestRoom2);
 	nest.push_back(m_alienNestRoom3);
 	nest.push_back(m_alienNestRoom4);
@@ -157,7 +157,7 @@ void Game::update(double dt)
 	for (int i = 0; i < workers.size(); i++)
 	{
 		workers[i]->update(m_level);
-		//worker collision
+		//worker collision with the player
 		if (m_player->checkWorkerCollision(workers[i]->getPosition(), 32, 64, workers[i]->getCollected())) {
 			workers[i]->setCollected();
 		}
@@ -174,13 +174,16 @@ void Game::update(double dt)
 	for (int i = 0; i < enemies.size(); i++)
 	{
 		enemies[i]->update(m_player->getPosition(), m_player, enemies, m_level);
-		//wrapper this in gethealth 
+		//if enemy is alive check for bullet collison
 		if (enemies[i]->getHealth() > 0) {
 			if (m_player->checkBulletCollision(enemies[i]->getPosition(), enemies[i]->getWidth(), enemies[i]->getHeight()) == true)
 			{
+				//if collide with bullet assign damage
  				enemies[i]->hit(25);
 			}
 		}
+		//id 1 = alien nest
+		//id 2 = predator
 		if (enemies[i]->getId() == 1 || enemies[i]->getId() == 2)
 		{
 			enemies[i]->radar(m_player->getPosition());
@@ -189,10 +192,11 @@ void Game::update(double dt)
 		}
 
 		
-
+		//id 3 = sweeper 
 		if (enemies[i]->getId() == 3)
 		{
 			enemies[i]->radar(m_player->getPosition());
+			//if sweeper is alive 
 			if (enemies[i]->getHealth() <= 0) {
 				//give score to player
 				m_player->setScore(enemies[i]->getScore());
@@ -243,7 +247,7 @@ void Game::update(double dt)
 void Game::render()
 {
 	m_window.clear(sf::Color(0, 0, 0));
-
+	//render player camera
 	m_window.setView(m_follow);
 	m_level->draw(&m_window);
 	
@@ -261,7 +265,7 @@ void Game::render()
 	{
 		nest[i]->render(m_window);
 	}
-	
+	//render minimap
 	m_window.setView(miniMap);
 	m_player->render(m_window);
 	for (int i = 0; i < workers.size(); i++)
