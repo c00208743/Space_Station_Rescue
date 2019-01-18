@@ -37,6 +37,9 @@ private:
 	Level* m_level;
 	std::string const path = "assets/maps/Practice.tmx";
 	
+	int m_workersCollected;
+	sf::Texture m_winTexture;
+	sf::Sprite m_winSprite;
 	//std::vector<Enemy*> enemies;
 	sf::RectangleShape m_radar;
 };

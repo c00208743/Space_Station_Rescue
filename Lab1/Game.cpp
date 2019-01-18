@@ -122,13 +122,20 @@ Game::Game()
 	m_follow.setSize(sf::Vector2f(2000.f, 2000.f));
 
 	// player 2 (right side of the screen)
-	miniMap.setViewport(sf::FloatRect(0.75f, 0.f, 0.25f, 0.25f));
-	miniMap.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
+	miniMap.setViewport(sf::FloatRect(0.7f, -0.1f, 0.3f, 0.3f));
+	//miniMap.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
+	miniMap.zoom(12.0f);
 
 	//radar background
-	m_radar.setSize(sf::Vector2f(500, 500));
+	m_radar = sf::RectangleShape(sf::Vector2f(6400, 6400));
 	m_radar.setFillColor(sf::Color::Black);
-	
+
+	if (!m_winTexture.loadFromFile("assets/end_game/winner.jpg")) {
+		//error
+	}
+	m_winSprite.setTexture(m_winTexture);
+	m_winSprite.setPosition(sf::Vector2f(0,300));
+	m_winSprite.setScale(3.5f, 3.5f);
 }
 
 
@@ -187,145 +194,149 @@ void Game::update(double dt)
 {
 	sf::Time deltaTime;
 
-	m_radar.setPosition(m_player->getPosition().x + 500, m_player->getPosition().y -750);
-
-	for (int i = 0; i < workers.size(); i++)
+	if (m_workersCollected < workers.size())
 	{
-		workers[i]->update(m_level);
-		//worker collision with the player
-		if (m_player->checkWorkerCollision(workers[i]->getPosition(), 32, 64, workers[i]->getCollected())) {
-			workers[i]->setCollected();
-		}
-		
-		
-	}
-	
-	m_player->update(dt, m_level);
-
-	//camera 
-	m_follow.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
-	miniMap.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
-	
-	for (int i = 0; i < enemies.size(); i++)
-	{
-		enemies[i]->update(m_player->getPosition(), m_player, enemies, m_level);
-		//if enemy is alive check for bullet collison
-		if (enemies[i]->getHealth() > 0) {
-			if (m_player->checkBulletCollision(enemies[i]->getPosition(), enemies[i]->getWidth(), enemies[i]->getHeight()) == true)
-			{
-				//if collide with bullet assign damage
- 				enemies[i]->hit(25);
-			}
-		}
-		//id 1 = alien nest
-		//id 2 = predator
-		if (enemies[i]->getId() == 1 || enemies[i]->getId() == 2)
+		for (int i = 0; i < workers.size(); i++)
 		{
-			enemies[i]->radar(m_player->getPosition());
-			//set player health
-			m_player->setHealth(enemies[i]->getDamageToPlayer());
-		}
-
-		
-		//id 3 = sweeper 
-		if (enemies[i]->getId() == 3)
-		{
-			enemies[i]->radar(m_player->getPosition());
-			//if sweeper is alive 
-			if (enemies[i]->getHealth() <= 0) {
-				//give score to player
-				m_player->setScore(enemies[i]->getScore());
-				enemies[i]->setScore();
-			}
-			for (int j = 0; j < workers.size(); j++)
-			{
-				//if dead dont seek worker
-				if (workers[j]->getCollected() == false) {
-					enemies[i]->workerRadar(workers[j]->getPosition());
-				}
-				
-				if (enemies[i]->checkWorkerCollision(workers[j]->getPosition(), 32, 64, workers[j]->getCollected())) {
-					workers[j]->setCollected();
+			workers[i]->update(m_level);
+			//worker collision with the player
+			if (m_player->checkWorkerCollision(workers[i]->getPosition(), 32, 64, workers[i]->getCollected())) {
+				workers[i]->setCollected();
+				if (!workers[i]->getCollected())
+				{
+					m_workersCollected++;
 				}
 			}
-			
-		}
 		
-	}
-
-	for (int i = 0; i < nest.size(); i++)
-	{
 		
-		nest[i]->update(m_player->getPosition(), m_player, nest, m_level);
-		//wrapper this in gethealth 
-		if (nest[i]->getHealth() > 0) {
-			if (m_player->checkBulletCollision(nest[i]->getPosition(), nest[i]->getWidth(), nest[i]->getHeight()) == true)
+		}
+
+		m_player->update(dt, m_level);
+
+		//camera 
+		m_follow.setCenter(sf::Vector2f(m_player->getPosition().x, m_player->getPosition().y));
+
+		for (int i = 0; i < enemies.size(); i++)
+		{
+			enemies[i]->update(m_player->getPosition(), m_player, enemies, m_level);
+			//if enemy is alive check for bullet collison
+			if (enemies[i]->getHealth() > 0) {
+				if (m_player->checkBulletCollision(enemies[i]->getPosition(), enemies[i]->getWidth(), enemies[i]->getHeight()) == true)
+				{
+					//if collide with bullet assign damage
+					enemies[i]->hit(25);
+				}
+			}
+			//id 1 = alien nest
+			//id 2 = predator
+			if (enemies[i]->getId() == 1 || enemies[i]->getId() == 2)
 			{
- 				nest[i]->hit(25);
+				enemies[i]->radar(m_player->getPosition());
+				//set player health
+				m_player->setHealth(enemies[i]->getDamageToPlayer());
+			}
+
+
+			//id 3 = sweeper 
+			if (enemies[i]->getId() == 3)
+			{
+				enemies[i]->radar(m_player->getPosition());
+				//if sweeper is alive 
+				if (enemies[i]->getHealth() <= 0) {
+					//give score to player
+					m_player->setScore(enemies[i]->getScore());
+					enemies[i]->setScore();
+				}
+				for (int j = 0; j < workers.size(); j++)
+				{
+					//if dead dont seek worker
+					if (workers[j]->getCollected() == false) {
+						enemies[i]->workerRadar(workers[j]->getPosition());
+					}
+
+					if (enemies[i]->checkWorkerCollision(workers[j]->getPosition(), 32, 64, workers[j]->getCollected())) {
+						workers[j]->setCollected();
+					}
+				}
+
+			}
+
+		}
+
+		for (int i = 0; i < nest.size(); i++)
+		{
+
+			nest[i]->update(m_player->getPosition(), m_player, nest, m_level);
+			//wrapper this in gethealth 
+			if (nest[i]->getHealth() > 0) {
+				if (m_player->checkBulletCollision(nest[i]->getPosition(), nest[i]->getWidth(), nest[i]->getHeight()) == true)
+				{
+					nest[i]->hit(25);
+				}
+			}
+			if (nest[i]->getId() == 1 || nest[i]->getId() == 2)
+			{
+				nest[i]->radar(m_player->getPosition());
+				//set player health
+				m_player->setHealth(nest[i]->getDamageToPlayer());
 			}
 		}
-		if (nest[i]->getId() == 1 || nest[i]->getId() == 2)
+
+		for (int i = 0; i < nest2.size(); i++)
 		{
-			nest[i]->radar(m_player->getPosition());
-			//set player health
-			m_player->setHealth(nest[i]->getDamageToPlayer());
-		}
-	}
 
-	for (int i = 0; i < nest2.size(); i++)
-	{
-
-		nest2[i]->update(m_player->getPosition(), m_player, nest2, m_level);
-		//wrapper this in gethealth 
-		if (nest2[i]->getHealth() > 0) {
-			if (m_player->checkBulletCollision(nest2[i]->getPosition(), nest2[i]->getWidth(), nest2[i]->getHeight()) == true)
+			nest2[i]->update(m_player->getPosition(), m_player, nest2, m_level);
+			//wrapper this in gethealth 
+			if (nest2[i]->getHealth() > 0) {
+				if (m_player->checkBulletCollision(nest2[i]->getPosition(), nest2[i]->getWidth(), nest2[i]->getHeight()) == true)
+				{
+					nest2[i]->hit(25);
+				}
+			}
+			if (nest2[i]->getId() == 1 || nest2[i]->getId() == 2)
 			{
-				nest2[i]->hit(25);
+				nest2[i]->radar(m_player->getPosition());
+				//set player health
+				m_player->setHealth(nest2[i]->getDamageToPlayer());
 			}
 		}
-		if (nest2[i]->getId() == 1 || nest2[i]->getId() == 2)
+
+		for (int i = 0; i < nest3.size(); i++)
 		{
-			nest2[i]->radar(m_player->getPosition());
-			//set player health
-			m_player->setHealth(nest2[i]->getDamageToPlayer());
-		}
-	}
 
-	for (int i = 0; i < nest3.size(); i++)
-	{
-
-		nest3[i]->update(m_player->getPosition(), m_player, nest3, m_level);
-		//wrapper this in gethealth 
-		if (nest3[i]->getHealth() > 0) {
-			if (m_player->checkBulletCollision(nest3[i]->getPosition(), nest3[i]->getWidth(), nest3[i]->getHeight()) == true)
+			nest3[i]->update(m_player->getPosition(), m_player, nest3, m_level);
+			//wrapper this in gethealth 
+			if (nest3[i]->getHealth() > 0) {
+				if (m_player->checkBulletCollision(nest3[i]->getPosition(), nest3[i]->getWidth(), nest3[i]->getHeight()) == true)
+				{
+					nest3[i]->hit(25);
+				}
+			}
+			if (nest3[i]->getId() == 1 || nest3[i]->getId() == 2)
 			{
-				nest3[i]->hit(25);
+				nest3[i]->radar(m_player->getPosition());
+				//set player health
+				m_player->setHealth(nest3[i]->getDamageToPlayer());
 			}
 		}
-		if (nest3[i]->getId() == 1 || nest3[i]->getId() == 2)
+
+		for (int i = 0; i < nest4.size(); i++)
 		{
-			nest3[i]->radar(m_player->getPosition());
-			//set player health
-			m_player->setHealth(nest3[i]->getDamageToPlayer());
-		}
-	}
 
-	for (int i = 0; i < nest4.size(); i++)
-	{
-
-		nest4[i]->update(m_player->getPosition(), m_player, nest4, m_level);
-		//wrapper this in gethealth 
-		if (nest4[i]->getHealth() > 0) {
-			if (m_player->checkBulletCollision(nest4[i]->getPosition(), nest4[i]->getWidth(), nest4[i]->getHeight()) == true)
-			{
-				nest4[i]->hit(25);
+			nest4[i]->update(m_player->getPosition(), m_player, nest4, m_level);
+			//wrapper this in gethealth 
+			if (nest4[i]->getHealth() > 0) {
+				if (m_player->checkBulletCollision(nest4[i]->getPosition(), nest4[i]->getWidth(), nest4[i]->getHeight()) == true)
+				{
+					nest4[i]->hit(25);
+				}
 			}
-		}
-		if (nest4[i]->getId() == 1 || nest4[i]->getId() == 2)
-		{
-			nest4[i]->radar(m_player->getPosition());
-			//set player health
-			m_player->setHealth(nest4[i]->getDamageToPlayer());
+			if (nest4[i]->getId() == 1 || nest4[i]->getId() == 2)
+			{
+				nest4[i]->radar(m_player->getPosition());
+				//set player health
+				m_player->setHealth(nest4[i]->getDamageToPlayer());
+			}
 		}
 	}
 }
@@ -340,70 +351,79 @@ void Game::render()
 {
 	m_window.clear(sf::Color(0, 0, 0));
 	//render player camera
-	m_window.setView(m_follow);
-	m_level->draw(&m_window);
-	
-	m_player->render(m_window);
+	if (m_workersCollected < workers.size())
+	{
+		m_window.setView(m_follow);
+		m_level->draw(&m_window, false);
 
-	for (int i = 0; i < workers.size(); i++)
-	{
-		workers[i]->render(m_window);
-	}
-	for (int i = 0; i < enemies.size(); i++)
-	{
-		enemies[i]->render(m_window);
-	}
-	for (int i = 0; i < nest.size(); i++)
-	{
-		nest[i]->render(m_window);
-	}
-	for (int i = 0; i < nest2.size(); i++)
-	{
-		nest2[i]->render(m_window);
-	}
+		m_player->render(m_window, false);
 
-
-	for (int i = 0; i < nest3.size(); i++)
-	{
-		nest3[i]->render(m_window);
-	}
+		for (int i = 0; i < workers.size(); i++)
+		{
+			workers[i]->render(m_window);
+		}
+		for (int i = 0; i < enemies.size(); i++)
+		{
+			enemies[i]->render(m_window);
+		}
+		for (int i = 0; i < nest.size(); i++)
+		{
+			nest[i]->render(m_window);
+		}
+		for (int i = 0; i < nest2.size(); i++)
+		{
+			nest2[i]->render(m_window);
+		}
 
 
-	for (int i = 0; i < nest4.size(); i++)
-	{
-		nest4[i]->render(m_window);
-	}
+		for (int i = 0; i < nest3.size(); i++)
+		{
+			nest3[i]->render(m_window);
+		}
 
-	//render minimap
-	m_window.setView(miniMap);
-	m_player->render(m_window);
-	for (int i = 0; i < workers.size(); i++)
-	{
-		workers[i]->render(m_window);
-	}
-	for (int i = 0; i < enemies.size(); i++)
-	{
-		enemies[i]->render(m_window);
-	}
 
-	for (int i = 0; i < nest.size(); i++)
-	{
-		nest[i]->render(m_window);
-	}
+		for (int i = 0; i < nest4.size(); i++)
+		{
+			nest4[i]->render(m_window);
+		}
 
-	for (int i = 0; i < nest2.size(); i++)
-	{
-		nest2[i]->render(m_window);
-	}
+		//render minimap
+		m_window.setView(miniMap);
+		m_window.draw(m_radar);
+		m_level->draw(&m_window, true);
+		m_player->render(m_window, true);
+		for (int i = 0; i < workers.size(); i++)
+		{
+			workers[i]->render(m_window);
+		}
+		for (int i = 0; i < enemies.size(); i++)
+		{
+			enemies[i]->render(m_window);
+		}
 
-	for (int i = 0; i < nest3.size(); i++)
-	{
-		nest3[i]->render(m_window);
+		for (int i = 0; i < nest.size(); i++)
+		{
+			nest[i]->render(m_window);
+		}
+
+		for (int i = 0; i < nest2.size(); i++)
+		{
+			nest2[i]->render(m_window);
+		}
+
+		for (int i = 0; i < nest3.size(); i++)
+		{
+			nest3[i]->render(m_window);
+		}
+
+		for (int i = 0; i < nest4.size(); i++)
+		{
+			nest4[i]->render(m_window);
+		}
 	}
-	
-	for (int i = 0; i < nest4.size(); i++)
+	else
 	{
-		nest4[i]->render(m_window);
+		m_window.draw(m_winSprite);
 	}
 	m_window.display();
 }

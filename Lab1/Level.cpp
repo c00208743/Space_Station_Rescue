@@ -287,14 +287,33 @@ void Level::load(const std::string& path, sf::RenderWindow* ren) {
 	giveWeights(grid, sf::Vector2i(9, 9));
 }
 
-void Level::draw(sf::RenderWindow* ren) {
-	for (auto& layer : grid) {
-		for (auto& tile : layer)
+void Level::draw(sf::RenderWindow* ren, bool miniMap) {
+	if (miniMap)
+	{
+		for (auto& layer : grid) 
 		{
-			tile->draw(ren);
+			for (auto& tile : layer)
+			{
+				if (tile->getCollision() == true)
+				{
+					tile->draw(ren);
+				}
+			}
+			
+		}
+	}
+	else
+	{
+		for (auto& layer : grid)
+		{
+			for (auto& tile : layer)
+			{
+				tile->draw(ren);
+			}
 		}
 	}
 }
+
 
 bool Level::collide(sf::Vector2i pos)
 {

@@ -65,7 +65,7 @@ class Level
 public:
 	Level(const std::string& name);
 	void load(const std::string& path, sf::RenderWindow* ren);
-	void draw(sf::RenderWindow* ren);
+	void draw(sf::RenderWindow* ren, bool miniMap);
 	void updateWeights(sf::Vector2i p);
 	bool collide(sf::Vector2i pos);
 	int getWeight(sf::Vector2i gp);

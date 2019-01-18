@@ -13,7 +13,7 @@ public:
 	Player();
 	~Player();
 	void update(double dt, Level * cLevel);
-	void render(sf::RenderWindow & window);
+	void render(sf::RenderWindow & window, bool miniMap);
 	bool checkBulletCollision(sf::Vector2f pos, int width, int height);
 	bool checkWorkerCollision(sf::Vector2f pos, int width, int height, bool alive);
 	sf::Vector2f getPosition();

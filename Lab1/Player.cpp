@@ -190,23 +190,32 @@ void Player::hit(int d)
 		health -= d;
 }
 
-void Player::render(sf::RenderWindow & window)
+void Player::render(sf::RenderWindow & window, bool miniMap)
 {
-	m_bullet->render(window);
-	window.draw(m_text);
-	window.draw(m_textScore);
-	window.draw(scoreNu);
+	if (!miniMap)
+	{
+		m_bullet->render(window);
+		window.draw(m_text);
+		window.draw(m_textScore);
+		window.draw(scoreNu);
 
-	if (health > 0) {
-		window.draw(m_sprite);
-		window.draw(m_health);
+		if (health > 0) {
+			window.draw(m_sprite);
+			window.draw(m_health);
+		}
+		else {
+			window.draw(m_gameOver);
+		}
+
+		if (shield) {
+			window.draw(m_spriteShield);
+		}
 	}
-	else {
-		window.draw(m_gameOver);
-	}
-	
-	if (shield) {
-		window.draw(m_spriteShield);
+	else
+	{
+		if (health > 0) {
+			window.draw(m_sprite);
+		}
 	}
 
 	
